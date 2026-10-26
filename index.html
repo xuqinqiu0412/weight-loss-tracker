@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="减脂打卡" />
+  <meta name="theme-color" content="#059669" />
+  <title>85kg → 70kg 每日减脂打卡助手 (iPhone版)</title>
+  <style>
+    :root {
+      --bg: #f4f7f6;
+      --card: #ffffff;
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --primary-light: #d1fae5;
+      --accent: #3b82f6;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      padding: calc(16px + env(safe-area-inset-top)) 14px calc(76px + env(safe-area-inset-bottom));
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    header {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      color: #fff;
+      padding: 20px 18px;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.22);
+      margin-bottom: 16px;
+    }
+    header h1 {
+      font-size: 1.28rem;
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.82rem;
+      opacity: 0.92;
+    }
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 12px 8px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+    }
+    .stat-item { text-align: center; }
+    .stat-label { font-size: 0.72rem; opacity: 0.88; }
+    .stat-value { font-size: 1.15rem; font-weight: 700; margin-top: 2px; }
+    .progress-wrap { margin-top: 12px; }
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      margin-bottom: 5px;
+    }
+    .progress-track {
+      height: 9px;
+      background: rgba(255, 255, 255, 0.28);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #fff;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 11px 8px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.86rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border);
+    }
+    .card h2 {
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .date-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .date-controls input[type="date"] {
+      flex: 1;
+      min-width: 135px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.92rem;
+      background: #fff;
+    }
+    .btn {
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .day-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .streak-banner {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+    }
+    .streak-banner .plan-line {
+      margin-top: 6px;
+      color: #065f46;
+      font-weight: 600;
+      font-size: 0.83rem;
+    }
+    .checklist-groupTitle {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin: 14px 0 8px;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .check-item.checked {
+      background: #f0fdf4;
+      border-color: #a7f3d0;
+    }
+    .check-item.checked .item-title {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+    .check-item input[type="checkbox"] {
+      width: 21px;
+      height: 21px;
+      margin-top: 1px;
+      accent-color: var(--primary);
+      flex-shrink: 0;
+    }
+    .item-content { flex: 1; }
+    .item-time {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: var(--primary-light);
+      padding: 2px 6px;
+      border-radius: 5px;
+      margin-right: 6px;
+    }
+    .item-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .item-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+    .water-tracker {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .cup-btn {
+      padding: 10px 4px;
+      border-radius: 10px;
+      border: 1px dashed #93c5fd;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .cup-btn.drank {
+      background: #3b82f6;
+      color: #fff;
+      border-style: solid;
+      border-color: #2563eb;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+    th, td {
+      padding: 9px 6px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      white-space: nowrap;
+    }
+    th {
+      background: #f9fafb;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .input-sm {
+      width: 68px;
+      padding: 6px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.86rem;
+    }
+    .input-note {
+      width: 140px;
+      padding: 6px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.84rem;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      font-weight: 600;
+    }
+    .tag-green { background: #d1fae5; color: #065f46; }
+    .tag-blue { background: #dbeafe; color: #1e40af; }
+    .tag-orange { background: #fef3c7; color: #92400e; }
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+    }
+    .guide-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      background: #fafafa;
+    }
+    .guide-box h3 {
+      font-size: 0.94rem;
+      margin-bottom: 8px;
+      color: var(--primary-dark);
+    }
+    .guide-box ul {
+      padding-left: 18px;
+      font-size: 0.84rem;
+    }
+    .guide-box li { margin-bottom: 5px; }
+    .ios-tip {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e3a8a;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎯 170cm / 85kg → 70kg 减脂打卡</h1>
+      <p>专攻肚子、大腿、脸与脖子 ｜ 低阻力有氧 + 深度拉伸（不长块状肌肉）</p>
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-label">初始</div>
+          <div class="stat-value">85.0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">当前(kg)</div>
+          <div class="stat-value" id="currentWeightDisplay">85.0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">已减(kg)</div>
+          <div class="stat-value" id="lostWeightDisplay">0.0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">距70kg</div>
+          <div class="stat-value" id="remainWeightDisplay">15.0</div>
+        </div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-header">
+          <span>总减脂进度（目标 -15kg）</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressBar"></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="ios-tip">
+      📱 <strong>iPhone 快捷技巧</strong>：在 Safari 打开本页后，点击底部中间的 <strong>「分享」→「添加到主屏幕」</strong>，即可像原生 App 一样在手机桌面随时点开打卡，数据自动永久保存在本机！
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('daily')">✅ 每日打卡</button>
+      <button class="tab-btn" onclick="switchTab('weekly')">📊 18周体重围度</button>
+      <button class="tab-btn" onclick="switchTab('guide')">📖 食谱与动作</button>
+    </div>
+
+    <!-- TAB 1: 每日打卡 -->
+    <div id="tab-daily" class="tab-panel active">
+      <div class="card">
+        <div class="date-controls">
+          <button class="btn" onclick="changeDate(-1)">◀</button>
+          <input type="date" id="checkinDate" onchange="loadDailyCheckin()" />
+          <button class="btn" onclick="changeDate(1)">▶</button>
+          <button class="btn btn-primary" onclick="setToday()">今天</button>
+          <span class="day-badge" id="weekdayHint"></span>
+        </div>
+
+        <div class="streak-banner">
+          <div>🔥 <strong>今日打卡进度：</strong> <span id="dailyScoreText">0 / 12 项</span>（完成 ≥9 项即为优秀燃脂日）</div>
+          <div class="plan-line" id="todayPlanBadge"></div>
+        </div>
+
+        <div class="checklist-groupTitle">💧 今日 2400ml 消水肿饮水打卡（点水杯打钩）</div>
+        <div class="water-tracker" id="waterCups"></div>
+
+        <div id="checklistContainer"></div>
+      </div>
+    </div>
+
+    <!-- TAB 2: 18周体重与四维记录 -->
+    <div id="tab-weekly" class="tab-panel">
+      <div class="card">
+        <h2>
+          <span>📊 18周体重与围度记录（每周一晨起空腹）</span>
+          <div style="display:flex;gap:6px;">
+            <button class="btn" onclick="exportData()">📥 导出备份</button>
+            <button class="btn" onclick="document.getElementById('importFile').click()">📤 恢复数据</button>
+            <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)" />
+          </div>
+        </h2>
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px;">
+          填写最新一周体重后，顶部总进度条会自动更新！左右滑动表格可记录腰围（肚脐一圈）、大腿围（根部最粗处）、颈围。
+        </p>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>周次</th>
+                <th>阶段目标</th>
+                <th>日期</th>
+                <th>体重(kg)</th>
+                <th>腰围(cm)</th>
+                <th>大腿(cm)</th>
+                <th>颈围(cm)</th>
+                <th>状态备注</th>
+              </tr>
+            </thead>
+            <tbody id="weeklyTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: 饮食与运动速查指南 -->
+    <div id="tab-guide" class="tab-panel">
+      <div class="card">
+        <h2>🍽️ 一日三餐万能搭配公式（控糖消水肿）</h2>
+        <div class="guide-grid">
+          <div class="guide-box">
+            <h3>🌅 早餐（08:00 - 08:30）开启代谢</h3>
+            <ul>
+              <li><strong>主食（1拳头）</strong>：蒸红薯 / 紫薯 / 玉米1根 / 纯燕麦片45g / 全麦面包2片</li>
+              <li><strong>蛋白质</strong>：水煮蛋/蒸蛋 1~2个 + 无糖豆浆300ml 或 纯牛奶250ml</li>
+              <li><strong>果蔬</strong>：圣女果8颗 或 黄瓜半根</li>
+            </ul>
+          </div>
+          <div class="guide-box">
+            <h3>☀️ 午餐（12:00 - 12:30）7~8分饱</h3>
+            <ul>
+              <li><strong>进餐顺序</strong>：汤水 → 蔬菜和肉 → 最后吃主食（平稳血糖防大肚腩）</li>
+              <li><strong>蛋白质（1掌心）</strong>：去皮鸡腿/鸡胸、清蒸鱼、虾仁10只、瘦牛肉/牛腱、瘦猪里脊</li>
+              <li><strong>蔬菜（2拳头）</strong>：西兰花、芹菜、菠菜、冬瓜、菌菇、生菜（外卖用温水涮油）</li>
+              <li><strong>主食（1拳头）</strong>：杂粮饭 / 糙米饭 / 小半碗白米饭</li>
+            </ul>
+          </div>
+          <div class="guide-box">
+            <h3>🌙 晚餐（17:30 - 18:15）6分饱·少盐</h3>
+            <ul>
+              <li><strong>核心原则</strong>：清淡少盐（防次日脸和腿水肿），18:30后严格禁食</li>
+              <li><strong>蛋白质（1掌心）</strong>：嫩豆腐/北豆腐150g、虾仁、鱼肉、鸡蛋白2个</li>
+              <li><strong>蔬菜（2拳头）</strong>：冬瓜海带汤、凉拌黄瓜木耳、番茄金针菇、烫青菜</li>
+              <li><strong>主食（半拳头或免主食）</strong>：山药1小段 / 南瓜100g / 玉米半根</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🏃 运动与深度拉伸执行标准（只减脂、不长块状肌肉）</h2>
+        <div class="guide-grid">
+          <div class="guide-box">
+            <h3>1️⃣ 核心与天鹅颈（10分钟·有氧前）</h3>
+            <ul>
+              <li><strong>真空腹呼吸（专缩肚腩）</strong>：深吸气鼓肚 → 吐气把肚脐用力往脊柱吸进去，屏气 15~20秒 × 10次</li>
+              <li><strong>死虫式（平下腹）</strong>：仰卧后腰死贴垫子，手脚交替伸直不落地，16次 × 3组</li>
+              <li><strong>平板支撑</strong>：收紧腹臀，30~45秒 × 3组</li>
+              <li><strong>麦肯基收下巴（瘦脖子双下巴）</strong>：食指轻推下巴水平向后平移，保持5秒 × 15次 × 2组</li>
+            </ul>
+          </div>
+          <div class="guide-box">
+            <h3>2️⃣ 中低强度有氧（45分钟·心率120~140）</h3>
+            <ul>
+              <li><strong>快走（最推荐）</strong>：配速 5.5~6.5 km/h（跑步机坡度3~5）。脚跟先落地滚到全脚掌，用臀部和大腿后侧带动迈步，<strong>绝不用小腿肚猛蹬</strong></li>
+              <li><strong>椭圆机/单车</strong>：只用 1~3 档低阻力，轻快踩踏，不调高阻力</li>
+              <li><strong>游泳/室内无跳跃操</strong>：保护膝盖，消除下半身水肿</li>
+            </ul>
+          </div>
+          <div class="guide-box">
+            <h3>3️⃣ 运动后必做深度拉伸（15分钟·瘦腿关键）</h3>
+            <ul>
+              <li><strong>大腿前侧拉伸</strong>：站立扶墙后抓脚踝贴臀，双膝并拢骨盆前推，左右各 45秒×2组</li>
+              <li><strong>大腿后侧与小腿</strong>：弓箭步推墙，后脚跟死踩地面，左右各 45秒×2组</li>
+              <li><strong>大腿内侧（蝴蝶式）</strong>：坐姿脚心相对压膝前倾，保持 60秒</li>
+              <li><strong>天鹅颈拉伸</strong>：沉肩，头向左右侧偏及仰头拉颈前侧，各 30秒</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TASKS = [
+      { id: 't1', group: '☀️ 早间唤醒与排毒', time: '07:30', title: '空腹喝 300ml 温水（可配黑咖啡消脸肿）', desc: '唤醒肠胃代谢，帮助排出夜间水分与宿便' },
+      { id: 't2', group: '☀️ 早间唤醒与排毒', time: '08:00', title: '高蛋白慢碳早餐（鸡蛋+奶/豆浆+粗粮+果蔬）', desc: '杜绝油条、甜面包、含糖豆浆' },
+      { id: 't3', group: '🌤️ 日间控糖与防久坐', time: '12:00', title: '减脂午餐 7~8分饱（先菜肉、后主食，零含糖饮料）', desc: '2拳头蔬菜 + 1掌心去皮瘦肉/鱼虾 + 1拳头主食' },
+      { id: 't4', group: '🌤️ 日间控糖与防久坐', time: '12:30', title: '饭后靠墙站立或慢走 15 分钟', desc: '收紧小腹、后脑勺贴墙矫正探颈，严禁饭后立刻瘫坐长肚腩' },
+      { id: 't5', group: '🌤️ 日间控糖与防久坐', time: '15:30', title: '久坐起身活动 & 戒除高糖下午茶零食', desc: '每坐1小时起身走动2分钟防大腿水肿；饿了只吃黄瓜/小苹果' },
+      { id: 't6', group: '🌙 晚间断食与清淡控盐', time: '18:00', title: '清淡少盐晚餐 6分饱（蔬菜+豆腐/鱼虾+半拳粗粮）', desc: '晚上吃咸第二天脸和腿必水肿' },
+      { id: 't7', group: '🌙 晚间断食与清淡控盐', time: '18:30', title: '18:30 后开启轻断食（零宵夜、零零食水果）', desc: '让胰岛素回落，夜间持续分解腹部内脏脂肪' },
+      { id: 't8', group: '🔥 黄金运动与瘦腿拉伸', time: '19:30', title: '核心收腹 + 麦肯基天鹅颈训练（10分钟）', desc: '真空腹10次 + 死虫式3组 + 平板支撑3组 + 收下巴2组' },
+      { id: 't9', group: '🔥 黄金运动与瘦腿拉伸', time: '19:45', title: '中低心率有氧燃脂 45 分钟（或休息日主动恢复）', desc: '快走 / 低冲击操 / 椭圆机 / 游泳（心率120~140，不跑跳不粗腿）' },
+      { id: 't10', group: '🔥 黄金运动与瘦腿拉伸', time: '20:30', title: '运动后大腿四侧 + 小腿 + 肩颈深度拉伸 15 分钟', desc: '消除肌肉充血紧绷感，拉长腿部与脖子线条' },
+      { id: 't11', group: '💤 睡前消肿与修复', time: '21:30', title: '温水泡脚 15 分钟 / 泡沫轴滚腿 + 全天饮水达标', desc: '促进下半身淋巴与血液回流，瘦大腿小腿' },
+      { id: 't12', group: '💤 睡前消肿与修复', time: '23:00', title: '23:00 前放下手机准时入睡', desc: '保证7~8小时睡眠，降低皮质醇（防压力肥肚腩）' }
+    ];
+
+    const CUP_LABELS = [
+      '第1杯 (晨起)', '第2杯 (上午)', '第3杯 (上午)', '第4杯 (午饭前)',
+      '第5杯 (下午)', '第6杯 (下午)', '第7杯 (晚饭前)', '第8杯 (运动后)'
+    ];
+
+    const WEEK_PLANS = {
+      1: '📅 周一任务：核心10m + 快走45m + 拉伸15m（严格控盐消肿）',
+      2: '📅 周二任务：核心10m + 低冲击操/椭圆机45m + 拉伸15m',
+      3: '📅 周三【主动休息日】：真空腹10m + 全身拉伸15m + 泡脚（晚餐免主食）',
+      4: '📅 周四任务：核心10m + 快走45m + 拉伸15m',
+      5: '📅 周五任务：核心10m + 游泳/快走45m + 拉伸15m',
+      6: '📅 周六任务：户外公园慢速有氧 50~60m + 拉伸15m',
+      0: '📅 周日【完全休息日】：腿部与肩颈拉伸放松15m + 明早空腹称重！'
+    };
+
+    const STORAGE_KEY = 'weight_loss_85_to_70_v1';
+
+    function getStore() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : { daily: {}, weekly: {} };
+      } catch (e) {
+        return { daily: {}, weekly: {} };
+      }
+    }
+
+    function saveStore(data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function formatDate(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    }
+
+    function setToday() {
+      document.getElementById('checkinDate').value = formatDate(new Date());
+      loadDailyCheckin();
+    }
+
+    function changeDate(offset) {
+      const input = document.getElementById('checkinDate');
+      const cur = input.value ? new Date(input.value + 'T00:00:00') : new Date();
+      cur.setDate(cur.getDate() + offset);
+      input.value = formatDate(cur);
+      loadDailyCheckin();
+    }
+
+    function loadDailyCheckin() {
+      const dateStr = document.getElementById('checkinDate').value;
+      const store = getStore();
+      const dayData = store.daily[dateStr] || { tasks: {}, cups: [] };
+
+      const d = new Date(dateStr + 'T00:00:00');
+      const wk = d.getDay();
+      const wkNames = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+      document.getElementById('weekdayHint').textContent = wkNames[wk];
+      document.getElementById('todayPlanBadge').textContent = WEEK_PLANS[wk];
+
+      const waterEl = document.getElementById('waterCups');
+      waterEl.innerHTML = '';
+      CUP_LABELS.forEach((label, idx) => {
+        const drank = dayData.cups && dayData.cups.includes(idx);
+        const btn = document.createElement('button');
+        btn.className = 'cup-btn' + (drank ? ' drank' : '');
+        btn.innerHTML = (drank ? '💧 300ml<br>' : '🥛 待喝<br>') + `<small>${label}</small>`;
+        btn.onclick = () => toggleCup(dateStr, idx);
+        waterEl.appendChild(btn);
+      });
+
+      const container = document.getElementById('checklistContainer');
+      container.innerHTML = '';
+      let currentGroup = '';
+      let checkedCount = 0;
+
+      TASKS.forEach(t => {
+        if (t.group !== currentGroup) {
+          currentGroup = t.group;
+          const gTitle = document.createElement('div');
+          gTitle.className = 'checklist-groupTitle';
+          gTitle.textContent = currentGroup;
+          container.appendChild(gTitle);
+        }
+        const isChecked = !!dayData.tasks[t.id];
+        if (isChecked) checkedCount++;
+
+        const row = document.createElement('label');
+        row.className = 'check-item' + (isChecked ? ' checked' : '');
+        row.innerHTML = `
+          <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleTask('${dateStr}', '${t.id}', this.checked)" />
+          <div class="item-content">
+            <div><span class="item-time">${t.time}</span><span class="item-title">${t.title}</span></div>
+            <div class="item-desc">${t.desc}</div>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+
+      document.getElementById('dailyScoreText').textContent = `${checkedCount} / ${TASKS.length} 项`;
+    }
+
+    function toggleTask(dateStr, taskId, checked) {
+      const store = getStore();
+      if (!store.daily[dateStr]) store.daily[dateStr] = { tasks: {}, cups: [] };
+      store.daily[dateStr].tasks[taskId] = checked;
+      saveStore(store);
+      loadDailyCheckin();
+    }
+
+    function toggleCup(dateStr, cupIdx) {
+      const store = getStore();
+      if (!store.daily[dateStr]) store.daily[dateStr] = { tasks: {}, cups: [] };
+      const cups = store.daily[dateStr].cups || [];
+      const pos = cups.indexOf(cupIdx);
+      if (pos >= 0) cups.splice(pos, 1);
+      else cups.push(cupIdx);
+      store.daily[dateStr].cups = cups;
+      saveStore(store);
+      loadDailyCheckin();
+    }
+
+    function renderWeeklyTable() {
+      const store = getStore();
+      const tbody = document.getElementById('weeklyTableBody');
+      tbody.innerHTML = '';
+
+      for (let w = 0; w <= 18; w++) {
+        const rowData = store.weekly[w] || {
+          date: '',
+          weight: w === 0 ? '85.0' : '',
+          waist: '',
+          thigh: '',
+          neck: '',
+          note: w === 0 ? '起点记录' : ''
+        };
+        const targetWeight = (85 - (15 / 18) * w).toFixed(1);
+        const label = w === 0 ? '起点' : `第${w}周`;
+        const badgeClass = w <= 4 ? 'tag-blue' : (w <= 12 ? 'tag-green' : 'tag-orange');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${label}</strong></td>
+          <td><span class="tag ${badgeClass}">≤${targetWeight}</span></td>
+          <td><input type="date" class="input-sm" style="width:118px" value="${rowData.date}" onchange="saveWeekly(${w}, 'date', this.value)" /></td>
+          <td><input type="number" step="0.1" class="input-sm" placeholder="${targetWeight}" value="${rowData.weight}" onchange="saveWeekly(${w}, 'weight', this.value)" /></td>
+          <td><input type="number" step="0.1" class="input-sm" placeholder="cm" value="${rowData.waist}" onchange="saveWeekly(${w}, 'waist', this.value)" /></td>
+          <td><input type="number" step="0.1" class="input-sm" placeholder="cm" value="${rowData.thigh}" onchange="saveWeekly(${w}, 'thigh', this.value)" /></td>
+          <td><input type="number" step="0.1" class="input-sm" placeholder="cm" value="${rowData.neck}" onchange="saveWeekly(${w}, 'neck', this.value)" /></td>
+          <td><input type="text" class="input-note" placeholder="变化备注..." value="${rowData.note}" onchange="saveWeekly(${w}, 'note', this.value)" /></td>
+        `;
+        tbody.appendChild(tr);
+      }
+      updateHeaderProgress();
+    }
+
+    function saveWeekly(weekIdx, field, val) {
+      const store = getStore();
+      if (!store.weekly[weekIdx]) {
+        store.weekly[weekIdx] = { date: '', weight: '', waist: '', thigh: '', neck: '', note: '' };
+      }
+      store.weekly[weekIdx][field] = val;
+      saveStore(store);
+      updateHeaderProgress();
+    }
+
+    function updateHeaderProgress() {
+      const store = getStore();
+      let latestWeight = 85.0;
+      for (let w = 18; w >= 0; w--) {
+        const rec = store.weekly[w];
+        if (rec && rec.weight && !isNaN(parseFloat(rec.weight))) {
+          latestWeight = parseFloat(rec.weight);
+          break;
+        }
+      }
+      const lost = Math.max(0, 85.0 - latestWeight);
+      const remain = Math.max(0, latestWeight - 70.0);
+      const pct = Math.min(100, Math.max(0, (lost / 15.0) * 100));
+
+      document.getElementById('currentWeightDisplay').textContent = latestWeight.toFixed(1);
+      document.getElementById('lostWeightDisplay').textContent = lost.toFixed(1);
+      document.getElementById('remainWeightDisplay').textContent = remain.toFixed(1);
+      document.getElementById('progressPercent').textContent = `${pct.toFixed(1)}%`;
+      document.getElementById('progressBar').style.width = `${pct}%`;
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        const names = ['daily', 'weekly', 'guide'];
+        btn.classList.toggle('active', names[idx] === tabName);
+      });
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + tabName).classList.add('active');
+    }
+
+    function exportData() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(getStore(), null, 2));
+      const dl = document.createElement('a');
+      dl.setAttribute("href", dataStr);
+      dl.setAttribute("download", `减脂打卡记录_${formatDate(new Date())}.json`);
+      document.body.appendChild(dl);
+      dl.click();
+      dl.remove();
+    }
+
+    function importData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (data && (data.daily || data.weekly)) {
+            saveStore(data);
+            loadDailyCheckin();
+            renderWeeklyTable();
+            alert('打卡数据恢复成功！');
+          }
+        } catch (err) {
+          alert('文件格式有误，请选择之前导出的 .json 备份文件。');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    setToday();
+    renderWeeklyTable();
+  </script>
+</body>
+</html>
