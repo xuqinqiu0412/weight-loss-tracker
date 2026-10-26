@@ -1,0 +1,19 @@
+name: Daily 21:30 Weight Loss Bark Reminder
+
+on:
+  schedule:
+    # UTC 时间 13:30 对应北京时间 (UTC+8) 每天晚上 21:30
+    - cron: '30 13 * * *'
+  workflow_dispatch: # 支持在 GitHub 页面手动点击 "Run workflow" 立即测试推送
+
+jobs:
+  send-bark-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Send Bark Push Notification to iPhone
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 send_bark.py
