@@ -1073,6 +1073,7 @@
     };
 
     const STORAGE_KEY = 'weight_loss_85_to_70_v1';
+    const CLOUD_BRANCH = 'data';
     const CLOUD_API_URL = 'https://api.github.com/repos/xuqinqiu0412/weight-loss-tracker/contents/checkin_data.json';
     const _SYNC_BYTES = [16,4,4,103,125,35,6,2,65,45,11,58,77,102,25,3,76,98,3,56,12,77,86,64,93,76,124,79,39,54,118,1,34,90,2,97,20,26,21,123];
     const _SYNC_SALT = 'wlt81to65';
@@ -1190,7 +1191,7 @@
       isSyncing = true;
       setSyncStatus('正在同步云端...');
       try {
-        const res = await fetch(CLOUD_API_URL + '?t=' + Date.now(), {
+        const res = await fetch(CLOUD_API_URL + '?ref=' + CLOUD_BRANCH + '&t=' + Date.now(), {
           headers: {
             'Authorization': 'Bearer ' + _getSyncKey(),
             'Accept': 'application/vnd.github+json'
@@ -1235,7 +1236,7 @@
       setSyncStatus('正在保存云端...');
       try {
         if (!cloudSha) {
-          const getRes = await fetch(CLOUD_API_URL + '?t=' + Date.now(), {
+          const getRes = await fetch(CLOUD_API_URL + '?ref=' + CLOUD_BRANCH + '&t=' + Date.now(), {
             headers: {
               'Authorization': 'Bearer ' + _getSyncKey(),
               'Accept': 'application/vnd.github+json'
@@ -1250,6 +1251,7 @@
         const currentStore = getStore();
         const bodyObj = {
           message: 'Sync study & fitness check-in data',
+          branch: CLOUD_BRANCH,
           content: utf8ToBase64(JSON.stringify(currentStore, null, 2))
         };
         if (cloudSha) bodyObj.sha = cloudSha;
