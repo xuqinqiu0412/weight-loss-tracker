@@ -758,14 +758,31 @@
       font-size: 0.75rem;
       color: var(--sky-dark);
       background: var(--sky-soft);
-      padding: 3px 9px;
+      padding: 4px 10px;
       border-radius: 999px;
       font-weight: 700;
       transition: all 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .fold-arrow::before {
+      content: "点击展开 ▾";
     }
     details.fold-card[open] .fold-arrow {
       background: var(--sky-primary);
       color: #fff;
+    }
+    details.fold-card[open] .fold-arrow::before {
+      content: "点击收起 ▴";
+    }
+
+    @keyframes cardPulseHighlight {
+      0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.55); border-color: #0ea5e9; }
+      50% { box-shadow: 0 0 0 8px rgba(14, 165, 233, 0.18); border-color: #0284c7; }
+      100% { box-shadow: var(--shadow-sm); border-color: var(--border); }
+    }
+    .card.highlight-jump {
+      animation: cardPulseHighlight 1.6s ease;
     }
     .fold-body {
       padding: 0 16px 16px;
@@ -1251,7 +1268,7 @@
           <div class="metric-sub">CPA·双语·Python</div>
         </div>
       </div>
-      <div class="metric-card" id="metricCardWater" onclick="switchTab('fit')">
+      <div class="metric-card" id="metricCardWater" onclick="jumpToWaterCheckin()">
         <div class="metric-icon icon-amber">💧</div>
         <div class="metric-info">
           <div class="metric-label">消肿饮水</div>
@@ -1307,6 +1324,7 @@
           <button class="filter-pill fit-pill" onclick="setFitFilter('m3')">🌇 断食&天鹅颈 (3)</button>
           <button class="filter-pill fit-pill" onclick="setFitFilter('m4')">🏃 有氧&拉伸 (3)</button>
           <button class="filter-pill fit-pill" onclick="setFitFilter('m5')">🌙 睡前竖腿 (3)</button>
+          <button class="filter-pill fit-pill" onclick="jumpToWaterCheckin()">💧 饮水打卡</button>
         </div>
 
         <div class="two-col-grid" id="fitGridWrap">
@@ -1317,7 +1335,7 @@
 
       <!-- 2. 8杯消水肿饮水矩阵 + 今日空腹体重/围度快记 -->
       <div class="two-col-grid">
-        <div class="card">
+        <div class="card" id="waterCheckinCard">
           <div class="section-header">
             <div class="section-title">💧 2400ml 消水肿饮水打卡</div>
             <span class="tag tag-blue" id="waterMlText">0 / 2400 ml</span>
@@ -1328,7 +1346,7 @@
           <div class="water-tracker" id="waterCups"></div>
         </div>
 
-        <div class="card">
+        <div class="card" id="bodyMetricQuickCard">
           <div class="section-header">
             <div class="section-title">⚖️ 今日体重与围度随手记</div>
             <span class="tag tag-green">自动同步云端</span>
@@ -1358,7 +1376,7 @@
       <details class="fold-card">
         <summary>
           <span>🍽️ 211 掉秤三餐食谱 & 零肌肉腿拉伸要领</span>
-          <span class="fold-arrow">点击展开 ▾</span>
+          <span class="fold-arrow"></span>
         </summary>
         <div class="fold-body">
           <div class="focus-badges-row">
@@ -1457,7 +1475,7 @@
       <details class="fold-card" open>
         <summary>
           <span>📅 每周全科课程表总览（单双日轮换 · 下午 Python 2h + 财务软件/实操 1.5h）</span>
-          <span class="fold-arrow">收起/展开 ▾</span>
+          <span class="fold-arrow"></span>
         </summary>
         <div class="fold-body">
           <div class="week-cards-grid">
@@ -2243,7 +2261,7 @@
       document.getElementById('progressBar').style.width = `${pct}%`;
     }
 
-    function switchTab(tabName) {
+    function switchTab(tabName, skipScrollTop = false) {
       const names = ['fit', 'study', 'progress', 'weekly'];
       document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
         btn.classList.toggle('active', names[idx] === tabName);
@@ -2261,7 +2279,26 @@
       if (cardMap[tabName] && document.getElementById(cardMap[tabName])) {
         document.getElementById(cardMap[tabName]).classList.add('active-metric');
       }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (!skipScrollTop) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function jumpToWaterCheckin() {
+      switchTab('fit', true);
+      document.querySelectorAll('.metric-card').forEach(c => c.classList.remove('active-metric'));
+      const waterMetric = document.getElementById('metricCardWater');
+      if (waterMetric) waterMetric.classList.add('active-metric');
+
+      const waterCard = document.getElementById('waterCheckinCard');
+      if (waterCard) {
+        waterCard.classList.remove('highlight-jump');
+        void waterCard.offsetWidth;
+        waterCard.classList.add('highlight-jump');
+        setTimeout(() => {
+          waterCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 40);
+      }
     }
 
     function exportData() {
