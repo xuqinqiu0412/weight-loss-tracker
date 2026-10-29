@@ -21,7 +21,7 @@
       --sky-pale: #f0f9ff;
       --sky-border: #bae6fd;
 
-      /* 塑形薄荷绿 & 活力珊瑚橙 */
+      /* 塑形薄荷绿 & 暖阳橙 */
       --fit: #10b981;
       --fit-dark: #059669;
       --fit-soft: #ecfdf5;
@@ -38,11 +38,11 @@
       --muted: #64748b;
       --border: #dbeafe;
       --border-light: #eff6ff;
-      --radius-xl: 24px;
-      --radius-lg: 18px;
-      --radius-md: 14px;
-      --shadow-sm: 0 4px 14px -2px rgba(14, 165, 233, 0.07);
-      --shadow-md: 0 12px 28px -6px rgba(14, 165, 233, 0.12);
+      --radius-xl: 22px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --shadow-sm: 0 3px 12px -2px rgba(14, 165, 233, 0.07);
+      --shadow-md: 0 10px 24px -6px rgba(14, 165, 233, 0.13);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -51,124 +51,118 @@
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
       background-color: var(--bg);
       background-image:
-        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.16) 0px, transparent 55%),
-        radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.11) 0px, transparent 50%),
-        radial-gradient(at 50% 100%, rgba(186, 230, 253, 0.25) 0px, transparent 60%);
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 55%),
+        radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.10) 0px, transparent 50%);
       background-attachment: fixed;
       color: var(--text);
-      line-height: 1.5;
-      padding: calc(14px + env(safe-area-inset-top)) 14px calc(84px + env(safe-area-inset-bottom));
+      line-height: 1.48;
+      padding: calc(12px + env(safe-area-inset-top)) 12px calc(92px + env(safe-area-inset-bottom));
       -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      max-width: 1160px;
+      max-width: 1140px;
       margin: 0 auto;
     }
 
-    /* 顶部清新晴空浅蓝英雄区 */
+    /* ==================== 顶部晴空浅蓝英雄区 ==================== */
     .hero-banner {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 48%, #d1fae5 100%);
+      background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 52%, #d1fae5 100%);
       border: 1px solid #7dd3fc;
       color: #0c4a6e;
-      padding: 22px 22px 18px;
+      padding: 18px 18px 15px;
       border-radius: var(--radius-xl);
-      box-shadow: 0 12px 30px -8px rgba(14, 165, 233, 0.18);
-      margin-bottom: 14px;
+      box-shadow: 0 10px 26px -8px rgba(14, 165, 233, 0.18);
+      margin-bottom: 12px;
     }
     .hero-banner::before {
       content: "";
       position: absolute;
-      top: -70px;
+      top: -60px;
       right: -30px;
-      width: 240px;
-      height: 240px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-banner::after {
-      content: "";
-      position: absolute;
-      bottom: -80px;
-      left: 12%;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.72) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .hero-top {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
       position: relative;
       z-index: 1;
     }
     .brand-group {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 11px;
+      min-width: 0;
     }
     .brand-logo {
-      width: 48px;
-      height: 48px;
-      border-radius: 15px;
-      background: rgba(255, 255, 255, 0.85);
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.88);
       border: 1px solid #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 6px 16px rgba(14, 165, 233, 0.16);
+      font-size: 1.35rem;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.14);
       flex-shrink: 0;
     }
+    .brand-text {
+      min-width: 0;
+    }
     .brand-text h1 {
-      font-size: 1.32rem;
+      font-size: 1.18rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: #0c4a6e;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .brand-pills {
       display: flex;
-      gap: 6px;
+      gap: 5px;
       flex-wrap: wrap;
-      margin-top: 6px;
+      margin-top: 4px;
     }
     .brand-pill {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      padding: 3px 10px;
+      padding: 2px 8px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.78);
-      border: 1px solid rgba(14, 165, 233, 0.22);
+      border: 1px solid rgba(14, 165, 233, 0.2);
       color: #0369a1;
-      backdrop-filter: blur(4px);
     }
 
     .sync-pill {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      background: rgba(255, 255, 255, 0.88);
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.9);
       color: #0369a1;
       border: 1px solid #7dd3fc;
-      padding: 7px 14px;
+      padding: 6px 11px;
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 2px 10px rgba(14, 165, 233, 0.1);
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
+      flex-shrink: 0;
       transition: all 0.2s;
     }
-    .sync-pill:hover { background: #ffffff; transform: translateY(-1px); }
     .sync-pill:active { transform: scale(0.96); }
     .sync-dot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: #10b981;
       box-shadow: 0 0 8px #10b981;
@@ -176,35 +170,41 @@
     }
     @keyframes pulseDot {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.85); }
+      50% { opacity: 0.45; transform: scale(0.85); }
     }
 
     .hero-bars {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 12px;
-      margin-top: 16px;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
       position: relative;
       z-index: 1;
     }
     .hero-bar-card {
-      background: rgba(255, 255, 255, 0.76);
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      padding: 11px 14px;
-      border-radius: 14px;
-      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      padding: 9px 12px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
     }
     .hero-bar-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.76rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: #0c4a6e;
-      margin-bottom: 7px;
+      margin-bottom: 5px;
+      gap: 4px;
+    }
+    .hero-bar-head span:first-child {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .hero-bar-track {
-      height: 8px;
+      height: 6px;
       background: #e0f2fe;
       border-radius: 999px;
       overflow: hidden;
@@ -220,97 +220,98 @@
       background: linear-gradient(90deg, #38bdf8, #0284c7);
     }
 
-    /* 4宫格独立悬浮指标卡（点击可快速切换对应板块） */
+    /* ==================== 4宫格核心指标卡（手机端一行4列紧凑排布） ==================== */
     .metrics-bento {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
-      margin-bottom: 16px;
-    }
-    @media (max-width: 680px) {
-      .metrics-bento {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      margin-bottom: 12px;
     }
     .metric-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 13px 14px;
+      padding: 11px 12px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       box-shadow: var(--shadow-sm);
       cursor: pointer;
       transition: all 0.18s ease;
     }
     .metric-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
       border-color: var(--sky-light);
-      box-shadow: var(--shadow-md);
+    }
+    .metric-card.active-metric {
+      border-color: var(--sky-primary);
+      background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.14);
     }
     .metric-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       flex-shrink: 0;
     }
     .icon-emerald { background: var(--fit-soft); color: var(--fit-dark); }
     .icon-sky { background: var(--sky-soft); color: var(--sky-dark); }
     .icon-amber { background: var(--amber-soft); color: var(--amber-dark); }
     .icon-rose { background: var(--rose-soft); color: var(--rose); }
-    .metric-info { min-width: 0; }
+    .metric-info { min-width: 0; flex: 1; }
     .metric-label {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
       color: var(--muted);
+      white-space: nowrap;
     }
     .metric-val {
-      font-size: 1.18rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: var(--text);
       letter-spacing: -0.02em;
       line-height: 1.25;
+      white-space: nowrap;
     }
     .metric-sub {
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       color: var(--muted);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    /* 统一导航与日期工具栏 */
+    /* ==================== 顶部导航与单行日期工具栏 ==================== */
     .top-toolbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
     .tabs-nav {
       display: flex;
-      gap: 5px;
+      gap: 4px;
       background: #dbeafe;
-      padding: 5px;
-      border-radius: 15px;
+      padding: 4px;
+      border-radius: 14px;
       flex: 1;
-      min-width: 310px;
+      min-width: 300px;
     }
     .tab-btn {
       flex: 1;
-      padding: 9px 10px;
+      padding: 8px 8px;
       border: none;
       background: transparent;
       color: #0369a1;
       font-weight: 800;
-      font-size: 0.83rem;
-      border-radius: 11px;
+      font-size: 0.82rem;
+      border-radius: 10px;
       cursor: pointer;
       transition: all 0.18s ease;
       text-align: center;
@@ -319,28 +320,39 @@
     .tab-btn.active {
       background: #ffffff;
       color: #0284c7;
-      box-shadow: 0 3px 10px rgba(14, 165, 233, 0.15);
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.15);
     }
+
+    /* 单行防折行日期切换栏 */
     .date-bar-inline {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 6px;
       background: var(--card);
-      padding: 5px 10px;
-      border-radius: 15px;
+      padding: 5px 8px;
+      border-radius: 14px;
       border: 1px solid var(--sky-border);
       box-shadow: var(--shadow-sm);
-      flex-wrap: wrap;
+    }
+    .date-center-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+      justify-content: center;
+      min-width: 0;
     }
     .date-bar-inline input[type="date"] {
-      padding: 5px 8px;
+      padding: 4px 6px;
       border: 1px solid transparent;
       border-radius: 8px;
-      font-size: 0.86rem;
-      font-weight: 700;
+      font-size: 0.82rem;
+      font-weight: 800;
       color: var(--text);
       background: var(--sky-pale);
       cursor: pointer;
+      min-width: 0;
     }
     .icon-btn {
       width: 30px;
@@ -350,24 +362,26 @@
       background: #fff;
       cursor: pointer;
       font-size: 0.75rem;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--sky-dark);
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
       transition: all 0.15s;
     }
-    .icon-btn:hover { background: var(--sky-pale); }
+    .icon-btn:active { transform: scale(0.92); background: var(--sky-soft); }
     .btn {
-      padding: 6px 12px;
-      border-radius: 9px;
+      padding: 5px 10px;
+      border-radius: 8px;
       border: 1px solid var(--sky-border);
       background: #fff;
       cursor: pointer;
-      font-size: 0.78rem;
-      font-weight: 700;
+      font-size: 0.74rem;
+      font-weight: 800;
       color: var(--sky-deep);
-      transition: all 0.15s;
+      flex-shrink: 0;
+      white-space: nowrap;
     }
     .btn-primary {
       background: linear-gradient(135deg, #38bdf8, #0284c7);
@@ -377,16 +391,23 @@
     .day-badge {
       background: var(--sky-soft);
       color: var(--sky-deep);
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 800;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* 手机端底部毛玻璃悬浮导航栏 (默认桌面隐藏，手机显示) */
+    .mobile-bottom-nav {
+      display: none;
     }
 
     .tab-panel { display: none; }
-    .tab-panel.active { display: block; animation: fadeIn 0.22s ease; }
+    .tab-panel.active { display: block; animation: fadeIn 0.2s ease; }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
+      from { opacity: 0; transform: translateY(3px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -394,7 +415,7 @@
     .two-col-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 14px;
       align-items: start;
     }
     @media (min-width: 880px) {
@@ -406,8 +427,8 @@
     .card {
       background: var(--card);
       border-radius: var(--radius-lg);
-      padding: 18px;
-      margin-bottom: 16px;
+      padding: 16px;
+      margin-bottom: 14px;
       box-shadow: var(--shadow-sm);
       border: 1px solid var(--border);
     }
@@ -415,27 +436,28 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       gap: 8px;
       flex-wrap: wrap;
     }
     .section-title {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 1.03rem;
+      gap: 6px;
+      font-size: 0.98rem;
       font-weight: 800;
       color: #0c4a6e;
     }
     .plan-summary-strip {
-      font-size: 0.79rem;
+      font-size: 0.76rem;
       color: #0369a1;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
       background: var(--sky-pale);
-      padding: 10px 13px;
-      border-radius: 12px;
+      padding: 8px 11px;
+      border-radius: 10px;
       border: 1px solid var(--sky-border);
       font-weight: 600;
+      line-height: 1.4;
     }
     .plan-summary-strip.fit-strip {
       background: var(--fit-soft);
@@ -443,79 +465,48 @@
       color: #065f46;
     }
 
-    /* 今日体重与围度快记栏（减肥板块专属） */
-    .quick-body-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
-      gap: 10px;
-      margin-top: 8px;
-    }
-    .quick-input-box {
-      background: var(--sky-pale);
-      border: 1px solid var(--sky-border);
-      border-radius: 12px;
-      padding: 10px 12px;
-    }
-    .quick-input-box label {
-      display: block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: #0369a1;
-      margin-bottom: 4px;
-    }
-    .quick-input-box input {
-      width: 100%;
-      border: 1px solid #bae6fd;
-      background: #fff;
-      padding: 6px 9px;
-      border-radius: 8px;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .quick-input-box input:focus {
-      outline: none;
-      border-color: var(--sky-primary);
-    }
-
-    /* 局部塑形重点标签卡 */
-    .focus-badges-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-    .focus-mini-card {
-      background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
-      border: 1px solid var(--sky-border);
-      border-radius: 14px;
-      padding: 11px 13px;
+    /* 时段快速筛选胶囊栏（手机端支持横向顺滑滑动，不占纵向高度） */
+    .filter-pills-bar {
       display: flex;
-      align-items: flex-start;
-      gap: 10px;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-    .focus-mini-icon {
-      font-size: 1.3rem;
-      line-height: 1;
-      margin-top: 2px;
+    .filter-pills-bar::-webkit-scrollbar { display: none; }
+    .filter-pill {
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--sky-border);
+      background: #fff;
+      color: var(--text-secondary);
+      font-size: 0.74rem;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.15s;
+      flex-shrink: 0;
     }
-    .focus-mini-title {
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: #0c4a6e;
+    .filter-pill.active {
+      background: var(--sky-primary);
+      color: #fff;
+      border-color: var(--sky-primary);
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.25);
     }
-    .focus-mini-desc {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-top: 2px;
+    .filter-pill.fit-pill.active {
+      background: var(--fit);
+      border-color: var(--fit);
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
     }
 
     .period-divider {
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 800;
       color: #0284c7;
-      letter-spacing: 0.03em;
-      margin: 14px 0 8px;
+      letter-spacing: 0.02em;
+      margin: 12px 0 7px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -530,32 +521,33 @@
       background: var(--border);
     }
 
-    /* 打卡任务行 + 自定义浅蓝/薄荷绿勾选框 */
+    /* ==================== 全新手机端友好的打卡行排版（标题与时间同行，描述全宽不挤压） ==================== */
     .check-item {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 11px 13px;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 11px 12px;
       border-radius: 13px;
       border: 1px solid #e2e8f0;
       background: #fff;
       margin-bottom: 8px;
       cursor: pointer;
-      transition: all 0.16s ease;
+      transition: all 0.15s ease;
     }
     .check-item:hover {
       border-color: var(--sky-light);
       background: var(--sky-pale);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.06);
+    }
+    .check-item:active {
+      transform: scale(0.99);
     }
     .check-item input[type="checkbox"] {
       display: none;
     }
     .check-circle {
-      width: 22px;
-      height: 22px;
+      width: 23px;
+      height: 23px;
+      margin-top: 1px;
       border-radius: 7px;
       border: 2px solid #93c5fd;
       background: #f0f9ff;
@@ -565,7 +557,7 @@
       flex-shrink: 0;
       transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
       color: transparent;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 900;
     }
     .study-item .check-circle { border-color: #7dd3fc; background: #f0f9ff; }
@@ -595,43 +587,36 @@
       color: var(--muted);
     }
     .check-item.checked .item-desc {
-      opacity: 0.65;
+      opacity: 0.6;
     }
 
-    .item-left {
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
+    .item-body {
       flex: 1;
       min-width: 0;
     }
-    .item-content {
-      flex: 1;
-      min-width: 0;
+    .item-top-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
     }
     .item-title {
       font-weight: 700;
-      font-size: 0.89rem;
+      font-size: 0.88rem;
       color: var(--text);
       line-height: 1.35;
+      flex: 1;
     }
-    .item-desc {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 2px;
-      line-height: 1.42;
-    }
-    .item-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 3px;
+    .item-badges {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       flex-shrink: 0;
     }
     .time-pill {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 6px;
       background: var(--fit-soft);
       color: var(--fit-dark);
@@ -646,47 +631,68 @@
       color: #075985;
     }
     .dur-pill {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 700;
       color: var(--muted);
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+    .item-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.42;
     }
 
-    /* 学习心得框 */
-    .study-note-box {
-      margin-top: 12px;
+    /* 今日体重与围度快记栏 */
+    .quick-body-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
+    @media (max-width: 640px) {
+      .quick-body-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .quick-input-box {
       background: var(--sky-pale);
       border: 1px solid var(--sky-border);
-      padding: 12px;
-      border-radius: 13px;
+      border-radius: 11px;
+      padding: 8px 10px;
     }
-    .study-note-box label {
+    .quick-input-box label {
       display: block;
-      font-size: 0.76rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      color: var(--sky-deep);
-      margin-bottom: 6px;
+      color: #0369a1;
+      margin-bottom: 3px;
     }
-    .study-note-box input {
+    .quick-input-box input {
       width: 100%;
-      padding: 9px 11px;
-      border: 1px solid var(--sky-border);
-      border-radius: 9px;
-      font-size: 0.84rem;
+      border: 1px solid #bae6fd;
       background: #fff;
-      transition: border-color 0.15s;
+      padding: 6px 8px;
+      border-radius: 7px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
     }
-    .study-note-box input:focus {
+    .quick-input-box input:focus {
       outline: none;
       border-color: var(--sky-primary);
     }
 
     /* 8杯水矩阵 */
     .water-bar-bg {
-      height: 7px;
+      height: 6px;
       background: #e0f2fe;
       border-radius: 999px;
       overflow: hidden;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .water-bar-fill {
       height: 100%;
@@ -697,7 +703,7 @@
     .water-tracker {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
+      gap: 7px;
     }
     @media (min-width: 760px) {
       .water-tracker {
@@ -705,52 +711,159 @@
       }
     }
     .cup-btn {
-      padding: 10px 4px;
-      border-radius: 12px;
+      padding: 8px 4px;
+      border-radius: 11px;
       border: 1px solid #bae6fd;
       background: var(--sky-pale);
       color: #0369a1;
-      font-size: 0.73rem;
+      font-size: 0.72rem;
       font-weight: 700;
       cursor: pointer;
       text-align: center;
       transition: all 0.16s;
+      line-height: 1.3;
     }
-    .cup-btn:hover { transform: translateY(-1px); border-color: #38bdf8; }
+    .cup-btn:active { transform: scale(0.95); }
     .cup-btn.drank {
       background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
       color: #fff;
       border-color: transparent;
-      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.28);
+      box-shadow: 0 3px 10px rgba(14, 165, 233, 0.25);
+    }
+
+    /* 手风琴折叠指南卡（手机端省空间，点击即展开） */
+    details.fold-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    details.fold-card summary {
+      list-style: none;
+      padding: 14px 16px;
+      font-weight: 800;
+      font-size: 0.94rem;
+      color: #0c4a6e;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+    details.fold-card summary::-webkit-details-marker { display: none; }
+    .fold-arrow {
+      font-size: 0.75rem;
+      color: var(--sky-dark);
+      background: var(--sky-soft);
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    details.fold-card[open] .fold-arrow {
+      background: var(--sky-primary);
+      color: #fff;
+    }
+    .fold-body {
+      padding: 0 16px 16px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    /* 局部塑形重点标签卡 */
+    .focus-badges-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+    @media (min-width: 880px) {
+      .focus-badges-row {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .focus-mini-card {
+      background: var(--sky-pale);
+      border: 1px solid var(--sky-border);
+      border-radius: 12px;
+      padding: 10px 11px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .focus-mini-icon {
+      font-size: 1.15rem;
+      line-height: 1;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+    .focus-mini-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #0c4a6e;
+    }
+    .focus-mini-desc {
+      font-size: 0.69rem;
+      color: var(--muted);
+      margin-top: 2px;
+      line-height: 1.35;
+    }
+
+    /* 学习心得框 */
+    .study-note-box {
+      margin-top: 12px;
+      background: var(--sky-pale);
+      border: 1px solid var(--sky-border);
+      padding: 11px 12px;
+      border-radius: 12px;
+    }
+    .study-note-box label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--sky-deep);
+      margin-bottom: 5px;
+    }
+    .study-note-box input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--sky-border);
+      border-radius: 8px;
+      font-size: 0.84rem;
+      background: #fff;
+    }
+    .study-note-box input:focus {
+      outline: none;
+      border-color: var(--sky-primary);
     }
 
     /* 9大科目进度网格 */
     .subjects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 10px;
     }
     .subject-card {
       border: 1px solid var(--sky-border);
-      border-radius: 14px;
-      padding: 14px;
+      border-radius: 13px;
+      padding: 13px;
       background: #fff;
-      transition: all 0.2s;
     }
-    .subject-card:hover { box-shadow: var(--shadow-sm); border-color: var(--sky-light); }
     .subject-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
     .subject-title {
       font-weight: 800;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: #0c4a6e;
     }
     .subject-sched {
-      font-size: 0.73rem;
+      font-size: 0.72rem;
       color: var(--muted);
       margin-bottom: 8px;
     }
@@ -759,7 +872,7 @@
       background: #e0f2fe;
       border-radius: 999px;
       overflow: hidden;
-      margin-bottom: 10px;
+      margin-bottom: 9px;
     }
     .sub-bar-fill {
       height: 100%;
@@ -773,56 +886,58 @@
       gap: 8px;
     }
     .subject-controls input[type="range"] {
-      width: 90px;
+      width: 85px;
       accent-color: var(--sky-primary);
       cursor: pointer;
     }
     .subject-controls input[type="text"] {
       flex: 1;
       min-width: 0;
-      padding: 6px 9px;
+      padding: 6px 8px;
       border: 1px solid var(--sky-border);
       border-radius: 8px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       background: var(--sky-pale);
     }
 
     /* 7日可视化课表卡片网格 */
     .week-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
       gap: 12px;
+      margin-top: 12px;
     }
     .day-schedule-card {
       border: 1px solid var(--sky-border);
-      border-radius: 14px;
-      padding: 14px;
+      border-radius: 13px;
+      padding: 13px;
       background: #fff;
     }
     .day-schedule-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 8px;
-      margin-bottom: 10px;
+      padding-bottom: 7px;
+      margin-bottom: 8px;
       border-bottom: 1px solid var(--border-light);
       font-weight: 800;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       color: #0c4a6e;
     }
     .slot-list {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
     }
     .slot-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.78rem;
-      padding: 6px 9px;
-      border-radius: 8px;
+      font-size: 0.76rem;
+      padding: 5px 8px;
+      border-radius: 7px;
       background: #f8fafc;
+      gap: 6px;
     }
     .slot-row.highlight-afternoon {
       background: var(--sky-soft);
@@ -832,46 +947,58 @@
     .slot-time {
       font-weight: 700;
       color: var(--muted);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
+      white-space: nowrap;
     }
 
-    /* 表格与标签 */
+    /* 表格与手机端首列固定 */
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
     }
     th, td {
-      padding: 10px 8px;
+      padding: 9px 7px;
       border-bottom: 1px solid var(--border);
       text-align: left;
+      white-space: nowrap;
     }
     th {
       background: var(--sky-pale);
       font-weight: 700;
       color: #0369a1;
-      white-space: nowrap;
+    }
+    th:first-child, td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background: #fff;
+      box-shadow: 2px 0 5px -2px rgba(14, 165, 233, 0.12);
+    }
+    th:first-child {
+      background: var(--sky-pale);
     }
     .input-sm {
-      width: 66px;
-      padding: 6px;
+      width: 64px;
+      padding: 5px 6px;
       border: 1px solid var(--sky-border);
-      border-radius: 8px;
-      font-size: 0.84rem;
+      border-radius: 7px;
+      font-size: 0.82rem;
     }
     .input-note {
-      width: 140px;
-      padding: 6px;
+      width: 130px;
+      padding: 5px 6px;
       border: 1px solid var(--sky-border);
-      border-radius: 8px;
-      font-size: 0.82rem;
+      border-radius: 7px;
+      font-size: 0.8rem;
     }
     .tag {
       display: inline-block;
-      padding: 3px 10px;
+      padding: 3px 9px;
       border-radius: 999px;
-      font-size: 0.72rem;
+      font-size: 0.71rem;
       font-weight: 800;
+      white-space: nowrap;
     }
     .tag-green { background: #d1fae5; color: #065f46; }
     .tag-blue { background: #e0f2fe; color: #0369a1; }
@@ -880,26 +1007,186 @@
 
     .guide-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
     }
     .guide-box {
       border: 1px solid var(--sky-border);
-      border-radius: 14px;
-      padding: 15px;
+      border-radius: 13px;
+      padding: 13px;
       background: var(--sky-pale);
     }
     .guide-box h3 {
-      font-size: 0.94rem;
-      margin-bottom: 8px;
+      font-size: 0.88rem;
+      margin-bottom: 6px;
       color: #0369a1;
     }
     .guide-box ul {
-      padding-left: 18px;
-      font-size: 0.81rem;
+      padding-left: 16px;
+      font-size: 0.78rem;
       color: var(--text-secondary);
     }
-    .guide-box li { margin-bottom: 6px; }
+    .guide-box li { margin-bottom: 5px; }
+
+    /* ==================== 手机端专项深度适配 (@media max-width: 768px) ==================== */
+    @media (max-width: 768px) {
+      body {
+        padding: calc(8px + env(safe-area-inset-top)) 10px calc(86px + env(safe-area-inset-bottom));
+      }
+
+      /* 1. 顶部晴空看板手机端精简 */
+      .hero-banner {
+        padding: 13px 13px 12px;
+        border-radius: 18px;
+        margin-bottom: 10px;
+      }
+      .brand-logo {
+        width: 36px;
+        height: 36px;
+        font-size: 1.15rem;
+        border-radius: 10px;
+      }
+      .brand-text h1 {
+        font-size: 1.02rem;
+      }
+      .brand-pills {
+        display: none; /* 手机端隐藏冗长副标题胶囊，让首屏直达核心打卡区 */
+      }
+      .sync-pill {
+        padding: 4px 9px;
+        font-size: 0.68rem;
+      }
+      .hero-bars {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        margin-top: 9px;
+      }
+      .hero-bar-card {
+        padding: 7px 10px;
+      }
+
+      /* 2. 4宫格核心指标在手机端保持 1行×4列 精致微缩卡，省去一半高度 */
+      .metrics-bento {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        margin-bottom: 10px;
+      }
+      .metric-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 8px 4px;
+        gap: 4px;
+        border-radius: 13px;
+      }
+      .metric-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 0.92rem;
+        border-radius: 8px;
+      }
+      .metric-label {
+        font-size: 0.63rem;
+      }
+      .metric-val {
+        font-size: 0.92rem;
+      }
+      .metric-sub {
+        display: none;
+      }
+
+      /* 3. 手机端隐藏顶部宽Tab栏，改用底部iOS毛玻璃固定导航栏；日期栏100%单行占满 */
+      .tabs-nav {
+        display: none;
+      }
+      .top-toolbar {
+        margin-bottom: 10px;
+      }
+      .date-bar-inline {
+        width: 100%;
+        padding: 5px 7px;
+        border-radius: 13px;
+      }
+      .date-bar-inline input[type="date"] {
+        font-size: 0.78rem;
+        padding: 4px 4px;
+      }
+      .day-badge {
+        font-size: 0.68rem;
+        padding: 3px 7px;
+      }
+      .btn {
+        font-size: 0.72rem;
+        padding: 5px 8px;
+      }
+
+      /* 4. 手机端卡片内边距与字号精致化 */
+      .card {
+        padding: 13px 12px;
+        border-radius: 15px;
+        margin-bottom: 11px;
+      }
+      .section-title {
+        font-size: 0.92rem;
+      }
+      .check-item {
+        padding: 10px 10px;
+        gap: 9px;
+      }
+      .item-title {
+        font-size: 0.84rem;
+      }
+      .item-desc {
+        font-size: 0.73rem;
+      }
+      .focus-badges-row {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      /* 5. 原生 iOS 风格底部悬浮毛玻璃导航栏 */
+      .mobile-bottom-nav {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid #bae6fd;
+        padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+        box-shadow: 0 -4px 20px rgba(14, 165, 233, 0.1);
+      }
+      .mob-nav-btn {
+        border: none;
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        padding: 4px 2px;
+        border-radius: 10px;
+        color: var(--muted);
+        font-size: 0.68rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .mob-nav-btn .mob-icon {
+        font-size: 1.15rem;
+        line-height: 1.1;
+      }
+      .mob-nav-btn.active {
+        color: var(--sky-dark);
+        background: var(--sky-pale);
+        font-weight: 800;
+      }
+    }
   </style>
 </head>
 <body>
@@ -927,7 +1214,7 @@
       <div class="hero-bars">
         <div class="hero-bar-card">
           <div class="hero-bar-head">
-            <span>🎯 减脂塑形总进度（目标 -16.0 kg）</span>
+            <span>🎯 减脂总进度 (-16kg)</span>
             <span id="progressPercent">0%</span>
           </div>
           <div class="hero-bar-track">
@@ -936,7 +1223,7 @@
         </div>
         <div class="hero-bar-card">
           <div class="hero-bar-head">
-            <span>⚡ 今日全天自律达成率（减肥 + 学习 + 饮水）</span>
+            <span>⚡ 今日自律达成率</span>
             <span id="dailyTotalPercent">0%</span>
           </div>
           <div class="hero-bar-track">
@@ -946,43 +1233,43 @@
       </div>
     </header>
 
-    <!-- 4宫格独立 Bento 指标卡片（点击可切换板块） -->
+    <!-- 4宫格独立 Bento 指标卡片（手机端一行4列，点击直接切换板块） -->
     <div class="metrics-bento">
-      <div class="metric-card" onclick="switchTab('weekly')" title="点击查看体重记录表">
+      <div class="metric-card active-metric" id="metricCardFit" onclick="switchTab('fit')">
+        <div class="metric-icon icon-rose">🔥</div>
+        <div class="metric-info">
+          <div class="metric-label">减肥打卡</div>
+          <div class="metric-val" id="headerFitScore">0 / 18</div>
+          <div class="metric-sub">瘦肚·瘦腿·天鹅颈</div>
+        </div>
+      </div>
+      <div class="metric-card" id="metricCardStudy" onclick="switchTab('study')">
+        <div class="metric-icon icon-sky">📚</div>
+        <div class="metric-info">
+          <div class="metric-label">学习打卡</div>
+          <div class="metric-val" id="headerStudyScore">0 / 7</div>
+          <div class="metric-sub">CPA·双语·Python</div>
+        </div>
+      </div>
+      <div class="metric-card" id="metricCardWater" onclick="switchTab('fit')">
+        <div class="metric-icon icon-amber">💧</div>
+        <div class="metric-info">
+          <div class="metric-label">消肿饮水</div>
+          <div class="metric-val" id="headerWaterScore">0 <small style="font-size:0.7rem;font-weight:600">ml</small></div>
+          <div class="metric-sub">目标 2400 ml</div>
+        </div>
+      </div>
+      <div class="metric-card" id="metricCardWeight" onclick="switchTab('weekly')">
         <div class="metric-icon icon-emerald">⚖️</div>
         <div class="metric-info">
           <div class="metric-label">当前体重</div>
-          <div class="metric-val"><span id="currentWeightDisplay">81.0</span> <small style="font-size:0.75rem;font-weight:600">kg</small></div>
-          <div class="metric-sub">累计已减 <strong id="lostWeightDisplay">0.0</strong> kg</div>
-        </div>
-      </div>
-      <div class="metric-card" onclick="switchTab('fit')" title="点击进入减肥打卡板块">
-        <div class="metric-icon icon-rose">🔥</div>
-        <div class="metric-info">
-          <div class="metric-label">今日减肥打卡</div>
-          <div class="metric-val" id="headerFitScore">0 / 18</div>
-          <div class="metric-sub">瘦肚·瘦腿·瘦脸与天鹅颈</div>
-        </div>
-      </div>
-      <div class="metric-card" onclick="switchTab('study')" title="点击进入学习打卡板块">
-        <div class="metric-icon icon-sky">📚</div>
-        <div class="metric-info">
-          <div class="metric-label">今日学习打卡</div>
-          <div class="metric-val" id="headerStudyScore">0 / 7</div>
-          <div class="metric-sub">CPA·双语·Python·实操</div>
-        </div>
-      </div>
-      <div class="metric-card" onclick="switchTab('fit')" title="点击进入饮水打卡">
-        <div class="metric-icon icon-amber">💧</div>
-        <div class="metric-info">
-          <div class="metric-label">今日消肿饮水</div>
-          <div class="metric-val" id="headerWaterScore">0 <small style="font-size:0.75rem;font-weight:600">ml</small></div>
-          <div class="metric-sub">每日目标 2400 ml</div>
+          <div class="metric-val"><span id="currentWeightDisplay">81.0</span> <small style="font-size:0.7rem;font-weight:600">kg</small></div>
+          <div class="metric-sub">已减 <strong id="lostWeightDisplay">0.0</strong> kg</div>
         </div>
       </div>
     </div>
 
-    <!-- 顶部整合导航与日期切换栏（学习打卡与减肥打卡彻底分成两个独立板块） -->
+    <!-- 顶部导航（桌面端显示）与单行日期切换栏（手机+桌面通用） -->
     <div class="top-toolbar">
       <div class="tabs-nav">
         <button class="tab-btn active" onclick="switchTab('fit')">🔥 减肥打卡</button>
@@ -993,77 +1280,46 @@
 
       <div class="date-bar-inline">
         <button class="icon-btn" onclick="changeDate(-1)" title="前一天">◀</button>
-        <input type="date" id="checkinDate" onchange="loadDailyCheckin()" />
+        <div class="date-center-group">
+          <input type="date" id="checkinDate" onchange="loadDailyCheckin()" />
+          <span class="day-badge" id="weekdayHint"></span>
+        </div>
+        <button class="btn btn-primary" onclick="setToday()">今天</button>
         <button class="icon-btn" onclick="changeDate(1)" title="后一天">▶</button>
-        <button class="btn btn-primary" onclick="setToday()">回到今天</button>
-        <span class="day-badge" id="weekdayHint"></span>
       </div>
     </div>
 
-    <!-- ==================== 板块 1: 🔥 减肥打卡（独立板块 · 18项深度塑形） ==================== -->
+    <!-- ==================== 板块 1: 🔥 减肥打卡（手机端首屏直达打卡列表） ==================== -->
     <div id="tab-fit" class="tab-panel active">
-      <!-- 4大局部塑形核心准则提示卡 -->
-      <div class="focus-badges-row">
-        <div class="focus-mini-card">
-          <div class="focus-mini-icon">🎯</div>
-          <div>
-            <div class="focus-mini-title">专攻大肚腩 & 内脏脂肪</div>
-            <div class="focus-mini-desc">饭后靠墙站15m + 18:30轻断食 + 真空腹呼吸，平腹不粗腰</div>
-          </div>
+      <!-- 1. 首屏第一顺位：18项全天减肥塑形打卡清单 + 时段快速筛选 -->
+      <div class="card">
+        <div class="section-header">
+          <div class="section-title">🔥 今日全维度减肥塑形打卡</div>
+          <span class="tag tag-green" id="dailyScoreText">0 / 18 项完成</span>
         </div>
-        <div class="focus-mini-card">
-          <div class="focus-mini-icon">🦵</div>
-          <div>
-            <div class="focus-mini-title">瘦大腿小腿 · 绝不长肌肉块</div>
-            <div class="focus-mini-desc">零负重中低心率有氧 + 运动后15m深度拉伸打散充血 + 睡前竖腿</div>
-          </div>
+        <div class="plan-summary-strip fit-strip" id="todayPlanBadge"></div>
+
+        <!-- 手机端超好用的时段快速筛选胶囊 -->
+        <div class="filter-pills-bar" id="fitFilterBar">
+          <button class="filter-pill fit-pill active" onclick="setFitFilter('all')">全部 (18)</button>
+          <button class="filter-pill fit-pill" onclick="setFitFilter('m1')">🌅 晨间瘦脸 (4)</button>
+          <button class="filter-pill fit-pill" onclick="setFitFilter('m2')">☀️ 日间防肚腩 (5)</button>
+          <button class="filter-pill fit-pill" onclick="setFitFilter('m3')">🌇 断食&天鹅颈 (3)</button>
+          <button class="filter-pill fit-pill" onclick="setFitFilter('m4')">🏃 有氧&拉伸 (3)</button>
+          <button class="filter-pill fit-pill" onclick="setFitFilter('m5')">🌙 睡前竖腿 (3)</button>
         </div>
-        <div class="focus-mini-card">
-          <div class="focus-mini-icon">🦢</div>
-          <div>
-            <div class="focus-mini-title">瘦脸消水肿 & 修长天鹅颈</div>
-            <div class="focus-mini-desc">早间黑咖/刮指排水 + 晚餐控盐 + 麦肯基收下巴与颈阔肌拉伸</div>
-          </div>
-        </div>
-        <div class="focus-mini-card">
-          <div class="focus-mini-icon">⚖️</div>
-          <div>
-            <div class="focus-mini-title">今日体重与围度随手记</div>
-            <div class="focus-mini-desc">晨起空腹称重可直接填在下方，自动同步云端记录</div>
-          </div>
+
+        <div class="two-col-grid" id="fitGridWrap">
+          <div id="fitChecklistLeft"></div>
+          <div id="fitChecklistRight"></div>
         </div>
       </div>
 
-      <!-- 今日空腹体重/围度快记 + 8杯消水肿饮水矩阵 -->
+      <!-- 2. 8杯消水肿饮水矩阵 + 今日空腹体重/围度快记 -->
       <div class="two-col-grid">
         <div class="card">
           <div class="section-header">
-            <div class="section-title">⚖️ 今日身体数据快记（自动同步云端）</div>
-            <span class="tag tag-green">晨起空腹测量</span>
-          </div>
-          <div class="quick-body-grid">
-            <div class="quick-input-box">
-              <label>今日空腹体重 (kg)</label>
-              <input type="number" step="0.1" id="dailyWeightInput" placeholder="如 80.2" onchange="saveDailyBodyMetric('weight', this.value)" />
-            </div>
-            <div class="quick-input-box">
-              <label>今日腰围 (cm)</label>
-              <input type="number" step="0.1" id="dailyWaistInput" placeholder="肚脐水平一圈" onchange="saveDailyBodyMetric('waist', this.value)" />
-            </div>
-            <div class="quick-input-box">
-              <label>大腿根围 (cm)</label>
-              <input type="number" step="0.1" id="dailyThighInput" placeholder="大腿最粗处" onchange="saveDailyBodyMetric('thigh', this.value)" />
-            </div>
-            <div class="quick-input-box">
-              <label>三餐与运动备注</label>
-              <input type="text" id="dailyFitNoteInput" placeholder="今日饮食/掉秤感受..." onchange="saveDailyBodyMetric('fitNote', this.value)" />
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="section-header">
-            <div class="section-title">💧 2400ml 消水肿饮水打卡（8 杯 × 300ml）</div>
+            <div class="section-title">💧 2400ml 消水肿饮水打卡</div>
             <span class="tag tag-blue" id="waterMlText">0 / 2400 ml</span>
           </div>
           <div class="water-bar-bg">
@@ -1071,80 +1327,121 @@
           </div>
           <div class="water-tracker" id="waterCups"></div>
         </div>
-      </div>
 
-      <!-- 18项全天减肥塑形打卡（分左右双栏：白天的代谢饮食管理 vs 晚间的燃脂有氧与拉伸排水） -->
-      <div class="card">
-        <div class="section-header">
-          <div class="section-title">🔥 今日全维度减肥塑形打卡清单（5大模块 · 18项精细执行）</div>
-          <span class="tag tag-green" id="dailyScoreText">0 / 18 项完成</span>
-        </div>
-        <div class="plan-summary-strip fit-strip" id="todayPlanBadge"></div>
-
-        <div class="two-col-grid">
-          <!-- 左栏：模块1(晨间唤醒瘦脸) + 模块2(日间211控糖防久坐肚腩) + 模块3前段(傍晚轻断食) -->
-          <div id="fitChecklistLeft"></div>
-          <!-- 右栏：模块3后段(核心天鹅颈) + 模块4(有氧燃脂+深度拉伸防粗腿) + 模块5(睡前竖腿泡脚促瘦素) -->
-          <div id="fitChecklistRight"></div>
-        </div>
-      </div>
-
-      <!-- 减肥三餐 211 公式 & 零肌肉腿拉伸标准（直接内置在减肥板块底部，随时对照） -->
-      <div class="card">
-        <div class="section-header">
-          <div class="section-title">🍽️ 211 掉秤三餐公式 & 零肌肉腿拉伸指南</div>
-          <span class="tag tag-blue">只减脂肪 · 绝不粗腿</span>
-        </div>
-        <div class="guide-grid">
-          <div class="guide-box">
-            <h3>🌅 早餐（08:00）高蛋白抗饿消脸肿</h3>
-            <ul>
-              <li><strong>消肿饮品</strong>：温水300ml + 美式黑咖啡 或 无糖豆浆300ml</li>
-              <li><strong>优质蛋白</strong>：水煮蛋/蒸蛋 2个（提供全天饱腹感，护发防掉发）</li>
-              <li><strong>优质慢碳（1拳）</strong>：蒸玉米1根 / 紫薯红薯150g / 纯燕麦片45g</li>
-              <li><strong>严禁踩雷</strong>：包子、油条、手抓饼、甜面包（升糖快且极易囤积肚腩）</li>
-            </ul>
+        <div class="card">
+          <div class="section-header">
+            <div class="section-title">⚖️ 今日体重与围度随手记</div>
+            <span class="tag tag-green">自动同步云端</span>
           </div>
-          <div class="guide-box">
-            <h3>☀️ 午餐（12:15）211法则平稳胰岛素</h3>
-            <ul>
-              <li><strong>黄金进食顺序</strong>：先喝清汤 → 再吃2拳蔬菜 → 吃1掌瘦肉 → 最后吃粗粮饭</li>
-              <li><strong>蛋白质（1掌心）</strong>：去皮鸡腿/鸡胸、清蒸鱼、虾仁12只、卤牛腱、瘦里脊</li>
-              <li><strong>高纤蔬菜（2拳头）</strong>：西兰花、菠菜、冬瓜、芹菜、菌菇、生菜</li>
-              <li><strong>慢碳主食（1拳头）</strong>：糙米杂粮饭 / 荞麦面 / 小半碗米饭（7~8分饱停筷）</li>
-            </ul>
-          </div>
-          <div class="guide-box">
-            <h3>🌙 晚餐（17:45）少盐控水防次日浮肿</h3>
-            <ul>
-              <li><strong>核心铁律</strong>：少盐清淡（防次日晨起脸肿腿粗），<strong>18:30后严格禁食</strong></li>
-              <li><strong>蛋白质（1掌心）</strong>：嫩豆腐150g、白灼虾仁、清蒸鱼片、鸡蛋白2个</li>
-              <li><strong>排水蔬菜（2拳头）</strong>：冬瓜海带汤、黄瓜拌木耳、番茄金针菇、白灼生菜</li>
-              <li><strong>主食控制</strong>：仅吃半拳山药/南瓜，周三及大餐次日直接<strong>免主食</strong></li>
-            </ul>
-          </div>
-          <div class="guide-box">
-            <h3>🧘‍♀️ 为什么你这样做绝对不会长肌肉腿？</h3>
-            <ul>
-              <li><strong>零爆发力冲击</strong>：不做负重深蹲、不跳绳、不调高单车/椭圆机阻力（仅1~2档）</li>
-              <li><strong>发力姿态纠正</strong>：快走时<strong>脚跟先落地过渡到全脚掌</strong>，用臀部与大腿根带动迈步，不踮脚尖猛蹬小腿</li>
-              <li><strong>15分钟必做拉伸+竖腿</strong>：运动后趁热把大腿前侧、后侧、内侧、小腿肌纤维彻底拉长，配合睡前15分钟靠墙L型竖腿排空下肢积液</li>
-            </ul>
+          <div class="quick-body-grid">
+            <div class="quick-input-box">
+              <label>空腹体重 (kg)</label>
+              <input type="number" step="0.1" id="dailyWeightInput" placeholder="如 80.2" onchange="saveDailyBodyMetric('weight', this.value)" />
+            </div>
+            <div class="quick-input-box">
+              <label>今日腰围 (cm)</label>
+              <input type="number" step="0.1" id="dailyWaistInput" placeholder="肚脐一圈" onchange="saveDailyBodyMetric('waist', this.value)" />
+            </div>
+            <div class="quick-input-box">
+              <label>大腿根围 (cm)</label>
+              <input type="number" step="0.1" id="dailyThighInput" placeholder="根部最粗" onchange="saveDailyBodyMetric('thigh', this.value)" />
+            </div>
+            <div class="quick-input-box">
+              <label>饮食/运动备注</label>
+              <input type="text" id="dailyFitNoteInput" placeholder="今日感受..." onchange="saveDailyBodyMetric('fitNote', this.value)" />
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- 3. 折叠手风琴：211掉秤三餐公式 & 零肌肉腿拉伸标准（手机端默认收起不占空间，点击即展开） -->
+      <details class="fold-card">
+        <summary>
+          <span>🍽️ 211 掉秤三餐食谱 & 零肌肉腿拉伸要领</span>
+          <span class="fold-arrow">点击展开 ▾</span>
+        </summary>
+        <div class="fold-body">
+          <div class="focus-badges-row">
+            <div class="focus-mini-card">
+              <div class="focus-mini-icon">🎯</div>
+              <div>
+                <div class="focus-mini-title">专攻大肚腩 & 内脏脂肪</div>
+                <div class="focus-mini-desc">饭后靠墙站15m + 18:30轻断食 + 真空腹呼吸，平腹不粗腰</div>
+              </div>
+            </div>
+            <div class="focus-mini-card">
+              <div class="focus-mini-icon">🦵</div>
+              <div>
+                <div class="focus-mini-title">瘦大腿小腿 · 绝不长肌肉块</div>
+                <div class="focus-mini-desc">零负重中低心率有氧 + 运动后15m深度拉伸打散充血 + 睡前竖腿</div>
+              </div>
+            </div>
+            <div class="focus-mini-card">
+              <div class="focus-mini-icon">🦢</div>
+              <div>
+                <div class="focus-mini-title">瘦脸消水肿 & 修长天鹅颈</div>
+                <div class="focus-mini-desc">早间黑咖/刮指排水 + 晚餐控盐 + 麦肯基收下巴与颈阔肌拉伸</div>
+              </div>
+            </div>
+            <div class="focus-mini-card">
+              <div class="focus-mini-icon">💧</div>
+              <div>
+                <div class="focus-mini-title">前紧后松喝水法</div>
+                <div class="focus-mini-desc">白天喝够 2100ml 加速代谢，21:30 后少喝水防次日眼肿脸肿</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="guide-grid">
+            <div class="guide-box">
+              <h3>🌅 早餐（08:00）高蛋白抗饿消脸肿</h3>
+              <ul>
+                <li><strong>消肿饮品</strong>：温水300ml + 美式黑咖啡 或 无糖豆浆300ml</li>
+                <li><strong>优质蛋白</strong>：水煮蛋/蒸蛋 2个（提供全天饱腹感）</li>
+                <li><strong>优质慢碳（1拳）</strong>：蒸玉米1根 / 紫薯红薯150g / 纯燕麦片45g</li>
+                <li><strong>严禁踩雷</strong>：包子、油条、手抓饼、甜面包（极易囤积肚腩）</li>
+              </ul>
+            </div>
+            <div class="guide-box">
+              <h3>☀️ 午餐（12:15）211法则平稳胰岛素</h3>
+              <ul>
+                <li><strong>进食顺序</strong>：先喝清汤 → 吃2拳蔬菜 → 吃1掌瘦肉 → 最后吃粗粮饭</li>
+                <li><strong>蛋白质（1掌心）</strong>：去皮鸡腿/鸡胸、清蒸鱼、虾仁12只、卤牛腱</li>
+                <li><strong>高纤蔬菜（2拳头）</strong>：西兰花、菠菜、冬瓜、芹菜、菌菇、生菜</li>
+                <li><strong>慢碳主食（1拳头）</strong>：糙米杂粮饭 / 荞麦面 / 小半碗米饭</li>
+              </ul>
+            </div>
+            <div class="guide-box">
+              <h3>🌙 晚餐（17:45）少盐控水防次日浮肿</h3>
+              <ul>
+                <li><strong>核心铁律</strong>：少盐清淡，<strong>18:30后严格禁食</strong></li>
+                <li><strong>蛋白质（1掌心）</strong>：嫩豆腐150g、白灼虾仁、鱼片、鸡蛋白2个</li>
+                <li><strong>排水蔬菜（2拳头）</strong>：冬瓜海带汤、黄瓜拌木耳、番茄金针菇</li>
+                <li><strong>主食控制</strong>：仅吃半拳山药/南瓜，周三及大餐次日直接<strong>免主食</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
     </div>
 
     <!-- ==================== 板块 2: 📚 学习打卡（独立板块 · CPA+双语+Python+实操） ==================== -->
     <div id="tab-study" class="tab-panel">
       <div class="card">
         <div class="section-header">
-          <div class="section-title">📚 今日全职学业打卡清单（上午CPA双语 · 下午Python与财务软件实操）</div>
+          <div class="section-title">📚 今日全职学业打卡清单</div>
           <span class="tag tag-sky" id="studyScoreText">0 / 7 项完成</span>
         </div>
         <div class="plan-summary-strip" id="todayStudyBadge"></div>
 
-        <!-- 左右双栏展示今日学习任务：左栏上午+中午，右栏下午+晚间 -->
+        <!-- 学习时段快速筛选胶囊 -->
+        <div class="filter-pills-bar" id="studyFilterBar">
+          <button class="filter-pill active" onclick="setStudyFilter('all')">全天课表 (7)</button>
+          <button class="filter-pill" onclick="setStudyFilter('morning')">🌅 上午英语&CPA (3)</button>
+          <button class="filter-pill" onclick="setStudyFilter('afternoon')">💻 中午粤语&下午编程实操 (3)</button>
+          <button class="filter-pill" onclick="setStudyFilter('evening')">🌙 晚间刷题复盘 (1)</button>
+        </div>
+
         <div class="two-col-grid">
           <div id="studyChecklistLeft"></div>
           <div id="studyChecklistRight"></div>
@@ -1156,70 +1453,72 @@
         </div>
       </div>
 
-      <!-- 每周可视化课表卡片直接整合在学习打卡板块下方 -->
-      <div class="card">
-        <div class="section-header">
-          <div class="section-title">📅 每周全科课程表总览（单双日轮换 · 下午固定 3.5h 编程与财务实操）</div>
-          <span class="tag tag-blue">全天 7h40m 科学排课</span>
-        </div>
-        <div class="week-cards-grid">
-          <div class="day-schedule-card">
-            <div class="day-schedule-head">
-              <span>周一 · 周三 · 周五</span>
-              <span class="tag tag-sky">单数日课表</span>
+      <!-- 每周可视化课表（折叠或展开均可，默认展开方便随时看） -->
+      <details class="fold-card" open>
+        <summary>
+          <span>📅 每周全科课程表总览（单双日轮换 · 下午 Python 2h + 财务软件/实操 1.5h）</span>
+          <span class="fold-arrow">收起/展开 ▾</span>
+        </summary>
+        <div class="fold-body">
+          <div class="week-cards-grid">
+            <div class="day-schedule-card">
+              <div class="day-schedule-head">
+                <span>周一 · 周三 · 周五</span>
+                <span class="tag tag-sky">单数日课表</span>
+              </div>
+              <div class="slot-list">
+                <div class="slot-row"><span>🔤 英语深度学习（加长版）</span><span class="slot-time">08:30 - 09:30 (60m)</span></div>
+                <div class="slot-row"><span>📚 CPA《会计》核心精讲</span><span class="slot-time">09:40 - 11:00 (80m)</span></div>
+                <div class="slot-row"><span>📚 CPA《税法》核心精讲</span><span class="slot-time">11:10 - 12:15 (65m)</span></div>
+                <div class="slot-row"><span>🗣️ 粤语特训 + 饭后靠墙站</span><span class="slot-time">12:40 - 13:25 (45m)</span></div>
+                <div class="slot-row highlight-afternoon"><span>🐍 Python 深度编程实战</span><span class="slot-time">14:00 - 16:00 (2.0h)</span></div>
+                <div class="slot-row highlight-afternoon"><span>🧾 会计实操做账报税</span><span class="slot-time">16:15 - 17:45 (1.5h)</span></div>
+                <div class="slot-row"><span>📝 会计+税法刷题 & 双语闪回</span><span class="slot-time">18:30 - 19:25 (55m)</span></div>
+              </div>
             </div>
-            <div class="slot-list">
-              <div class="slot-row"><span>🔤 英语深度学习（加长版）</span><span class="slot-time">08:30 - 09:30 (60m)</span></div>
-              <div class="slot-row"><span>📚 CPA《会计》核心精讲</span><span class="slot-time">09:40 - 11:00 (80m)</span></div>
-              <div class="slot-row"><span>📚 CPA《税法》核心精讲</span><span class="slot-time">11:10 - 12:15 (65m)</span></div>
-              <div class="slot-row"><span>🗣️ 粤语特训 + 饭后靠墙站</span><span class="slot-time">12:40 - 13:25 (45m)</span></div>
-              <div class="slot-row highlight-afternoon"><span>🐍 Python 深度编程实战</span><span class="slot-time">14:00 - 16:00 (2.0h)</span></div>
-              <div class="slot-row highlight-afternoon"><span>🧾 会计实操做账报税</span><span class="slot-time">16:15 - 17:45 (1.5h)</span></div>
-              <div class="slot-row"><span>📝 会计+税法刷题 & 双语闪回</span><span class="slot-time">18:30 - 19:25 (55m)</span></div>
-            </div>
-          </div>
 
-          <div class="day-schedule-card">
-            <div class="day-schedule-head">
-              <span>周二 · 周四 · 周六</span>
-              <span class="tag tag-blue">双数日课表</span>
+            <div class="day-schedule-card">
+              <div class="day-schedule-head">
+                <span>周二 · 周四 · 周六</span>
+                <span class="tag tag-blue">双数日课表</span>
+              </div>
+              <div class="slot-list">
+                <div class="slot-row"><span>🔤 英语深度学习（加长版）</span><span class="slot-time">08:30 - 09:30 (60m)</span></div>
+                <div class="slot-row"><span>📚 CPA《财管》核心精讲</span><span class="slot-time">09:40 - 11:00 (80m)</span></div>
+                <div class="slot-row"><span>📚 CPA《审计》核心精讲</span><span class="slot-time">11:10 - 12:15 (65m)</span></div>
+                <div class="slot-row"><span>🗣️ 粤语特训 + 饭后靠墙站</span><span class="slot-time">12:40 - 13:25 (45m)</span></div>
+                <div class="slot-row highlight-afternoon"><span>🐍 Python 深度编程实战</span><span class="slot-time">14:00 - 16:00 (2.0h)</span></div>
+                <div class="slot-row highlight-afternoon"><span>💻 财务软件 (用友/金蝶/Excel)</span><span class="slot-time">16:15 - 17:45 (1.5h)</span></div>
+                <div class="slot-row"><span>📝 财管+审计刷题 & 双语闪回</span><span class="slot-time">18:30 - 19:25 (55m)</span></div>
+              </div>
             </div>
-            <div class="slot-list">
-              <div class="slot-row"><span>🔤 英语深度学习（加长版）</span><span class="slot-time">08:30 - 09:30 (60m)</span></div>
-              <div class="slot-row"><span>📚 CPA《财管》核心精讲</span><span class="slot-time">09:40 - 11:00 (80m)</span></div>
-              <div class="slot-row"><span>📚 CPA《审计》核心精讲</span><span class="slot-time">11:10 - 12:15 (65m)</span></div>
-              <div class="slot-row"><span>🗣️ 粤语特训 + 饭后靠墙站</span><span class="slot-time">12:40 - 13:25 (45m)</span></div>
-              <div class="slot-row highlight-afternoon"><span>🐍 Python 深度编程实战</span><span class="slot-time">14:00 - 16:00 (2.0h)</span></div>
-              <div class="slot-row highlight-afternoon"><span>💻 财务软件 (用友/金蝶/Excel)</span><span class="slot-time">16:15 - 17:45 (1.5h)</span></div>
-              <div class="slot-row"><span>📝 财管+审计刷题 & 双语闪回</span><span class="slot-time">18:30 - 19:25 (55m)</span></div>
-            </div>
-          </div>
 
-          <div class="day-schedule-card">
-            <div class="day-schedule-head">
-              <span>周日 · 错题复盘与项目实战</span>
-              <span class="tag tag-orange">周复盘日</span>
-            </div>
-            <div class="slot-list">
-              <div class="slot-row"><span>🔤 英语本周生词与表达总复习</span><span class="slot-time">08:30 - 09:30 (60m)</span></div>
-              <div class="slot-row"><span>📚 会计 + 财管 本周错题重做</span><span class="slot-time">09:40 - 11:00 (80m)</span></div>
-              <div class="slot-row"><span>📚 税法 + 审计 章节框架默写</span><span class="slot-time">11:10 - 12:15 (65m)</span></div>
-              <div class="slot-row"><span>🗣️ 粤语本周对话脱稿复述</span><span class="slot-time">12:40 - 13:25 (45m)</span></div>
-              <div class="slot-row highlight-afternoon"><span>🐍 Python 本周财务自动化小项目</span><span class="slot-time">14:00 - 16:00 (2.0h)</span></div>
-              <div class="slot-row highlight-afternoon"><span>🧾💻 财务软件 & 会计实操周总结</span><span class="slot-time">16:15 - 17:45 (1.5h)</span></div>
-              <div class="slot-row"><span>📝 制定下周计划 & 准备周一称重</span><span class="slot-time">18:30 - 19:15 (45m)</span></div>
+            <div class="day-schedule-card">
+              <div class="day-schedule-head">
+                <span>周日 · 错题复盘与项目实战</span>
+                <span class="tag tag-orange">周复盘日</span>
+              </div>
+              <div class="slot-list">
+                <div class="slot-row"><span>🔤 英语本周生词与表达总复习</span><span class="slot-time">08:30 - 09:30 (60m)</span></div>
+                <div class="slot-row"><span>📚 会计 + 财管 本周错题重做</span><span class="slot-time">09:40 - 11:00 (80m)</span></div>
+                <div class="slot-row"><span>📚 税法 + 审计 章节框架默写</span><span class="slot-time">11:10 - 12:15 (65m)</span></div>
+                <div class="slot-row"><span>🗣️ 粤语本周对话脱稿复述</span><span class="slot-time">12:40 - 13:25 (45m)</span></div>
+                <div class="slot-row highlight-afternoon"><span>🐍 Python 本周财务自动化项目</span><span class="slot-time">14:00 - 16:00 (2.0h)</span></div>
+                <div class="slot-row highlight-afternoon"><span>🧾💻 财务软件 & 会计实操总结</span><span class="slot-time">16:15 - 17:45 (1.5h)</span></div>
+                <div class="slot-row"><span>📝 制定下周计划 & 准备周一称重</span><span class="slot-time">18:30 - 19:15 (45m)</span></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </details>
     </div>
 
     <!-- ==================== 板块 3: 📈 9大科目总进度看板 ==================== -->
     <div id="tab-progress" class="tab-panel">
       <div class="card">
         <div class="section-header">
-          <div class="section-title">📈 9 大科目总进度看板（拖动滑块或填写章节自动云同步）</div>
-          <span class="tag tag-sky">长期进度追踪</span>
+          <div class="section-title">📈 9 大科目总进度看板</div>
+          <span class="tag tag-sky">拖动滑块自动云同步</span>
         </div>
         <div class="subjects-grid" id="subjectsProgressContainer"></div>
       </div>
@@ -1229,22 +1528,22 @@
     <div id="tab-weekly" class="tab-panel">
       <div class="card">
         <div class="section-header">
-          <div class="section-title">📊 18周体重与围度追踪（81.0kg → 65.0kg，每周一晨起空腹）</div>
+          <div class="section-title">📊 18周体重与围度追踪（81.0 → 65.0kg）</div>
           <div style="display:flex;gap:6px;">
             <button class="btn" onclick="exportData()">📥 导出备份</button>
             <button class="btn" onclick="document.getElementById('importFile').click()">📤 恢复数据</button>
             <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)" />
           </div>
         </div>
-        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:12px;">
-          填写最新一周体重后，顶部看板会自动更新并同步到云端！腰围量肚脐水平一圈，大腿围量根部最粗处，颈围量喉结下最细处。
+        <p style="font-size:0.76rem;color:var(--muted);margin-bottom:10px;">
+          每周一晨起空腹测量，左侧「周次」列在手机端滑动时自动固定。
         </p>
         <div style="overflow-x:auto;">
           <table>
             <thead>
               <tr>
                 <th>周次</th>
-                <th>阶段目标</th>
+                <th>目标</th>
                 <th>测量日期</th>
                 <th>体重(kg)</th>
                 <th>腰围(cm)</th>
@@ -1260,10 +1559,33 @@
     </div>
   </div>
 
+  <!-- 手机端专属底部 iOS 风格悬浮毛玻璃导航栏 -->
+  <nav class="mobile-bottom-nav">
+    <button class="mob-nav-btn active" onclick="switchTab('fit')">
+      <span class="mob-icon">🔥</span>
+      <span>减肥打卡</span>
+    </button>
+    <button class="mob-nav-btn" onclick="switchTab('study')">
+      <span class="mob-icon">📚</span>
+      <span>学习打卡</span>
+    </button>
+    <button class="mob-nav-btn" onclick="switchTab('progress')">
+      <span class="mob-icon">📈</span>
+      <span>9科进度</span>
+    </button>
+    <button class="mob-nav-btn" onclick="switchTab('weekly')">
+      <span class="mob-icon">📊</span>
+      <span>18周体重</span>
+    </button>
+  </nav>
+
   <script>
     const INIT_WEIGHT = 81.0;
     const TARGET_WEIGHT = 65.0;
     const TOTAL_LOSS_GOAL = INIT_WEIGHT - TARGET_WEIGHT; // 16.0 kg
+
+    let currentFitFilter = 'all';
+    let currentStudyFilter = 'all';
 
     function getStudyTasksForWeekday(wk) {
       const isOdd = (wk === 1 || wk === 3 || wk === 5);
@@ -1271,66 +1593,66 @@
 
       if (isOdd) {
         return [
-          { id: 's1', col: 'left', period: '🌅 上午 · 双语与CPA核心精讲', time: '08:30-09:30', dur: '60 min', title: '🔤 英语深度学习（加长版）', desc: '核心词汇20m + 外刊精读20m + 听力跟读与口语复述20m' },
-          { id: 's2', col: 'left', period: '🌅 上午 · 双语与CPA核心精讲', time: '09:40-11:00', dur: '80 min', title: '📚 CPA《会计》核心精讲', desc: '精简高效80分钟：专攻核心考点与会计分录推导' },
-          { id: 's3', col: 'left', period: '🌅 上午 · 双语与CPA核心精讲', time: '11:10-12:15', dur: '65 min', title: '📚 CPA《税法》核心精讲', desc: '紧跟《会计》之后学习，梳理税种要素与应纳税额计算' },
-          { id: 's4', col: 'left', period: '🌤️ 中午 · 粤语特训与饭后消食', time: '12:40-13:25', dur: '45 min', title: '🗣️ 粤语听说特训（加长版·配靠墙站）', desc: '前15m饭后靠墙站消肚腩 + 后30m慢走跟读九声六调与高频对白' },
-          { id: 's5', col: 'right', period: '💻 下午 · 编程与财务实操黄金档', isAfternoon: true, time: '14:00-16:00', dur: '2.0 小时', title: '🐍 Python 深度编程实战', desc: '手脑并用不犯困：语法进阶 / Pandas财务数据处理 / 自动化脚本' },
-          { id: 's6', col: 'right', period: '💻 下午 · 编程与财务实操黄金档', isAfternoon: true, time: '16:15-17:45', dur: '1.5 小时', title: '🧾 会计实操下午实练（单数日）', desc: '建账、原始凭证审核、全盘账务处理与纳税申报表填列实操' },
-          { id: 's7', col: 'right', period: '🌙 晚间 · 轻断食刷题与双语复盘', time: '18:30-19:25', dur: '55 min', title: '📝 CPA《会计+税法》刷题 & 双语闪回', desc: '做今日所学章节习题40m + 复习英语粤语高频词15m' }
+          { id: 's1', slot: 'morning', col: 'left', period: '🌅 上午 · 双语与CPA核心精讲', time: '08:30-09:30', dur: '60m', title: '🔤 英语深度学习（加长版）', desc: '核心词汇20m + 外刊精读20m + 听力跟读与口语复述20m' },
+          { id: 's2', slot: 'morning', col: 'left', period: '🌅 上午 · 双语与CPA核心精讲', time: '09:40-11:00', dur: '80m', title: '📚 CPA《会计》核心精讲', desc: '精简高效80分钟：专攻核心考点与会计分录推导' },
+          { id: 's3', slot: 'morning', col: 'left', period: '🌅 上午 · 双语与CPA核心精讲', time: '11:10-12:15', dur: '65m', title: '📚 CPA《税法》核心精讲', desc: '紧跟《会计》之后学习，梳理税种要素与应纳税额计算' },
+          { id: 's4', slot: 'afternoon', col: 'left', period: '🌤️ 中午 · 粤语特训与饭后消食', time: '12:40-13:25', dur: '45m', title: '🗣️ 粤语听说特训（配靠墙站）', desc: '前15m饭后靠墙站消肚腩 + 后30m慢走跟读九声六调与高频对白' },
+          { id: 's5', slot: 'afternoon', col: 'right', period: '💻 下午 · 编程与财务实操黄金档', isAfternoon: true, time: '14:00-16:00', dur: '2.0h', title: '🐍 Python 深度编程实战', desc: '手脑并用不犯困：语法进阶 / Pandas财务数据处理 / 自动化脚本' },
+          { id: 's6', slot: 'afternoon', col: 'right', period: '💻 下午 · 编程与财务实操黄金档', isAfternoon: true, time: '16:15-17:45', dur: '1.5h', title: '🧾 会计实操下午实练（单数日）', desc: '建账、原始凭证审核、全盘账务处理与纳税申报表填列实操' },
+          { id: 's7', slot: 'evening', col: 'right', period: '🌙 晚间 · 轻断食刷题与双语复盘', time: '18:30-19:25', dur: '55m', title: '📝 CPA《会计+税法》刷题 & 闪回', desc: '做今日所学章节习题40m + 复习英语粤语高频词15m' }
         ];
       } else if (isEven) {
         return [
-          { id: 's1', col: 'left', period: '🌅 上午 · 双语与CPA核心精讲', time: '08:30-09:30', dur: '60 min', title: '🔤 英语深度学习（加长版）', desc: '核心词汇20m + 财经外刊精读20m + 听力精听与口语跟读20m' },
-          { id: 's2', col: 'left', period: '🌅 上午 · 双语与CPA核心精讲', time: '09:40-11:00', dur: '80 min', title: '📚 CPA《财管》核心精讲', desc: '精简高效80分钟：理解公式推导逻辑 + 经典母题亲手计算' },
-          { id: 's3', col: 'left', period: '🌅 上午 · 双语与CPA核心精讲', time: '11:10-12:15', dur: '65 min', title: '📚 CPA《审计》核心精讲', desc: '搭建审计流程框架图 + 实务准则关键词辨析' },
-          { id: 's4', col: 'left', period: '🌤️ 中午 · 粤语特训与饭后消食', time: '12:40-13:25', dur: '45 min', title: '🗣️ 粤语听说特训（加长版·配靠墙站）', desc: '前15m饭后靠墙站消肚腩 + 后30m慢走跟读港剧/职场粤语表达' },
-          { id: 's5', col: 'right', period: '💻 下午 · 编程与财务实操黄金档', isAfternoon: true, time: '14:00-16:00', dur: '2.0 小时', title: '🐍 Python 深度编程实战', desc: '沉浸式写代码2小时：OpenPyXL/Pandas报表批处理与数据分析' },
-          { id: 's6', col: 'right', period: '💻 下午 · 编程与财务实操黄金档', isAfternoon: true, time: '16:15-17:45', dur: '1.5 小时', title: '💻 财务软件下午实练（双数日）', desc: '用友/金蝶 ERP 总账、固定资产、报表模块操作 & Excel高级建模' },
-          { id: 's7', col: 'right', period: '🌙 晚间 · 轻断食刷题与双语复盘', time: '18:30-19:25', dur: '55 min', title: '📝 CPA《财管+审计》刷题 & 双语闪回', desc: '亲手做财管计算与审计真题40m + 复习双语高频词15m' }
+          { id: 's1', slot: 'morning', col: 'left', period: '🌅 上午 · 双语与CPA核心精讲', time: '08:30-09:30', dur: '60m', title: '🔤 英语深度学习（加长版）', desc: '核心词汇20m + 财经外刊精读20m + 听力精听与口语跟读20m' },
+          { id: 's2', slot: 'morning', col: 'left', period: '🌅 上午 · 双语与CPA核心精讲', time: '09:40-11:00', dur: '80m', title: '📚 CPA《财管》核心精讲', desc: '精简高效80分钟：理解公式推导逻辑 + 经典母题亲手计算' },
+          { id: 's3', slot: 'morning', col: 'left', period: '🌅 上午 · 双语与CPA核心精讲', time: '11:10-12:15', dur: '65m', title: '📚 CPA《审计》核心精讲', desc: '搭建审计流程框架图 + 实务准则关键词辨析' },
+          { id: 's4', slot: 'afternoon', col: 'left', period: '🌤️ 中午 · 粤语特训与饭后消食', time: '12:40-13:25', dur: '45m', title: '🗣️ 粤语听说特训（配靠墙站）', desc: '前15m饭后靠墙站消肚腩 + 后30m慢走跟读港剧/职场粤语表达' },
+          { id: 's5', slot: 'afternoon', col: 'right', period: '💻 下午 · 编程与财务实操黄金档', isAfternoon: true, time: '14:00-16:00', dur: '2.0h', title: '🐍 Python 深度编程实战', desc: '沉浸式写代码2小时：OpenPyXL/Pandas报表批处理与数据分析' },
+          { id: 's6', slot: 'afternoon', col: 'right', period: '💻 下午 · 编程与财务实操黄金档', isAfternoon: true, time: '16:15-17:45', dur: '1.5h', title: '💻 财务软件下午实练（双数日）', desc: '用友/金蝶 ERP 总账、固定资产、报表模块操作 & Excel高级建模' },
+          { id: 's7', slot: 'evening', col: 'right', period: '🌙 晚间 · 轻断食刷题与双语复盘', time: '18:30-19:25', dur: '55m', title: '📝 CPA《财管+审计》刷题 & 闪回', desc: '亲手做财管计算与审计真题40m + 复习双语高频词15m' }
         ];
       } else {
         return [
-          { id: 's1', col: 'left', period: '🌅 上午 · 双语与CPA周复盘', time: '08:30-09:30', dur: '60 min', title: '🔤 英语本周总复习', desc: '复盘本周生词本、精读长难句与口语表达' },
-          { id: 's2', col: 'left', period: '🌅 上午 · 双语与CPA周复盘', time: '09:40-11:00', dur: '80 min', title: '📚 CPA《会计 + 财管》错题复盘', desc: '重做本周典型错题，巩固核心分录与财管公式' },
-          { id: 's3', col: 'left', period: '🌅 上午 · 双语与CPA周复盘', time: '11:10-12:15', dur: '65 min', title: '📚 CPA《税法 + 审计》错题复盘', desc: '默写章节框架图，消灭税率与审计程序盲区' },
-          { id: 's4', col: 'left', period: '🌤️ 中午 · 粤语特训与饭后消食', time: '12:40-13:25', dur: '45 min', title: '🗣️ 粤语本周对话总复习 + 靠墙站', desc: '脱稿复述本周所学粤语高频对话与发音难点' },
-          { id: 's5', col: 'right', period: '💻 下午 · 编程与财务实操黄金档', isAfternoon: true, time: '14:00-16:00', dur: '2.0 小时', title: '🐍 Python 本周综合小项目实战', desc: '用本周所学Python知识独立编写一个财务自动化脚本' },
-          { id: 's6', col: 'right', period: '💻 下午 · 编程与财务实操黄金档', isAfternoon: true, time: '16:15-17:45', dur: '1.5 小时', title: '🧾💻 财务软件 & 会计实操周总结', desc: '整理本周全盘账套与用友/金蝶软件实操笔记' },
-          { id: 's7', col: 'right', period: '🌙 晚间 · 下周规划', time: '18:30-19:15', dur: '45 min', title: '📝 制定下周 9 科推进计划 + 准备明早空腹称重', desc: '明确下周各科目标章节' }
+          { id: 's1', slot: 'morning', col: 'left', period: '🌅 上午 · 双语与CPA周复盘', time: '08:30-09:30', dur: '60m', title: '🔤 英语本周总复习', desc: '复盘本周生词本、精读长难句与口语表达' },
+          { id: 's2', slot: 'morning', col: 'left', period: '🌅 上午 · 双语与CPA周复盘', time: '09:40-11:00', dur: '80m', title: '📚 CPA《会计 + 财管》错题复盘', desc: '重做本周典型错题，巩固核心分录与财管公式' },
+          { id: 's3', slot: 'morning', col: 'left', period: '🌅 上午 · 双语与CPA周复盘', time: '11:10-12:15', dur: '65m', title: '📚 CPA《税法 + 审计》错题复盘', desc: '默写章节框架图，消灭税率与审计程序盲区' },
+          { id: 's4', slot: 'afternoon', col: 'left', period: '🌤️ 中午 · 粤语特训与饭后消食', time: '12:40-13:25', dur: '45m', title: '🗣️ 粤语本周对话总复习 + 靠墙站', desc: '脱稿复述本周所学粤语高频对话与发音难点' },
+          { id: 's5', slot: 'afternoon', col: 'right', period: '💻 下午 · 编程与财务实操黄金档', isAfternoon: true, time: '14:00-16:00', dur: '2.0h', title: '🐍 Python 本周综合小项目实战', desc: '用本周所学Python知识独立编写一个财务自动化脚本' },
+          { id: 's6', slot: 'afternoon', col: 'right', period: '💻 下午 · 编程与财务实操黄金档', isAfternoon: true, time: '16:15-17:45', dur: '1.5h', title: '🧾💻 财务软件 & 会计实操周总结', desc: '整理本周全盘账套与用友/金蝶软件实操笔记' },
+          { id: 's7', slot: 'evening', col: 'right', period: '🌙 晚间 · 下周规划', time: '18:30-19:15', dur: '45m', title: '📝 制定下周 9 科计划 + 准备明早称重', desc: '明确下周各科目标章节' }
         ];
       }
     }
 
-    // 扩充版 18 项全维度减肥塑形打卡清单（5大模块，专攻瘦肚、瘦腿、瘦脸与天鹅颈、绝不长肌肉块）
+    // 18 项全维度减肥塑形打卡清单
     const FIT_TASKS = [
-      // 模块 1：晨间代谢唤醒 & 瘦脸天鹅颈（左栏）
-      { id: 't1', col: 'left', group: '🌅 一、晨间代谢唤醒 & 瘦脸排水（4项）', time: '07:30', dur: '晨起', title: '排空后空腹称重 + 喝 300ml 温水', desc: '唤醒肠胃蠕动，温和排出夜间代谢废物与宿便，记录真实净重' },
-      { id: 't2', col: 'left', group: '🌅 一、晨间代谢唤醒 & 瘦脸排水（4项）', time: '07:45', dur: '消肿', title: '黑咖啡 / 无糖绿茶快速消脸肿', desc: '加速上午游离脂肪酸燃烧，快速褪去晨起眼皮与脸颊水肿' },
-      { id: 't3', col: 'left', group: '🌅 一、晨间代谢唤醒 & 瘦脸排水（4项）', time: '07:55', dur: '5 min', title: '面部下颌线刮指 + 锁骨淋巴疏通', desc: '食指弯曲从下巴沿下颌骨推至耳后、再顺颈侧推向锁骨窝各30次，紧致小脸' },
-      { id: 't4', col: 'left', group: '🌅 一、晨间代谢唤醒 & 瘦脸排水（4项）', time: '08:05', dur: '早餐', title: '高蛋白慢碳早餐（2水煮蛋+豆浆/奶+粗粮）', desc: '杜绝包子油条甜面包等精制碳水，稳住全天胰岛素不囤肚腩' },
+      // 模块 1：晨间代谢唤醒 & 瘦脸排水（左栏）
+      { id: 't1', mod: 'm1', col: 'left', group: '🌅 一、晨间代谢唤醒 & 瘦脸排水（4项）', time: '07:30', dur: '晨起', title: '排空后空腹称重 + 喝 300ml 温水', desc: '唤醒肠胃蠕动，温和排出夜间代谢废物与宿便，记录真实净重' },
+      { id: 't2', mod: 'm1', col: 'left', group: '🌅 一、晨间代谢唤醒 & 瘦脸排水（4项）', time: '07:45', dur: '消肿', title: '黑咖啡 / 无糖绿茶快速消脸肿', desc: '加速上午游离脂肪酸燃烧，快速褪去晨起眼皮与脸颊水肿' },
+      { id: 't3', mod: 'm1', col: 'left', group: '🌅 一、晨间代谢唤醒 & 瘦脸排水（4项）', time: '07:55', dur: '5m', title: '面部下颌线刮指 + 锁骨淋巴疏通', desc: '食指弯曲从下巴沿下颌骨推至耳后、再顺颈侧推向锁骨窝各30次，紧致小脸' },
+      { id: 't4', mod: 'm1', col: 'left', group: '🌅 一、晨间代谢唤醒 & 瘦脸排水（4项）', time: '08:05', dur: '早餐', title: '高蛋白慢碳早餐（2鸡蛋+豆浆/奶+粗粮）', desc: '杜绝包子油条甜面包等精制碳水，稳住全天胰岛素不囤肚腩' },
 
-      // 模块 2：日间 211 控糖饮食 & 防久坐大肚腩（左栏）
-      { id: 't5', col: 'left', group: '☀️ 二、日间 211 控糖 & 防久坐肚腩（5项）', time: '12:15', dur: '午餐', title: '211 减脂午餐（按「汤→菜→肉→饭」顺序）', desc: '2拳绿叶菜 + 1掌去皮鸡胸/鱼虾牛腱 + 1拳杂粮饭，7~8分饱停筷' },
-      { id: 't6', col: 'left', group: '☀️ 二、日间 211 控糖 & 防久坐肚腩（5项）', time: '12:40', dur: '15 min', title: '饭后五点贴墙站立 15 分钟（配粤语）', desc: '后脑勺、肩胛骨、臀、小腿肚、脚跟贴墙收腹，专治久坐小肚腩与探颈' },
-      { id: 't7', col: 'left', group: '☀️ 二、日间 211 控糖 & 防久坐肚腩（5项）', time: '15:00', dur: '断糖', title: '下午茶断糖防暴食（零奶茶/零甜点零食）', desc: '下午写Python脑力消耗大时，仅喝柠檬水/茶或补8颗原味杏仁/圣女果' },
-      { id: 't8', col: 'left', group: '☀️ 二、日间 211 控糖 & 防久坐肚腩（5项）', time: '16:00', dur: '课间', title: '久坐每小时坐姿勾脚尖 + 起身活动 3 分钟', desc: '勾脚尖拉伸小腿比目鱼肌促进静脉回流，防止下午久坐大腿与小腿水肿' },
-      { id: 't9', col: 'left', group: '☀️ 二、日间 211 控糖 & 防久坐肚腩（5项）', time: '17:45', dur: '晚餐', title: '清淡少盐晚餐 6分饱（主食减半或去主食）', desc: '冬瓜菌菇蔬菜汤 + 豆腐/鱼虾白肉，严格控盐防次日脸肿腿粗' },
+      // 模块 2：日间 211 控糖 & 防久坐肚腩（左栏）
+      { id: 't5', mod: 'm2', col: 'left', group: '☀️ 二、日间 211 控糖 & 防久坐肚腩（5项）', time: '12:15', dur: '午餐', title: '211 减脂午餐（按「汤→菜→肉→饭」顺序）', desc: '2拳绿叶菜 + 1掌去皮鸡胸/鱼虾牛腱 + 1拳杂粮饭，7~8分饱停筷' },
+      { id: 't6', mod: 'm2', col: 'left', group: '☀️ 二、日间 211 控糖 & 防久坐肚腩（5项）', time: '12:40', dur: '15m', title: '饭后五点贴墙站立 15 分钟（配粤语）', desc: '后脑勺、肩胛骨、臀、小腿肚、脚跟贴墙收腹，专治久坐小肚腩与探颈' },
+      { id: 't7', mod: 'm2', col: 'left', group: '☀️ 二、日间 211 控糖 & 防久坐肚腩（5项）', time: '15:00', dur: '断糖', title: '下午茶断糖防暴食（零奶茶/零甜点零食）', desc: '下午写Python脑力消耗大时，仅喝柠檬水/茶或补8颗原味杏仁/圣女果' },
+      { id: 't8', mod: 'm2', col: 'left', group: '☀️ 二、日间 211 控糖 & 防久坐肚腩（5项）', time: '16:00', dur: '课间', title: '久坐每小时坐姿勾脚尖 + 起身活动 3 分钟', desc: '勾脚尖拉伸小腿比目鱼肌促进静脉回流，防止下午久坐大腿与小腿水肿' },
+      { id: 't9', mod: 'm2', col: 'left', group: '☀️ 二、日间 211 控糖 & 防久坐肚腩（5项）', time: '17:45', dur: '晚餐', title: '清淡少盐晚餐 6分饱（主食减半或去主食）', desc: '冬瓜菌菇蔬菜汤 + 豆腐/鱼虾白肉，严格控盐防次日脸肿腿粗' },
 
-      // 模块 3：傍晚轻断食 & 核心平腹天鹅颈（右栏）
-      { id: 't10', col: 'right', group: '🌇 三、夜间轻断食 & 平腹天鹅颈精雕（3项）', time: '18:30', dur: '断食', title: '18:30 后开启夜间 13 小时轻断食窗口', desc: '零宵夜、零高糖水果，让身体在夜间持续调用腹部内脏脂肪供能' },
-      { id: 't11', col: 'right', group: '🌇 三、夜间轻断食 & 平腹天鹅颈精雕（3项）', time: '19:30', dur: '6 min', title: '真空腹呼吸×10次 + 仰卧死虫式×3组（缩肚腩）', desc: '吐气把肚脐用力吸向脊柱屏气15秒，激活深层腹横肌天然束腰，平腹不粗腰' },
-      { id: 't12', col: 'right', group: '🌇 三、夜间轻断食 & 平腹天鹅颈精雕（3项）', time: '19:36', dur: '5 min', title: '麦肯基收下巴 + 仰头拉颈阔肌（瘦脖子双下巴）', desc: '食指水平后推下巴保持5秒×15次 + 沉肩仰头撅嘴拉伸颈前侧3组' },
+      // 模块 3：夜间轻断食 & 平腹天鹅颈精雕（右栏）
+      { id: 't10', mod: 'm3', col: 'right', group: '🌇 三、夜间轻断食 & 平腹天鹅颈精雕（3项）', time: '18:30', dur: '断食', title: '18:30 后开启夜间 13 小时轻断食窗口', desc: '零宵夜、零高糖水果，让身体在夜间持续调用腹部内脏脂肪供能' },
+      { id: 't11', mod: 'm3', col: 'right', group: '🌇 三、夜间轻断食 & 平腹天鹅颈精雕（3项）', time: '19:30', dur: '6m', title: '真空腹呼吸×10次 + 仰卧死虫式×3组', desc: '吐气把肚脐用力吸向脊柱屏气15秒，激活深层腹横肌天然束腰，平腹不粗腰' },
+      { id: 't12', mod: 'm3', col: 'right', group: '🌇 三、夜间轻断食 & 平腹天鹅颈精雕（3项）', time: '19:36', dur: '5m', title: '麦肯基收下巴 + 仰头拉颈阔肌（瘦脖子）', desc: '食指水平后推下巴保持5秒×15次 + 沉肩仰头撅嘴拉伸颈前侧3组' },
 
-      // 模块 4：低冲击燃脂有氧 & 深度拉伸散肌防粗腿（右栏）
-      { id: 't13', col: 'right', group: '🏃 四、低阻有氧燃脂 & 深度拉伸防肌肉腿（3项）', time: '19:42', dur: '45 min', title: '中低心率有氧 45 分钟（心率120~140，不粗腿）', desc: '快走（脚跟先落地臀部带动）/ 低阻椭圆机 / 游泳，严禁大阻力或负重跳跃' },
-      { id: 't14', col: 'right', group: '🏃 四、低阻有氧燃脂 & 深度拉伸防肌肉腿（3项）', time: '20:27', dur: '10 min', title: '大腿前侧 + 后侧 + 内侧蝴蝶式深度拉伸', desc: '扶墙后抓脚背贴臀拉前侧、弓步压腿拉后侧、坐姿压胯各60秒，彻底打散充血' },
-      { id: 't15', col: 'right', group: '🏃 四、低阻有氧燃脂 & 深度拉伸防肌肉腿（3项）', time: '20:37', dur: '5 min', title: '小腿下犬式踩踏拉伸 + 敲胆经与揉松小腿肚', desc: '脚跟死踩地面拉长跟腱与小腿线条，拳头轻敲大腿外侧胆经50下并揉软小腿' },
+      // 模块 4：低阻有氧燃脂 & 深度拉伸防肌肉腿（右栏）
+      { id: 't13', mod: 'm4', col: 'right', group: '🏃 四、低阻有氧燃脂 & 深度拉伸防肌肉腿（3项）', time: '19:42', dur: '45m', title: '中低心率有氧 45 分钟（心率120~140）', desc: '快走（脚跟先落地臀部带动）/ 低阻椭圆机 / 游泳，严禁大阻力或负重跳跃' },
+      { id: 't14', mod: 'm4', col: 'right', group: '🏃 四、低阻有氧燃脂 & 深度拉伸防肌肉腿（3项）', time: '20:27', dur: '10m', title: '大腿前侧 + 后侧 + 内侧蝴蝶式深度拉伸', desc: '扶墙后抓脚背贴臀拉前侧、弓步压腿拉后侧、坐姿压胯各60秒，彻底打散充血' },
+      { id: 't15', mod: 'm4', col: 'right', group: '🏃 四、低阻有氧燃脂 & 深度拉伸防肌肉腿（3项）', time: '20:37', dur: '5m', title: '小腿下犬式踩踏拉伸 + 敲胆经揉松小腿', desc: '脚跟死踩地面拉长跟腱与小腿线条，拳头轻敲大腿外侧胆经50下并揉软小腿' },
 
-      // 模块 5：睡前淋巴排水 & 瘦素睡眠修复（右栏）
-      { id: 't16', col: 'right', group: '🌙 五、睡前竖腿排水 & 瘦素睡眠修复（3项）', time: '21:15', dur: '15 min', title: '睡前靠墙倒箭式 L 型竖腿 15 分钟', desc: '双腿垂直贴墙排空下肢静脉积液，消除全天久坐与运动后的大小腿水肿' },
-      { id: 't17', col: 'right', group: '🌙 五、睡前竖腿排水 & 瘦素睡眠修复（3项）', time: '21:30', dur: '15 min', title: '温水泡脚 15 分钟 + 全天 2400ml 饮水达标', desc: '促进下半身血液与淋巴回流，21:30后少喝水避免次日眼肿' },
-      { id: 't18', col: 'right', group: '🌙 五、睡前竖腿排水 & 瘦素睡眠修复（3项）', time: '23:00', dur: '睡眠', title: '23:00 前放下手机准时入睡（睡满 7.5~8h）', desc: '深度睡眠分泌足量「瘦素」抑制食欲、压低「皮质醇」压力肚腩，躺着掉秤' }
+      // 模块 5：睡前竖腿排水 & 瘦素睡眠修复（右栏）
+      { id: 't16', mod: 'm5', col: 'right', group: '🌙 五、睡前竖腿排水 & 瘦素睡眠修复（3项）', time: '21:15', dur: '15m', title: '睡前靠墙倒箭式 L 型竖腿 15 分钟', desc: '双腿垂直贴墙排空下肢静脉积液，消除全天久坐与运动后的大小腿水肿' },
+      { id: 't17', mod: 'm5', col: 'right', group: '🌙 五、睡前竖腿排水 & 瘦素睡眠修复（3项）', time: '21:30', dur: '15m', title: '温水泡脚 15 分钟 + 全天饮水达标', desc: '促进下半身血液与淋巴回流，21:30后少喝水避免次日眼肿' },
+      { id: 't18', mod: 'm5', col: 'right', group: '🌙 五、睡前竖腿排水 & 瘦素睡眠修复（3项）', time: '23:00', dur: '睡眠', title: '23:00 前放下手机准时入睡（睡满 7.5~8h）', desc: '深度睡眠分泌足量「瘦素」抑制食欲、压低「皮质醇」压力肚腩，躺着掉秤' }
     ];
 
     const SUBJECTS_META = [
@@ -1351,23 +1673,23 @@
     ];
 
     const WEEK_FIT_PLANS = {
-      1: '🏃 周一塑形重点：核心天鹅颈11m + 快走45m + 深度拉伸15m + 竖腿15m（严格控盐消周末水肿）',
-      2: '🏃 周二塑形重点：核心天鹅颈11m + 低冲击有氧操/椭圆机45m + 深度拉伸15m + 竖腿15m',
-      3: '🧘 周三【主动恢复日】：真空腹+天鹅颈11m + 全身深度拉伸20m + 竖腿泡脚（晚餐免主食加速掉秤）',
-      4: '🏃 周四塑形重点：核心天鹅颈11m + 快走45m + 深度拉伸15m + 竖腿15m',
-      5: '🏊 周五塑形重点：核心天鹅颈11m + 游泳/快走45m + 深度拉伸15m + 竖腿15m',
-      6: '🚴 周六塑形重点：户外公园慢速有氧 50~60m + 深度拉伸15m + 竖腿15m',
-      0: '🛌 周日【全身休整日】：泡沫轴与全身拉伸15m + 竖腿泡脚 + ⏰明早(周一)空腹称重测围度！'
+      1: '🏃 周一重点：天鹅颈核心11m + 快走45m + 拉伸15m + 竖腿15m（控盐消肿）',
+      2: '🏃 周二重点：天鹅颈核心11m + 有氧操/椭圆机45m + 拉伸15m + 竖腿15m',
+      3: '🧘 周三【恢复日】：真空腹+天鹅颈11m + 全身拉伸20m + 竖腿泡脚（晚餐免主食）',
+      4: '🏃 周四重点：天鹅颈核心11m + 快走45m + 拉伸15m + 竖腿15m',
+      5: '🏊 周五重点：天鹅颈核心11m + 游泳/快走45m + 拉伸15m + 竖腿15m',
+      6: '🚴 周六重点：户外公园慢速有氧 50~60m + 深度拉伸15m + 竖腿15m',
+      0: '🛌 周日【休整日】：泡沫轴全身拉伸15m + 竖腿泡脚 + ⏰明早空腹称重！'
     };
 
     const WEEK_STUDY_PLANS = {
-      1: '📌 单数日课表：早[英语1h + 会计80m + 税法65m] · 午[粤语45m] · 下午[Python 2h + 会计实操 1.5h] · 晚[刷题55m]',
-      2: '📌 双数日课表：早[英语1h + 财管80m + 审计65m] · 午[粤语45m] · 下午[Python 2h + 财务软件 1.5h] · 晚[刷题55m]',
-      3: '📌 单数日课表：早[英语1h + 会计80m + 税法65m] · 午[粤语45m] · 下午[Python 2h + 会计实操 1.5h] · 晚[刷题55m]',
-      4: '📌 双数日课表：早[英语1h + 财管80m + 审计65m] · 午[粤语45m] · 下午[Python 2h + 财务软件 1.5h] · 晚[刷题55m]',
-      5: '📌 单数日课表：早[英语1h + 会计80m + 税法65m] · 午[粤语45m] · 下午[Python 2h + 会计实操 1.5h] · 晚[刷题55m]',
-      6: '📌 双数日课表：早[英语1h + 财管80m + 审计65m] · 午[粤语45m] · 下午[Python 2h + 财务软件 1.5h] · 晚[刷题55m]',
-      0: '📌 周日总复盘：早[英语+CPA四科错题] · 午[粤语45m] · 下午[Python实战项目2h + 软件实操总结1.5h]'
+      1: '📌 单数日：早[英语1h+会计80m+税法65m] · 午[粤语45m] · 下午[Python 2h+实操 1.5h]',
+      2: '📌 双数日：早[英语1h+财管80m+审计65m] · 午[粤语45m] · 下午[Python 2h+财务软件 1.5h]',
+      3: '📌 单数日：早[英语1h+会计80m+税法65m] · 午[粤语45m] · 下午[Python 2h+实操 1.5h]',
+      4: '📌 双数日：早[英语1h+财管80m+审计65m] · 午[粤语45m] · 下午[Python 2h+财务软件 1.5h]',
+      5: '📌 单数日：早[英语1h+会计80m+税法65m] · 午[粤语45m] · 下午[Python 2h+实操 1.5h]',
+      6: '📌 双数日：早[英语1h+财管80m+审计65m] · 午[粤语45m] · 下午[Python 2h+财务软件 1.5h]',
+      0: '📌 周日复盘：早[英语+CPA四科错题] · 午[粤语45m] · 下午[Python项目2h+软件实操总结1.5h]'
     };
 
     const STORAGE_KEY = 'weight_loss_85_to_70_v1';
@@ -1491,7 +1813,7 @@
     async function pullFromCloud(manual = false) {
       if (isSyncing) return;
       isSyncing = true;
-      setSyncStatus('正在同步云端...');
+      setSyncStatus('正在同步...');
       try {
         const res = await fetch(CLOUD_API_URL + '?ref=' + CLOUD_BRANCH + '&t=' + Date.now(), {
           headers: {
@@ -1512,17 +1834,17 @@
           renderWeeklyTable();
           renderSubjectsProgress();
           const nowTime = new Date().toTimeString().slice(0, 5);
-          setSyncStatus(`云端已同步 (${nowTime})`);
+          setSyncStatus(`已同步 (${nowTime})`);
           if (hadUnuploadedLocal) {
             isSyncing = false;
             pushToCloud();
             return;
           }
         } else {
-          setSyncStatus('本地模式 (点此重试)');
+          setSyncStatus('本地模式');
         }
       } catch (err) {
-        setSyncStatus('离线保存模式');
+        setSyncStatus('离线保存');
       } finally {
         isSyncing = false;
       }
@@ -1535,7 +1857,7 @@
         return;
       }
       isSyncing = true;
-      setSyncStatus('正在保存云端...');
+      setSyncStatus('正在保存...');
       try {
         if (!cloudSha) {
           const getRes = await fetch(CLOUD_API_URL + '?ref=' + CLOUD_BRANCH + '&t=' + Date.now(), {
@@ -1571,7 +1893,7 @@
           const putData = await putRes.json();
           cloudSha = putData.content.sha;
           const nowTime = new Date().toTimeString().slice(0, 5);
-          setSyncStatus(`云端已保存 (${nowTime})`);
+          setSyncStatus(`已同步 (${nowTime})`);
         } else if (putRes.status === 409) {
           cloudSha = null;
           isSyncing = false;
@@ -1581,7 +1903,7 @@
           setSyncStatus('已存本机');
         }
       } catch (err) {
-        setSyncStatus('已存本机 (待联网)');
+        setSyncStatus('已存本机');
       } finally {
         isSyncing = false;
       }
@@ -1607,6 +1929,24 @@
       loadDailyCheckin();
     }
 
+    function setFitFilter(filterKey) {
+      currentFitFilter = filterKey;
+      const keys = ['all', 'm1', 'm2', 'm3', 'm4', 'm5'];
+      document.querySelectorAll('#fitFilterBar .filter-pill').forEach((btn, idx) => {
+        btn.classList.toggle('active', keys[idx] === filterKey);
+      });
+      loadDailyCheckin();
+    }
+
+    function setStudyFilter(filterKey) {
+      currentStudyFilter = filterKey;
+      const keys = ['all', 'morning', 'afternoon', 'evening'];
+      document.querySelectorAll('#studyFilterBar .filter-pill').forEach((btn, idx) => {
+        btn.classList.toggle('active', keys[idx] === filterKey);
+      });
+      loadDailyCheckin();
+    }
+
     function loadDailyCheckin() {
       const dateStr = document.getElementById('checkinDate').value;
       const store = getStore();
@@ -1614,19 +1954,18 @@
 
       const d = new Date(dateStr + 'T00:00:00');
       const wk = d.getDay();
-      const wkNames = ['周日 · 全科复盘', '周一 · 单数日', '周二 · 双数日', '周三 · 单数日', '周四 · 双数日', '周五 · 单数日', '周六 · 双数日'];
+      const wkNames = ['周日·复盘', '周一·单日', '周二·双日', '周三·单日', '周四·双日', '周五·单日', '周六·双日'];
       document.getElementById('weekdayHint').textContent = wkNames[wk];
       document.getElementById('todayPlanBadge').textContent = WEEK_FIT_PLANS[wk];
       document.getElementById('todayStudyBadge').textContent = WEEK_STUDY_PLANS[wk];
       document.getElementById('dailyStudyNote').value = dayData.studyNote || '';
 
-      // 填充今日身体数据快记
       document.getElementById('dailyWeightInput').value = dayData.weight || '';
       document.getElementById('dailyWaistInput').value = dayData.waist || '';
       document.getElementById('dailyThighInput').value = dayData.thigh || '';
       document.getElementById('dailyFitNoteInput').value = dayData.fitNote || '';
 
-      // 1. 渲染今日学习任务 (7项，分左右两栏)
+      // 1. 渲染今日学习任务 (7项)
       const studyTasks = getStudyTasksForWeekday(wk);
       const studyLeft = document.getElementById('studyChecklistLeft');
       const studyRight = document.getElementById('studyChecklistRight');
@@ -1637,6 +1976,11 @@
       let curPeriodRight = '';
 
       studyTasks.forEach(st => {
+        const isChecked = !!(dayData.tasks && dayData.tasks[st.id]);
+        if (isChecked) studyCheckedCount++;
+
+        if (currentStudyFilter !== 'all' && st.slot !== currentStudyFilter) return;
+
         const targetEl = st.col === 'left' ? studyLeft : studyRight;
         const curPeriod = st.col === 'left' ? curPeriodLeft : curPeriodRight;
         if (st.period !== curPeriod) {
@@ -1647,28 +1991,27 @@
           pDiv.textContent = st.period;
           targetEl.appendChild(pDiv);
         }
-        const isChecked = !!(dayData.tasks && dayData.tasks[st.id]);
-        if (isChecked) studyCheckedCount++;
+
         const row = document.createElement('label');
         row.className = 'check-item study-item' + (st.isAfternoon ? ' afternoon-item' : '') + (isChecked ? ' checked' : '');
         row.innerHTML = `
           <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleTask('${dateStr}', '${st.id}', this.checked)" />
-          <div class="item-left">
-            <div class="check-circle">✓</div>
-            <div class="item-content">
+          <div class="check-circle">✓</div>
+          <div class="item-body">
+            <div class="item-top-row">
               <div class="item-title">${st.title}</div>
-              <div class="item-desc">${st.desc}</div>
+              <div class="item-badges">
+                <span class="time-pill">${st.time}</span>
+                <span class="dur-pill">${st.dur}</span>
+              </div>
             </div>
-          </div>
-          <div class="item-right">
-            <span class="time-pill">${st.time}</span>
-            <span class="dur-pill">⏱ ${st.dur}</span>
+            <div class="item-desc">${st.desc}</div>
           </div>
         `;
         targetEl.appendChild(row);
       });
 
-      document.getElementById('studyScoreText').textContent = `${studyCheckedCount} / ${studyTasks.length} 项完成`;
+      document.getElementById('studyScoreText').textContent = `${studyCheckedCount} / ${studyTasks.length} 完成`;
       document.getElementById('headerStudyScore').textContent = `${studyCheckedCount} / ${studyTasks.length}`;
 
       // 2. 渲染饮水打卡 (8杯)
@@ -1677,7 +2020,7 @@
       const drankList = dayData.cups || [];
       const mlDrank = drankList.length * 300;
       document.getElementById('waterMlText').textContent = `${mlDrank} / 2400 ml`;
-      document.getElementById('headerWaterScore').innerHTML = `${mlDrank} <small style="font-size:0.75rem;font-weight:600">ml</small>`;
+      document.getElementById('headerWaterScore').innerHTML = `${mlDrank} <small style="font-size:0.68rem;font-weight:600">ml</small>`;
       document.getElementById('waterBarFill').style.width = `${Math.min(100, (drankList.length / 8) * 100)}%`;
 
       CUP_LABELS.forEach((label, idx) => {
@@ -1689,7 +2032,7 @@
         waterEl.appendChild(btn);
       });
 
-      // 3. 渲染减肥塑形打卡 (18项，分左右两栏)
+      // 3. 渲染减肥塑形打卡 (18项)
       const fitLeft = document.getElementById('fitChecklistLeft');
       const fitRight = document.getElementById('fitChecklistRight');
       fitLeft.innerHTML = '';
@@ -1699,6 +2042,11 @@
       let fitCheckedCount = 0;
 
       FIT_TASKS.forEach(t => {
+        const isChecked = !!(dayData.tasks && dayData.tasks[t.id]);
+        if (isChecked) fitCheckedCount++;
+
+        if (currentFitFilter !== 'all' && t.mod !== currentFitFilter) return;
+
         const targetEl = t.col === 'left' ? fitLeft : fitRight;
         const curGroup = t.col === 'left' ? curGroupLeft : curGroupRight;
         if (t.group !== curGroup) {
@@ -1709,32 +2057,30 @@
           gTitle.textContent = t.group;
           targetEl.appendChild(gTitle);
         }
-        const isChecked = !!(dayData.tasks && dayData.tasks[t.id]);
-        if (isChecked) fitCheckedCount++;
 
         const row = document.createElement('label');
         row.className = 'check-item fit-item' + (isChecked ? ' checked' : '');
         row.innerHTML = `
           <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleTask('${dateStr}', '${t.id}', this.checked)" />
-          <div class="item-left">
-            <div class="check-circle">✓</div>
-            <div class="item-content">
+          <div class="check-circle">✓</div>
+          <div class="item-body">
+            <div class="item-top-row">
               <div class="item-title">${t.title}</div>
-              <div class="item-desc">${t.desc}</div>
+              <div class="item-badges">
+                <span class="time-pill">${t.time}</span>
+                <span class="dur-pill">${t.dur}</span>
+              </div>
             </div>
-          </div>
-          <div class="item-right">
-            <span class="time-pill">${t.time}</span>
-            <span class="dur-pill">${t.dur}</span>
+            <div class="item-desc">${t.desc}</div>
           </div>
         `;
         targetEl.appendChild(row);
       });
 
-      document.getElementById('dailyScoreText').textContent = `${fitCheckedCount} / ${FIT_TASKS.length} 项完成`;
+      document.getElementById('dailyScoreText').textContent = `${fitCheckedCount} / ${FIT_TASKS.length} 完成`;
       document.getElementById('headerFitScore').textContent = `${fitCheckedCount} / ${FIT_TASKS.length}`;
 
-      const totalMax = studyTasks.length + FIT_TASKS.length + 4; // 7 + 18 + 4 = 29
+      const totalMax = studyTasks.length + FIT_TASKS.length + 4;
       const totalRate = Math.min(100, Math.round(((studyCheckedCount + fitCheckedCount + drankList.length * 0.5) / totalMax) * 100));
       document.getElementById('dailyTotalPercent').textContent = `${totalRate}%`;
       document.getElementById('dailyTotalBar').style.width = `${totalRate}%`;
@@ -1844,7 +2190,7 @@
         tr.innerHTML = `
           <td><strong>${label}</strong></td>
           <td><span class="tag ${badgeClass}">≤${targetWeight}</span></td>
-          <td><input type="date" class="input-sm" style="width:118px" value="${rowData.date}" onchange="saveWeekly(${w}, 'date', this.value)" /></td>
+          <td><input type="date" class="input-sm" style="width:112px" value="${rowData.date}" onchange="saveWeekly(${w}, 'date', this.value)" /></td>
           <td><input type="number" step="0.1" class="input-sm" placeholder="${targetWeight}" value="${rowData.weight}" onchange="saveWeekly(${w}, 'weight', this.value)" /></td>
           <td><input type="number" step="0.1" class="input-sm" placeholder="cm" value="${rowData.waist}" onchange="saveWeekly(${w}, 'waist', this.value)" /></td>
           <td><input type="number" step="0.1" class="input-sm" placeholder="cm" value="${rowData.thigh}" onchange="saveWeekly(${w}, 'thigh', this.value)" /></td>
@@ -1871,7 +2217,6 @@
       const store = getStore();
       let latestWeight = INIT_WEIGHT;
 
-      // 优先读取 18 周表的最新体重
       for (let w = 18; w >= 0; w--) {
         const rec = store.weekly[w];
         if (rec && rec.weight && !isNaN(parseFloat(rec.weight))) {
@@ -1880,7 +2225,6 @@
         }
       }
 
-      // 如果今日或最近日常打卡填写了体重，也纳入最新体重计算
       const sortedDates = Object.keys(store.daily || {}).sort();
       for (let i = sortedDates.length - 1; i >= 0; i--) {
         const dRec = store.daily[sortedDates[i]];
@@ -1895,7 +2239,7 @@
 
       document.getElementById('currentWeightDisplay').textContent = latestWeight.toFixed(1);
       document.getElementById('lostWeightDisplay').textContent = lost.toFixed(1);
-      document.getElementById('progressPercent').textContent = `${pct.toFixed(1)}% (距65kg还差 ${Math.max(0, latestWeight - TARGET_WEIGHT).toFixed(1)}kg)`;
+      document.getElementById('progressPercent').textContent = `${pct.toFixed(1)}% (还差 ${Math.max(0, latestWeight - TARGET_WEIGHT).toFixed(1)}kg)`;
       document.getElementById('progressBar').style.width = `${pct}%`;
     }
 
@@ -1904,9 +2248,20 @@
       document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
         btn.classList.toggle('active', names[idx] === tabName);
       });
+      document.querySelectorAll('.mob-nav-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', names[idx] === tabName);
+      });
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
       const panel = document.getElementById('tab-' + tabName);
       if (panel) panel.classList.add('active');
+
+      // 高亮对应顶部卡片
+      const cardMap = { fit: 'metricCardFit', study: 'metricCardStudy', weekly: 'metricCardWeight' };
+      document.querySelectorAll('.metric-card').forEach(c => c.classList.remove('active-metric'));
+      if (cardMap[tabName] && document.getElementById(cardMap[tabName])) {
+        document.getElementById(cardMap[tabName]).classList.add('active-metric');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function exportData() {
