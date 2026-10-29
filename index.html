@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="减脂打卡" />
   <meta name="theme-color" content="#059669" />
-  <title>85kg → 70kg 每日减脂打卡助手 (iPhone版)</title>
+  <title>81kg → 65kg 每日减脂打卡助手 (iPhone版)</title>
   <style>
     :root {
       --bg: #f4f7f6;
@@ -328,29 +328,29 @@
 <body>
   <div class="container">
     <header>
-      <h1>🎯 170cm / 85kg → 70kg 减脂打卡</h1>
+      <h1>🎯 170cm / 81kg → 65kg 减脂打卡</h1>
       <p>专攻肚子、大腿、脸与脖子 ｜ 低阻力有氧 + 深度拉伸（不长块状肌肉）</p>
       <div class="stats-bar">
         <div class="stat-item">
-          <div class="stat-label">初始</div>
-          <div class="stat-value">85.0</div>
+          <div class="stat-label">初始(kg)</div>
+          <div class="stat-value">81.0</div>
         </div>
         <div class="stat-item">
           <div class="stat-label">当前(kg)</div>
-          <div class="stat-value" id="currentWeightDisplay">85.0</div>
+          <div class="stat-value" id="currentWeightDisplay">81.0</div>
         </div>
         <div class="stat-item">
           <div class="stat-label">已减(kg)</div>
           <div class="stat-value" id="lostWeightDisplay">0.0</div>
         </div>
         <div class="stat-item">
-          <div class="stat-label">距70kg</div>
-          <div class="stat-value" id="remainWeightDisplay">15.0</div>
+          <div class="stat-label">距65kg</div>
+          <div class="stat-value" id="remainWeightDisplay">16.0</div>
         </div>
       </div>
       <div class="progress-wrap">
         <div class="progress-header">
-          <span>总减脂进度（目标 -15kg）</span>
+          <span>总减脂进度（目标 -16.0kg）</span>
           <span id="progressPercent">0%</span>
         </div>
         <div class="progress-track">
@@ -495,6 +495,10 @@
   </div>
 
   <script>
+    const INIT_WEIGHT = 81.0;
+    const TARGET_WEIGHT = 65.0;
+    const TOTAL_LOSS_GOAL = INIT_WEIGHT - TARGET_WEIGHT; // 16.0 kg
+
     const TASKS = [
       { id: 't1', group: '☀️ 早间唤醒与排毒', time: '07:30', title: '空腹喝 300ml 温水（可配黑咖啡消脸肿）', desc: '唤醒肠胃代谢，帮助排出夜间水分与宿便' },
       { id: 't2', group: '☀️ 早间唤醒与排毒', time: '08:00', title: '高蛋白慢碳早餐（鸡蛋+奶/豆浆+粗粮+果蔬）', desc: '杜绝油条、甜面包、含糖豆浆' },
@@ -530,7 +534,12 @@
     function getStore() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? JSON.parse(raw) : { daily: {}, weekly: {} };
+        const parsed = raw ? JSON.parse(raw) : { daily: {}, weekly: {} };
+        if (parsed.weekly && parsed.weekly[0] && (parsed.weekly[0].weight === '85.0' || parsed.weekly[0].weight === '85')) {
+          parsed.weekly[0].weight = '81.0';
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+        }
+        return parsed;
       } catch (e) {
         return { daily: {}, weekly: {} };
       }
@@ -641,13 +650,13 @@
       for (let w = 0; w <= 18; w++) {
         const rowData = store.weekly[w] || {
           date: '',
-          weight: w === 0 ? '85.0' : '',
+          weight: w === 0 ? '81.0' : '',
           waist: '',
           thigh: '',
           neck: '',
           note: w === 0 ? '起点记录' : ''
         };
-        const targetWeight = (85 - (15 / 18) * w).toFixed(1);
+        const targetWeight = (INIT_WEIGHT - (TOTAL_LOSS_GOAL / 18) * w).toFixed(1);
         const label = w === 0 ? '起点' : `第${w}周`;
         const badgeClass = w <= 4 ? 'tag-blue' : (w <= 12 ? 'tag-green' : 'tag-orange');
         const tr = document.createElement('tr');
@@ -678,7 +687,7 @@
 
     function updateHeaderProgress() {
       const store = getStore();
-      let latestWeight = 85.0;
+      let latestWeight = INIT_WEIGHT;
       for (let w = 18; w >= 0; w--) {
         const rec = store.weekly[w];
         if (rec && rec.weight && !isNaN(parseFloat(rec.weight))) {
@@ -686,9 +695,9 @@
           break;
         }
       }
-      const lost = Math.max(0, 85.0 - latestWeight);
-      const remain = Math.max(0, latestWeight - 70.0);
-      const pct = Math.min(100, Math.max(0, (lost / 15.0) * 100));
+      const lost = Math.max(0, INIT_WEIGHT - latestWeight);
+      const remain = Math.max(0, latestWeight - TARGET_WEIGHT);
+      const pct = Math.min(100, Math.max(0, (lost / TOTAL_LOSS_GOAL) * 100));
 
       document.getElementById('currentWeightDisplay').textContent = latestWeight.toFixed(1);
       document.getElementById('lostWeightDisplay').textContent = lost.toFixed(1);
