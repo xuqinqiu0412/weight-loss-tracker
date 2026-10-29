@@ -71,7 +71,7 @@ def main():
             tasks_map = today_rec.get("tasks") or {}
             done_study = sum(1 for k, v in tasks_map.items() if k.startswith("s") and v)
             done_fit = sum(1 for k, v in tasks_map.items() if k.startswith("t") and v)
-            progress_line = f"📊 今日已打卡：📚学业 {done_study}/7 ｜ 🔥塑形 {done_fit}/12 ｜ 💧饮水 {cups_count}/8杯\n"
+            progress_line = f"📊 今日已打卡：🔥减肥 {done_fit}/18 ｜ 📚学业 {done_study}/7 ｜ 💧饮水 {cups_count}/8杯\n"
         except Exception:
             pass
 
