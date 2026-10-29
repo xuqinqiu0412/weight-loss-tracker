@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 GitHub Actions 云端每日 21:30:00 (北京时间 UTC+8) 精准 Bark 推送脚本
-支持读取云端 checkin_data.json，在锁屏通知中实时展示今日已完成的打卡进度！
+支持读取云端 checkin_data.json，在锁屏通知中实时展示今日「学习 + 减脂 + 饮水」打卡进度！
 """
 
 import json
@@ -58,8 +58,9 @@ def main():
             today_rec = (c_data.get("daily") or {}).get(date_str) or {}
             cups_count = len(today_rec.get("cups") or [])
             tasks_map = today_rec.get("tasks") or {}
-            done_tasks = sum(1 for v in tasks_map.values() if v)
-            progress_line = f"📊 今日实时进度：已喝水 {cups_count}/8 杯 ｜ 已完成 {done_tasks}/12 项\n"
+            done_study = sum(1 for k, v in tasks_map.items() if k.startswith("s") and v)
+            done_fit = sum(1 for k, v in tasks_map.items() if k.startswith("t") and v)
+            progress_line = f"📊 今日已打卡：📚学习 {done_study}/7 ｜ 🔥减脂 {done_fit}/12 ｜ 💧饮水 {cups_count}/8杯\n"
         except Exception:
             pass
 
@@ -78,14 +79,14 @@ def main():
 
     day_info = config["days"][day_key]
     title = f"{config['title_prefix']} ({date_str} {day_info['name']})"
-    body = progress_line + config["checklist_template"].replace("{plan}", day_info["plan"])
+    body = progress_line + config["checklist_template"].replace("{study}", day_info.get("study", "")).replace("{plan}", day_info["plan"])
     if checkin_url:
-        body += "\n👉 点击本条通知直接打开手机打卡页面！"
+        body += "\n👉 点击本条通知直接打开云同步打卡页！"
 
     payload = {
         "title": title,
         "body": body,
-        "group": config.get("group", "81to65减脂打卡"),
+        "group": config.get("group", "减脂与CPA打卡"),
         "sound": config.get("sound", "bell"),
         "isArchive": "1"
     }
