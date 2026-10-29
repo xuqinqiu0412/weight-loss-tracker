@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="减脂打卡" />
+  <meta name="apple-mobile-web-app-title" content="减脂与CPA打卡" />
   <meta name="theme-color" content="#059669" />
-  <title>81kg → 65kg 每日减脂打卡助手 (云同步版)</title>
+  <title>81→65kg 减脂 & CPA全职备考 云同步打卡助手</title>
   <style>
     :root {
       --bg: #f4f7f6;
@@ -15,6 +15,8 @@
       --primary: #10b981;
       --primary-dark: #059669;
       --primary-light: #d1fae5;
+      --study: #4f46e5;
+      --study-light: #e0e7ff;
       --accent: #3b82f6;
       --text: #1f2937;
       --muted: #6b7280;
@@ -26,19 +28,19 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.55;
-      padding: calc(16px + env(safe-area-inset-top)) 14px calc(76px + env(safe-area-inset-bottom));
+      padding: calc(14px + env(safe-area-inset-top)) 12px calc(76px + env(safe-area-inset-bottom));
     }
     .container {
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
     }
     header {
-      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      background: linear-gradient(135deg, #047857 0%, #10b981 55%, #3b82f6 100%);
       color: #fff;
-      padding: 20px 18px;
+      padding: 18px 16px;
       border-radius: 18px;
       box-shadow: 0 8px 20px rgba(16, 185, 129, 0.22);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .header-top {
       display: flex;
@@ -48,11 +50,11 @@
       flex-wrap: wrap;
     }
     header h1 {
-      font-size: 1.25rem;
-      margin-bottom: 4px;
+      font-size: 1.18rem;
+      margin-bottom: 3px;
     }
     header p {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       opacity: 0.92;
     }
     .sync-pill {
@@ -61,36 +63,35 @@
       border: 1px solid rgba(255, 255, 255, 0.35);
       padding: 5px 10px;
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
       backdrop-filter: blur(4px);
-      transition: all 0.2s;
     }
     .sync-pill:active { transform: scale(0.96); }
     .stats-bar {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-top: 14px;
+      gap: 6px;
+      margin-top: 12px;
       background: rgba(255, 255, 255, 0.16);
-      padding: 12px 8px;
+      padding: 10px 6px;
       border-radius: 12px;
       backdrop-filter: blur(6px);
     }
     .stat-item { text-align: center; }
-    .stat-label { font-size: 0.72rem; opacity: 0.88; }
-    .stat-value { font-size: 1.15rem; font-weight: 700; margin-top: 2px; }
-    .progress-wrap { margin-top: 12px; }
+    .stat-label { font-size: 0.7rem; opacity: 0.9; }
+    .stat-value { font-size: 1.08rem; font-weight: 700; margin-top: 2px; }
+    .progress-wrap { margin-top: 10px; }
     .progress-header {
       display: flex;
       justify-content: space-between;
-      font-size: 0.78rem;
-      margin-bottom: 5px;
+      font-size: 0.75rem;
+      margin-bottom: 4px;
     }
     .progress-track {
-      height: 9px;
+      height: 8px;
       background: rgba(255, 255, 255, 0.28);
       border-radius: 999px;
       overflow: hidden;
@@ -102,21 +103,22 @@
       transition: width 0.4s ease;
     }
     .tabs {
-      display: flex;
-      gap: 8px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
       margin-bottom: 14px;
     }
     .tab-btn {
-      flex: 1;
-      padding: 11px 8px;
+      padding: 10px 4px;
       border: 1px solid var(--border);
       background: var(--card);
       color: var(--text);
       font-weight: 600;
-      font-size: 0.86rem;
+      font-size: 0.8rem;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.2s;
+      text-align: center;
     }
     .tab-btn.active {
       background: var(--primary);
@@ -129,14 +131,14 @@
     .card {
       background: var(--card);
       border-radius: 16px;
-      padding: 16px;
+      padding: 15px;
       margin-bottom: 14px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
       border: 1px solid var(--border);
     }
     .card h2 {
-      font-size: 1.05rem;
-      margin-bottom: 12px;
+      font-size: 1.02rem;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -146,28 +148,28 @@
     .date-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
     }
     .date-controls input[type="date"] {
       flex: 1;
-      min-width: 135px;
-      padding: 8px 10px;
+      min-width: 130px;
+      padding: 7px 10px;
       border: 1px solid var(--border);
       border-radius: 10px;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       background: #fff;
     }
     .btn {
-      padding: 8px 12px;
+      padding: 7px 11px;
       border-radius: 10px;
       border: 1px solid var(--border);
       background: #fff;
       cursor: pointer;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       font-weight: 600;
       color: var(--text);
     }
@@ -182,58 +184,90 @@
       color: var(--primary-dark);
       padding: 5px 10px;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
     }
-    .streak-banner {
+    .dual-banner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .banner-box {
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 0.82rem;
+    }
+    .banner-study {
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      color: #312e81;
+    }
+    .banner-fit {
       background: #ecfdf5;
       border: 1px solid #a7f3d0;
-      padding: 12px;
-      border-radius: 12px;
-      margin-bottom: 12px;
-      font-size: 0.85rem;
+      color: #064e3b;
     }
-    .streak-banner .plan-line {
-      margin-top: 6px;
-      color: #065f46;
+    .banner-sub {
+      margin-top: 4px;
       font-weight: 600;
-      font-size: 0.83rem;
+      font-size: 0.78rem;
+      opacity: 0.9;
     }
     .checklist-groupTitle {
       font-size: 0.86rem;
       font-weight: 700;
       color: var(--primary-dark);
-      margin: 14px 0 8px;
+      margin: 15px 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .checklist-groupTitle.study-group {
+      color: var(--study);
     }
     .check-item {
       display: flex;
       align-items: flex-start;
-      gap: 11px;
-      padding: 12px;
+      gap: 10px;
+      padding: 11px 12px;
       border-radius: 12px;
       border: 1px solid var(--border);
       margin-bottom: 8px;
       cursor: pointer;
       transition: all 0.15s;
     }
+    .check-item.study-item {
+      border-left: 4px solid var(--study);
+    }
+    .check-item.fit-item {
+      border-left: 4px solid var(--primary);
+    }
     .check-item.checked {
       background: #f0fdf4;
       border-color: #a7f3d0;
+    }
+    .check-item.study-item.checked {
+      background: #eef2ff;
+      border-color: #c7d2fe;
     }
     .check-item.checked .item-title {
       text-decoration: line-through;
       color: var(--muted);
     }
     .check-item input[type="checkbox"] {
-      width: 21px;
-      height: 21px;
-      margin-top: 1px;
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
       accent-color: var(--primary);
       flex-shrink: 0;
     }
+    .check-item.study-item input[type="checkbox"] {
+      accent-color: var(--study);
+    }
     .item-content { flex: 1; }
     .item-time {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--primary-dark);
       background: var(--primary-light);
@@ -241,32 +275,56 @@
       border-radius: 5px;
       margin-right: 6px;
     }
+    .study-item .item-time {
+      color: var(--study);
+      background: var(--study-light);
+    }
     .item-title {
       font-weight: 600;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
     .item-desc {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--muted);
-      margin-top: 3px;
+      margin-top: 2px;
+    }
+    .study-note-box {
+      margin-top: 8px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      padding: 10px;
+      border-radius: 12px;
+    }
+    .study-note-box label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--study);
+      margin-bottom: 5px;
+    }
+    .study-note-box input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.85rem;
     }
     .water-tracker {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
+      gap: 7px;
       margin-top: 8px;
     }
     .cup-btn {
-      padding: 10px 4px;
+      padding: 9px 4px;
       border-radius: 10px;
       border: 1px dashed #93c5fd;
       background: #eff6ff;
       color: #1d4ed8;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 600;
       cursor: pointer;
       text-align: center;
-      transition: all 0.15s;
     }
     .cup-btn.drank {
       background: #3b82f6;
@@ -277,42 +335,43 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
     }
     th, td {
-      padding: 9px 6px;
+      padding: 8px 6px;
       border-bottom: 1px solid var(--border);
       text-align: left;
-      white-space: nowrap;
     }
     th {
       background: #f9fafb;
       font-weight: 600;
       color: var(--muted);
+      white-space: nowrap;
     }
     .input-sm {
-      width: 68px;
-      padding: 6px;
+      width: 66px;
+      padding: 5px;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.86rem;
+      border-radius: 7px;
+      font-size: 0.84rem;
     }
     .input-note {
-      width: 140px;
-      padding: 6px;
+      width: 135px;
+      padding: 5px;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.84rem;
+      border-radius: 7px;
+      font-size: 0.82rem;
     }
     .tag {
       display: inline-block;
       padding: 2px 7px;
       border-radius: 6px;
-      font-size: 0.74rem;
+      font-size: 0.73rem;
       font-weight: 600;
     }
     .tag-green { background: #d1fae5; color: #065f46; }
     .tag-blue { background: #dbeafe; color: #1e40af; }
+    .tag-purple { background: #e0e7ff; color: #3730a3; }
     .tag-orange { background: #fef3c7; color: #92400e; }
     .guide-grid {
       display: grid;
@@ -322,27 +381,58 @@
     .guide-box {
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 14px;
+      padding: 13px;
       background: #fafafa;
     }
     .guide-box h3 {
-      font-size: 0.94rem;
-      margin-bottom: 8px;
+      font-size: 0.92rem;
+      margin-bottom: 7px;
       color: var(--primary-dark);
     }
     .guide-box ul {
       padding-left: 18px;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
     }
     .guide-box li { margin-bottom: 5px; }
-    .ios-tip {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      color: #1e3a8a;
-      padding: 10px 12px;
+    .subject-card {
+      border: 1px solid var(--border);
       border-radius: 12px;
-      font-size: 0.8rem;
-      margin-bottom: 14px;
+      padding: 12px;
+      margin-bottom: 10px;
+      background: #fafafa;
+    }
+    .subject-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .subject-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #1e1b4b;
+    }
+    .subject-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .subject-controls input[type="range"] {
+      width: 110px;
+      accent-color: var(--study);
+    }
+    .subject-controls input[type="text"] {
+      flex: 1;
+      min-width: 160px;
+      padding: 6px 8px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      background: #fff;
     }
   </style>
 </head>
@@ -351,18 +441,14 @@
     <header>
       <div class="header-top">
         <div>
-          <h1>🎯 170cm / 81kg → 65kg 减脂打卡</h1>
-          <p>专攻肚子、大腿、脸与脖子 ｜ 低阻力有氧 + 深度拉伸</p>
+          <h1>🎯 81→65kg 减脂 & 📚 CPA全职备考</h1>
+          <p>CPA四科 + 英语/粤语/Python + 实操/软件 ｜ 多端实时云同步</p>
         </div>
-        <button class="sync-pill" id="syncStatusBtn" onclick="pullFromCloud(true)">☁️ 正在连接云端...</button>
+        <button class="sync-pill" id="syncStatusBtn" onclick="pullFromCloud(true)">☁️ 正在同步云端...</button>
       </div>
       <div class="stats-bar">
         <div class="stat-item">
-          <div class="stat-label">初始(kg)</div>
-          <div class="stat-value">81.0</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-label">当前(kg)</div>
+          <div class="stat-label">当前体重</div>
           <div class="stat-value" id="currentWeightDisplay">81.0</div>
         </div>
         <div class="stat-item">
@@ -370,13 +456,17 @@
           <div class="stat-value" id="lostWeightDisplay">0.0</div>
         </div>
         <div class="stat-item">
-          <div class="stat-label">距65kg</div>
-          <div class="stat-value" id="remainWeightDisplay">16.0</div>
+          <div class="stat-label">今日学习</div>
+          <div class="stat-value" id="headerStudyScore">0/7</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">今日减脂</div>
+          <div class="stat-value" id="headerFitScore">0/12</div>
         </div>
       </div>
       <div class="progress-wrap">
         <div class="progress-header">
-          <span>总减脂进度（目标 -16.0kg）</span>
+          <span>减脂总进度（81.0kg → 65.0kg，目标 -16.0kg）</span>
           <span id="progressPercent">0%</span>
         </div>
         <div class="progress-track">
@@ -385,17 +475,14 @@
       </div>
     </header>
 
-    <div class="ios-tip">
-      ☁️ <strong>多端云同步已开启</strong>：无论从 Bark 通知点开、iPhone 桌面图标点开、还是电脑浏览器打开，每次打钩都会自动实时同步到云端！
-    </div>
-
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('daily')">✅ 每日打卡</button>
-      <button class="tab-btn" onclick="switchTab('weekly')">📊 18周体重围度</button>
-      <button class="tab-btn" onclick="switchTab('guide')">📖 食谱与动作</button>
+      <button class="tab-btn" onclick="switchTab('study')">📚 周课表&进度</button>
+      <button class="tab-btn" onclick="switchTab('weekly')">📊 18周体重</button>
+      <button class="tab-btn" onclick="switchTab('guide')">📖 食谱&动作</button>
     </div>
 
-    <!-- TAB 1: 每日打卡 -->
+    <!-- TAB 1: 每日打卡（学习 + 减脂） -->
     <div id="tab-daily" class="tab-panel active">
       <div class="card">
         <div class="date-controls">
@@ -406,19 +493,140 @@
           <span class="day-badge" id="weekdayHint"></span>
         </div>
 
-        <div class="streak-banner">
-          <div>🔥 <strong>今日打卡进度：</strong> <span id="dailyScoreText">0 / 12 项</span>（完成 ≥9 项即为优秀燃脂日）</div>
-          <div class="plan-line" id="todayPlanBadge"></div>
+        <div class="dual-banner">
+          <div class="banner-box banner-study">
+            <div>📚 <strong>今日学习打卡：</strong> <span id="studyScoreText">0 / 7 项</span>（全职 7.5h）</div>
+            <div class="banner-sub" id="todayStudyBadge"></div>
+          </div>
+          <div class="banner-box banner-fit">
+            <div>🔥 <strong>今日减脂打卡：</strong> <span id="dailyScoreText">0 / 12 项</span></div>
+            <div class="banner-sub" id="todayPlanBadge"></div>
+          </div>
         </div>
 
-        <div class="checklist-groupTitle">💧 今日 2400ml 消水肿饮水打卡（点水杯打钩）</div>
+        <!-- 今日学习打卡区 -->
+        <div class="checklist-groupTitle study-group">
+          <span>📚 今日全职学习打卡清单（自动按单/双数日切换课表）</span>
+        </div>
+        <div id="studyChecklistContainer"></div>
+
+        <div class="study-note-box">
+          <label for="dailyStudyNote">📓 今日学习章节与心得小记（输入后自动同步云端）：</label>
+          <input type="text" id="dailyStudyNote" placeholder="例如：会计学完长期股权投资第1节；Python写完Excel合并脚本..." onchange="saveStudyNote(this.value)" />
+        </div>
+
+        <!-- 饮水打卡区 -->
+        <div class="checklist-groupTitle">
+          <span>💧 今日 2400ml 消水肿饮水打卡（每学1小时起身接水防粗腿）</span>
+        </div>
         <div class="water-tracker" id="waterCups"></div>
 
+        <!-- 减脂打卡区 -->
         <div id="checklistContainer"></div>
       </div>
     </div>
 
-    <!-- TAB 2: 18周体重与四维记录 -->
+    <!-- TAB 2: 周课表与 9 大科目总进度看板 -->
+    <div id="tab-study" class="tab-panel">
+      <div class="card">
+        <h2>📈 9 大科目备考总进度追踪（拖动滑块或填写当前章节自动云同步）</h2>
+        <div id="subjectsProgressContainer"></div>
+      </div>
+
+      <div class="card">
+        <h2>📅 全职备考 + 减脂 每周标准排课表（每天 7.5h 学习 + 70m 运动拉伸）</h2>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>星期</th>
+                <th>08:30-09:15<br>(45m)</th>
+                <th>09:20-11:50<br>(2.5h 主科一)</th>
+                <th>12:30-13:00<br>(30m 饭后消食)</th>
+                <th>14:00-16:30<br>(2.5h 主科二)</th>
+                <th>16:40-17:40<br>(1h 隔日交替)</th>
+                <th>18:30-19:30<br>(1h 晚间断食期)</th>
+                <th>19:30-21:30<br>(运动 + 30m复盘)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>周一</strong><br><span class="tag tag-purple">单数日</span></td>
+                <td>🔤 英语</td>
+                <td>📚 <strong>CPA《会计》</strong></td>
+                <td>🗣️ 粤语+靠墙站</td>
+                <td>📚 <strong>CPA《税法》</strong></td>
+                <td>🧾 <strong>会计实操</strong></td>
+                <td>🐍 Python</td>
+                <td>快走45m+拉伸+闪回</td>
+              </tr>
+              <tr>
+                <td><strong>周二</strong><br><span class="tag tag-blue">双数日</span></td>
+                <td>🔤 英语</td>
+                <td>📚 <strong>CPA《财管》</strong></td>
+                <td>🗣️ 粤语+靠墙站</td>
+                <td>📚 <strong>CPA《审计》</strong></td>
+                <td>💻 <strong>财务软件</strong></td>
+                <td>🐍 Python</td>
+                <td>有氧操/椭圆机+拉伸+闪回</td>
+              </tr>
+              <tr>
+                <td><strong>周三</strong><br><span class="tag tag-purple">单数日</span></td>
+                <td>🔤 英语</td>
+                <td>📚 <strong>CPA《会计》</strong></td>
+                <td>🗣️ 粤语+靠墙站</td>
+                <td>📚 <strong>CPA《税法》</strong></td>
+                <td>🧾 <strong>会计实操</strong></td>
+                <td>🐍 Python</td>
+                <td>真空腹+全身拉伸+闪回</td>
+              </tr>
+              <tr>
+                <td><strong>周四</strong><br><span class="tag tag-blue">双数日</span></td>
+                <td>🔤 英语</td>
+                <td>📚 <strong>CPA《财管》</strong></td>
+                <td>🗣️ 粤语+靠墙站</td>
+                <td>📚 <strong>CPA《审计》</strong></td>
+                <td>💻 <strong>财务软件</strong></td>
+                <td>🐍 Python</td>
+                <td>快走45m+拉伸+闪回</td>
+              </tr>
+              <tr>
+                <td><strong>周五</strong><br><span class="tag tag-purple">单数日</span></td>
+                <td>🔤 英语</td>
+                <td>📚 <strong>CPA《会计》</strong></td>
+                <td>🗣️ 粤语+靠墙站</td>
+                <td>📚 <strong>CPA《税法》</strong></td>
+                <td>🧾 <strong>会计实操</strong></td>
+                <td>🐍 Python</td>
+                <td>游泳/快走45m+拉伸+闪回</td>
+              </tr>
+              <tr>
+                <td><strong>周六</strong><br><span class="tag tag-blue">双数日</span></td>
+                <td>🔤 英语</td>
+                <td>📚 <strong>CPA《财管》</strong></td>
+                <td>🗣️ 粤语+靠墙站</td>
+                <td>📚 <strong>CPA《审计》</strong></td>
+                <td>💻 <strong>财务软件</strong></td>
+                <td>🐍 Python</td>
+                <td>户外有氧50m+拉伸+闪回</td>
+              </tr>
+              <tr>
+                <td><strong>周日</strong><br><span class="tag tag-orange">复盘日</span></td>
+                <td>🔤 英语周复习</td>
+                <td>📚 <strong>会计+财管错题</strong>(2h)</td>
+                <td>🗣️ 粤语+靠墙站</td>
+                <td>📚 <strong>税法+审计错题</strong>(2h)</td>
+                <td>🧾💻 <strong>实操软件总结</strong></td>
+                <td>🐍 Python项目</td>
+                <td>休息拉伸+下周计划</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: 18周体重与四维记录 -->
     <div id="tab-weekly" class="tab-panel">
       <div class="card">
         <h2>
@@ -452,15 +660,15 @@
       </div>
     </div>
 
-    <!-- TAB 3: 饮食与运动速查指南 -->
+    <!-- TAB 4: 饮食与运动速查指南 -->
     <div id="tab-guide" class="tab-panel">
       <div class="card">
-        <h2>🍽️ 一日三餐万能搭配公式（控糖消水肿）</h2>
+        <h2>🍽️ 一日三餐万能搭配公式（控糖消水肿·防备考犯困）</h2>
         <div class="guide-grid">
           <div class="guide-box">
-            <h3>🌅 早餐（08:00 - 08:30）开启代谢</h3>
+            <h3>🌅 早餐（08:00 - 08:30）开启脑力与代谢</h3>
             <ul>
-              <li><strong>主食（1拳头）</strong>：蒸红薯 / 紫薯 / 玉米1根 / 纯燕麦片45g / 全麦面包2片</li>
+              <li><strong>主食（1拳头）</strong>：蒸红薯 / 紫薯 / 玉米1根 / 纯燕麦片45g / 全麦面包2片（慢碳供能，上午学CPA不犯困）</li>
               <li><strong>蛋白质</strong>：水煮蛋/蒸蛋 1~2个 + 无糖豆浆300ml 或 纯牛奶250ml</li>
               <li><strong>果蔬</strong>：圣女果8颗 或 黄瓜半根</li>
             </ul>
@@ -468,14 +676,14 @@
           <div class="guide-box">
             <h3>☀️ 午餐（12:00 - 12:30）7~8分饱</h3>
             <ul>
-              <li><strong>进餐顺序</strong>：汤水 → 蔬菜和肉 → 最后吃主食（平稳血糖防大肚腩）</li>
+              <li><strong>进餐顺序</strong>：汤水 → 蔬菜和肉 → 最后吃主食（严防餐后血糖飙升导致下午学税法/审计犯困长肚腩）</li>
               <li><strong>蛋白质（1掌心）</strong>：去皮鸡腿/鸡胸、清蒸鱼、虾仁10只、瘦牛肉/牛腱、瘦猪里脊</li>
-              <li><strong>蔬菜（2拳头）</strong>：西兰花、芹菜、菠菜、冬瓜、菌菇、生菜（外卖用温水涮油）</li>
+              <li><strong>蔬菜（2拳头）</strong>：西兰花、芹菜、菠菜、冬瓜、菌菇、生菜</li>
               <li><strong>主食（1拳头）</strong>：杂粮饭 / 糙米饭 / 小半碗白米饭</li>
             </ul>
           </div>
           <div class="guide-box">
-            <h3>🌙 晚餐（17:30 - 18:15）6分饱·少盐</h3>
+            <h3>🌙 晚餐（17:45 - 18:15）6分饱·少盐</h3>
             <ul>
               <li><strong>核心原则</strong>：清淡少盐（防次日脸和腿水肿），18:30后严格禁食</li>
               <li><strong>蛋白质（1掌心）</strong>：嫩豆腐/北豆腐150g、虾仁、鱼肉、鸡蛋白2个</li>
@@ -487,27 +695,27 @@
       </div>
 
       <div class="card">
-        <h2>🏃 运动与深度拉伸执行标准（只减脂、不长块状肌肉）</h2>
+        <h2>🏃 运动与深度拉伸执行标准（专治久坐备考肚腩、粗腿与探颈）</h2>
         <div class="guide-grid">
           <div class="guide-box">
-            <h3>1️⃣ 核心与天鹅颈（10分钟·有氧前）</h3>
+            <h3>1️⃣ 核心与天鹅颈（10分钟·19:30）</h3>
             <ul>
               <li><strong>真空腹呼吸（专缩肚腩）</strong>：深吸气鼓肚 → 吐气把肚脐用力往脊柱吸进去，屏气 15~20秒 × 10次</li>
               <li><strong>死虫式（平下腹）</strong>：仰卧后腰死贴垫子，手脚交替伸直不落地，16次 × 3组</li>
               <li><strong>平板支撑</strong>：收紧腹臀，30~45秒 × 3组</li>
-              <li><strong>麦肯基收下巴（瘦脖子双下巴）</strong>：食指轻推下巴水平向后平移，保持5秒 × 15次 × 2组</li>
+              <li><strong>麦肯基收下巴（瘦脖子双下巴）</strong>：食指轻推下巴水平向后平移，保持5秒 × 15次 × 2组（每学1小时也可做5次）</li>
             </ul>
           </div>
           <div class="guide-box">
-            <h3>2️⃣ 中低强度有氧（45分钟·心率120~140）</h3>
+            <h3>2️⃣ 中低强度有氧（45分钟·19:45）</h3>
             <ul>
               <li><strong>快走（最推荐）</strong>：配速 5.5~6.5 km/h（跑步机坡度3~5）。脚跟先落地滚到全脚掌，用臀部和大腿后侧带动迈步，<strong>绝不用小腿肚猛蹬</strong></li>
               <li><strong>椭圆机/单车</strong>：只用 1~3 档低阻力，轻快踩踏，不调高阻力</li>
-              <li><strong>游泳/室内无跳跃操</strong>：保护膝盖，消除下半身水肿</li>
+              <li><strong>游泳/室内无跳跃操</strong>：保护膝盖，消除全天久坐下半身水肿</li>
             </ul>
           </div>
           <div class="guide-box">
-            <h3>3️⃣ 运动后必做深度拉伸（15分钟·瘦腿关键）</h3>
+            <h3>3️⃣ 运动后必做深度拉伸（15分钟·20:30）</h3>
             <ul>
               <li><strong>大腿前侧拉伸</strong>：站立扶墙后抓脚踝贴臀，双膝并拢骨盆前推，左右各 45秒×2组</li>
               <li><strong>大腿后侧与小腿</strong>：弓箭步推墙，后脚跟死踩地面，左右各 45秒×2组</li>
@@ -525,34 +733,95 @@
     const TARGET_WEIGHT = 65.0;
     const TOTAL_LOSS_GOAL = INIT_WEIGHT - TARGET_WEIGHT; // 16.0 kg
 
-    const TASKS = [
-      { id: 't1', group: '☀️ 早间唤醒与排毒', time: '07:30', title: '空腹喝 300ml 温水（可配黑咖啡消脸肿）', desc: '唤醒肠胃代谢，帮助排出夜间水分与宿便' },
-      { id: 't2', group: '☀️ 早间唤醒与排毒', time: '08:00', title: '高蛋白慢碳早餐（鸡蛋+奶/豆浆+粗粮+果蔬）', desc: '杜绝油条、甜面包、含糖豆浆' },
-      { id: 't3', group: '🌤️ 日间控糖与防久坐', time: '12:00', title: '减脂午餐 7~8分饱（先菜肉、后主食，零含糖饮料）', desc: '2拳头蔬菜 + 1掌心去皮瘦肉/鱼虾 + 1拳头主食' },
-      { id: 't4', group: '🌤️ 日间控糖与防久坐', time: '12:30', title: '饭后靠墙站立或慢走 15 分钟', desc: '收紧小腹、后脑勺贴墙矫正探颈，严禁饭后立刻瘫坐长肚腩' },
-      { id: 't5', group: '🌤️ 日间控糖与防久坐', time: '15:30', title: '久坐起身活动 & 戒除高糖下午茶零食', desc: '每坐1小时起身走动2分钟防大腿水肿；饿了只吃黄瓜/小苹果' },
-      { id: 't6', group: '🌙 晚间断食与清淡控盐', time: '18:00', title: '清淡少盐晚餐 6分饱（蔬菜+豆腐/鱼虾+半拳粗粮）', desc: '晚上吃咸第二天脸和腿必水肿' },
-      { id: 't7', group: '🌙 晚间断食与清淡控盐', time: '18:30', title: '18:30 后开启轻断食（零宵夜、零零食水果）', desc: '让胰岛素回落，夜间持续分解腹部内脏脂肪' },
-      { id: 't8', group: '🔥 黄金运动与瘦腿拉伸', time: '19:30', title: '核心收腹 + 麦肯基天鹅颈训练（10分钟）', desc: '真空腹10次 + 死虫式3组 + 平板支撑3组 + 收下巴2组' },
-      { id: 't9', group: '🔥 黄金运动与瘦腿拉伸', time: '19:45', title: '中低心率有氧燃脂 45 分钟（或休息日主动恢复）', desc: '快走 / 低冲击操 / 椭圆机 / 游泳（心率120~140，不跑跳不粗腿）' },
-      { id: 't10', group: '🔥 黄金运动与瘦腿拉伸', time: '20:30', title: '运动后大腿四侧 + 小腿 + 肩颈深度拉伸 15 分钟', desc: '消除肌肉充血紧绷感，拉长腿部与脖子线条' },
-      { id: 't11', group: '💤 睡前消肿与修复', time: '21:30', title: '温水泡脚 15 分钟 / 泡沫轴滚腿 + 全天饮水达标', desc: '促进下半身淋巴与血液回流，瘦大腿小腿' },
-      { id: 't12', group: '💤 睡前消肿与修复', time: '23:00', title: '23:00 前放下手机准时入睡', desc: '保证7~8小时睡眠，降低皮质醇（防压力肥肚腩）' }
+    // 每日根据星期几动态生成 7 项学习任务
+    function getStudyTasksForWeekday(wk) {
+      const isOdd = (wk === 1 || wk === 3 || wk === 5); // 周一、三、五
+      const isEven = (wk === 2 || wk === 4 || wk === 6); // 周二、四、六
+
+      if (isOdd) {
+        return [
+          { id: 's1', time: '08:30-09:15', title: '🔤 英语学习 (45min)：核心词汇 + 外刊/阅读精读与发音', desc: '趁晨间大脑最清醒完成高频词记忆与开口跟读' },
+          { id: 's2', time: '09:20-11:50', title: '📚 CPA《会计》主科攻坚 (2.5h)：章节精讲 + 分录推导 + 课后题', desc: '每满50分钟起身喝水活动2分钟，亲手写会计分录' },
+          { id: 's3', time: '12:30-13:00', title: '🗣️ 粤语听说 (30min)：结合饭后靠墙站15m+慢走15m同步跟读', desc: '戴耳机练粤语九声六调与高频日常/职场对白，消食练口语两不误' },
+          { id: 's4', time: '14:00-16:30', title: '📚 CPA《税法》主科攻坚 (2.5h)：税种要素梳理 + 应纳税额计算', desc: '与上午《会计》所得税/增值税联动学习，强化计算手感' },
+          { id: 's5', time: '16:40-17:40', title: '🧾 会计实操实练 (1h·单数日)：建账/凭证审核/全盘账务/报税实操', desc: '将今日所学会计与税法理论直接落地到实务做账与纳税申报' },
+          { id: 's6', time: '18:30-19:30', title: '🐍 Python 编程学习 (1h)：语法实敲 / Pandas财务数据处理', desc: '晚饭后轻断食时段静心敲代码1小时，不做伸手党' },
+          { id: 's7', time: '21:00-21:30', title: '📝 晚间闪回复盘 (30min)：回顾今日《会计》《税法》笔记 + 双语10词', desc: '运动拉伸后快速过一遍今日错题与框架，带着记忆入睡' }
+        ];
+      } else if (isEven) {
+        return [
+          { id: 's1', time: '08:30-09:15', title: '🔤 英语学习 (45min)：核心词汇 + 听力精听与口语跟读', desc: '每日不断线，积累财经与日常英语表达' },
+          { id: 's2', time: '09:20-11:50', title: '📚 CPA《财管》主科攻坚 (2.5h)：公式原理推导 + 经典母题手算', desc: '理解公式背后逻辑，切忌死记硬背，亲手按计算器/机考练习' },
+          { id: 's3', time: '12:30-13:00', title: '🗣️ 粤语听说 (30min)：结合饭后靠墙站15m+慢走15m同步跟读', desc: '跟读港剧/粤语新闻高频句型，同时消除午饭后肚腩积食' },
+          { id: 's4', time: '14:00-16:30', title: '📚 CPA《审计》主科攻坚 (2.5h)：审计流程框架图 + 准则关键词辨析', desc: '先画章节脉络图再抠细节，一理(财管)一文(审计)搭配不疲劳' },
+          { id: 's5', time: '16:40-17:40', title: '💻 财务软件实练 (1h·双数日)：用友/金蝶ERP实操 & Excel高级建模', desc: '熟练操作总账、固定资产、报表模块与Excel财务函数透视表' },
+          { id: 's6', time: '18:30-19:30', title: '🐍 Python 编程学习 (1h)：办公自动化脚本 / 报表批处理实战', desc: '晚饭后18:30轻断食开启，专注编写Python代码1小时' },
+          { id: 's7', time: '21:00-21:30', title: '📝 晚间闪回复盘 (30min)：回顾今日《财管》《审计》框架 + 双语10词', desc: '睡前闭目能复述今日核心公式与审计流程即为达标' }
+        ];
+      } else {
+        // 周日复盘日
+        return [
+          { id: 's1', time: '08:30-09:15', title: '🔤 英语本周总复习 (45min)：复盘本周核心词汇与阅读长难句', desc: '消灭本周生词本盲区' },
+          { id: 's2', time: '09:20-11:30', title: '📚 CPA《会计 + 财管》周错题复盘与综合题演练 (2h)', desc: '重做本周错题，检验分录与财管公式掌握度' },
+          { id: 's3', time: '12:30-13:00', title: '🗣️ 粤语本周对话总复习 (30min) + 饭后靠墙站15m', desc: '脱稿复述本周学过的粤语高频表达' },
+          { id: 's4', time: '14:00-16:00', title: '📚 CPA《税法 + 审计》周错题复盘与框架默写 (2h)', desc: '默写章节框架图，汇总税率与审计程序易混点' },
+          { id: 's5', time: '16:15-17:15', title: '🧾💻 会计实操 & 财务软件本周综合总结 (1h)', desc: '整理本周实操账套与ERP软件操作卡点笔记' },
+          { id: 's6', time: '18:30-19:30', title: '🐍 Python 本周实战小项目整合 (1h)', desc: '用本周所学Python知识独立写一个小工具脚本' },
+          { id: 's7', time: '21:00-21:30', title: '📝 制定下周 9 科推进计划 + 准备明早周一空腹称重', desc: '明确下周每一科的目标章节' }
+        ];
+      }
+    }
+
+    const FIT_TASKS = [
+      { id: 't1', group: '☀️ 早间与日间减脂习惯', time: '07:30', title: '空腹喝 300ml 温水（可配黑咖啡消脸肿）', desc: '唤醒肠胃代谢，帮助排出夜间水分与宿便' },
+      { id: 't2', group: '☀️ 早间与日间减脂习惯', time: '08:00', title: '高蛋白慢碳早餐（鸡蛋+奶/豆浆+粗粮+果蔬）', desc: '慢碳稳定上午学CPA血糖，杜绝油条、甜面包' },
+      { id: 't3', group: '☀️ 早间与日间减脂习惯', time: '12:00', title: '减脂午餐 7~8分饱（先菜肉、后主食，零含糖饮料）', desc: '2拳头蔬菜 + 1掌心去皮瘦肉/鱼虾 + 1拳头主食，防下午犯困' },
+      { id: 't4', group: '☀️ 早间与日间减脂习惯', time: '12:30', title: '饭后靠墙站立15m + 慢走15m（边练粤语边消肚腩）', desc: '收紧小腹、后脑勺贴墙矫正探颈，严禁饭后立刻瘫坐长肚腩' },
+      { id: 't5', group: '☀️ 早间与日间减脂习惯', time: '15:30', title: '每学1小时起身活动2分钟 & 戒除高糖下午茶零食', desc: '防全职备考久坐导致大腿水肿变粗；饿了只吃黄瓜/小苹果' },
+      { id: 't6', group: '🌙 晚间断食、黄金运动与修复', time: '17:45', title: '清淡少盐晚餐 6分饱（蔬菜+豆腐/鱼虾+半拳粗粮）', desc: '晚上吃咸第二天脸和腿必水肿' },
+      { id: 't7', group: '🌙 晚间断食、黄金运动与修复', time: '18:30', title: '18:30 后开启轻断食（边学Python边断食，零宵夜零食）', desc: '让胰岛素回落，夜间持续分解腹部内脏脂肪' },
+      { id: 't8', group: '🌙 晚间断食、黄金运动与修复', time: '19:30', title: '核心收腹 + 麦肯基天鹅颈训练（10分钟）', desc: '真空腹10次 + 死虫式3组 + 平板支撑3组 + 收下巴2组' },
+      { id: 't9', group: '🌙 晚间断食、黄金运动与修复', time: '19:45', title: '中低心率有氧燃脂 45 分钟（释放全天备考脑疲劳）', desc: '快走 / 低冲击操 / 椭圆机 / 游泳（心率120~140，不跑跳不粗腿）' },
+      { id: 't10', group: '🌙 晚间断食、黄金运动与修复', time: '20:30', title: '运动后大腿四侧 + 小腿 + 肩颈深度拉伸 15 分钟', desc: '消除肌肉充血紧绷与久坐僵硬，拉长腿部与脖子线条' },
+      { id: 't11', group: '🌙 晚间断食、黄金运动与修复', time: '21:30', title: '温水泡脚 15 分钟 / 泡沫轴滚腿 + 全天饮水达标', desc: '促进下半身淋巴与血液回流，瘦大腿小腿' },
+      { id: 't12', group: '🌙 晚间断食、黄金运动与修复', time: '23:00', title: '23:00 前放下手机准时入睡', desc: '保证7.5~8小时睡眠，巩固白天CPA记忆并防皮质醇肚腩' }
+    ];
+
+    const SUBJECTS_META = [
+      { id: 'cpa_acc', name: '📚 CPA《会计》', schedule: '周一/三/五上午 + 周日 (9.5h/周)', defaultNote: '第1章 总论' },
+      { id: 'cpa_tax', name: '📚 CPA《税法》', schedule: '周一/三/五下午 + 周日 (8.5h/周)', defaultNote: '第1章 税法总论' },
+      { id: 'cpa_fin', name: '📚 CPA《财管》', schedule: '周二/四/六上午 + 周日 (8.5h/周)', defaultNote: '第1章 财务管理基本原理' },
+      { id: 'cpa_aud', name: '📚 CPA《审计》', schedule: '周二/四/六下午 + 周日 (8.5h/周)', defaultNote: '第1章 审计概述' },
+      { id: 'prac_acc', name: '🧾 会计实操', schedule: '周一/三/五 16:40-17:40 (隔日1h)', defaultNote: '建账与原始凭证审核' },
+      { id: 'prac_soft', name: '💻 财务软件', schedule: '周二/四/六 16:40-17:40 (隔日1h)', defaultNote: '用友/金蝶总账模块 & Excel函数' },
+      { id: 'python', name: '🐍 Python 学习', schedule: '每日 18:30-19:30 (1h/天)', defaultNote: '基础语法与Pandas数据处理' },
+      { id: 'english', name: '🔤 英语学习', schedule: '每日 08:30-09:15 (45m/天)', defaultNote: '核心词汇与财经阅读精读' },
+      { id: 'cantonese', name: '🗣️ 粤语学习', schedule: '每日 12:30-13:00 (30m/天·饭后靠墙站)', defaultNote: '九声六调与日常高频对话' }
     ];
 
     const CUP_LABELS = [
-      '第1杯 (晨起)', '第2杯 (上午)', '第3杯 (上午)', '第4杯 (午饭前)',
-      '第5杯 (下午)', '第6杯 (下午)', '第7杯 (晚饭前)', '第8杯 (运动后)'
+      '第1杯 (晨起)', '第2杯 (学英语后)', '第3杯 (上午CPA)', '第4杯 (午饭前)',
+      '第5杯 (下午CPA)', '第6杯 (实操前)', '第7杯 (晚饭前)', '第8杯 (运动后)'
     ];
 
-    const WEEK_PLANS = {
-      1: '📅 周一任务：核心10m + 快走45m + 拉伸15m（严格控盐消肿）',
-      2: '📅 周二任务：核心10m + 低冲击操/椭圆机45m + 拉伸15m',
-      3: '📅 周三【主动休息日】：真空腹10m + 全身拉伸15m + 泡脚（晚餐免主食）',
-      4: '📅 周四任务：核心10m + 快走45m + 拉伸15m',
-      5: '📅 周五任务：核心10m + 游泳/快走45m + 拉伸15m',
-      6: '📅 周六任务：户外公园慢速有氧 50~60m + 拉伸15m',
-      0: '📅 周日【完全休息日】：腿部与肩颈拉伸放松15m + 明早空腹称重！'
+    const WEEK_FIT_PLANS = {
+      1: '周一减脂：核心10m + 快走45m + 拉伸15m（严格控盐消肿）',
+      2: '周二减脂：核心10m + 低冲击操/椭圆机45m + 拉伸15m',
+      3: '周三【主动休息日】：真空腹10m + 全身拉伸15m + 泡脚（晚餐免主食）',
+      4: '周四减脂：核心10m + 快走45m + 拉伸15m',
+      5: '周五减脂：核心10m + 游泳/快走45m + 拉伸15m',
+      6: '周六减脂：户外公园慢速有氧 50~60m + 拉伸15m',
+      0: '周日【完全休息日】：拉伸放松15m + ⏰明早空腹称重！'
+    };
+
+    const WEEK_STUDY_PLANS = {
+      1: '周一单数日：CPA《会计+税法》+ 🧾会计实操 + 英语/粤语/Python',
+      2: '周二双数日：CPA《财管+审计》+ 💻财务软件 + 英语/粤语/Python',
+      3: '周三单数日：CPA《会计+税法》+ 🧾会计实操 + 英语/粤语/Python',
+      4: '周四双数日：CPA《财管+审计》+ 💻财务软件 + 英语/粤语/Python',
+      5: '周五单数日：CPA《会计+税法》+ 🧾会计实操 + 英语/粤语/Python',
+      6: '周六双数日：CPA《财管+审计》+ 💻财务软件 + 英语/粤语/Python',
+      0: '周日复盘日：CPA四科错题复盘 + 实操软件总结 + 英语/粤语/Python'
     };
 
     const STORAGE_KEY = 'weight_loss_85_to_70_v1';
@@ -590,16 +859,17 @@
     function getStore() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        const parsed = raw ? JSON.parse(raw) : { updatedAt: 0, daily: {}, weekly: {} };
+        const parsed = raw ? JSON.parse(raw) : { updatedAt: 0, daily: {}, weekly: {}, subjects: {} };
         if (!parsed.daily) parsed.daily = {};
         if (!parsed.weekly) parsed.weekly = {};
+        if (!parsed.subjects) parsed.subjects = {};
         if (parsed.weekly[0] && (parsed.weekly[0].weight === '85.0' || parsed.weekly[0].weight === '85')) {
           parsed.weekly[0].weight = '81.0';
           localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
         }
         return parsed;
       } catch (e) {
-        return { updatedAt: 0, daily: {}, weekly: {} };
+        return { updatedAt: 0, daily: {}, weekly: {}, subjects: {} };
       }
     }
 
@@ -617,20 +887,25 @@
       const merged = {
         updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0),
         daily: {},
-        weekly: {}
+        weekly: {},
+        subjects: {}
       };
       const allDates = new Set([...Object.keys(local.daily || {}), ...Object.keys(remote.daily || {})]);
       allDates.forEach(d => {
-        const lDay = (local.daily && local.daily[d]) || { tasks: {}, cups: [], ts: 0 };
-        const rDay = (remote.daily && remote.daily[d]) || { tasks: {}, cups: [], ts: 0 };
+        const lDay = (local.daily && local.daily[d]) || { tasks: {}, cups: [], studyNote: '', ts: 0 };
+        const rDay = (remote.daily && remote.daily[d]) || { tasks: {}, cups: [], studyNote: '', ts: 0 };
         if (!local.updatedAt) {
-          // 首次升级合并：保留本地已打钩的所有记录与云端取并集
           const mergedTasks = { ...(rDay.tasks || {}) };
           Object.keys(lDay.tasks || {}).forEach(k => {
             if (lDay.tasks[k]) mergedTasks[k] = true;
           });
           const mergedCups = Array.from(new Set([...(rDay.cups || []), ...(lDay.cups || [])]));
-          merged.daily[d] = { tasks: mergedTasks, cups: mergedCups, ts: Date.now() };
+          merged.daily[d] = {
+            tasks: mergedTasks,
+            cups: mergedCups,
+            studyNote: lDay.studyNote || rDay.studyNote || '',
+            ts: Date.now()
+          };
         } else {
           merged.daily[d] = (lDay.ts || 0) > (rDay.ts || 0) ? lDay : rDay;
         }
@@ -648,6 +923,17 @@
           merged.weekly[w].weight = '81.0';
         }
       }
+
+      SUBJECTS_META.forEach(sub => {
+        const lS = local.subjects && local.subjects[sub.id];
+        const rS = remote.subjects && remote.subjects[sub.id];
+        if (lS && rS) {
+          merged.subjects[sub.id] = (lS.ts || 0) > (rS.ts || 0) ? lS : rS;
+        } else {
+          merged.subjects[sub.id] = rS || lS || { pct: 0, note: sub.defaultNote, ts: 0 };
+        }
+      });
+
       return merged;
     }
 
@@ -673,6 +959,7 @@
           localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
           loadDailyCheckin();
           renderWeeklyTable();
+          renderSubjectsProgress();
           const nowTime = new Date().toTimeString().slice(0, 5);
           setSyncStatus(`☁️ 云端已同步 (${nowTime})`);
           if (hadUnuploadedLocal) {
@@ -714,7 +1001,7 @@
         }
         const currentStore = getStore();
         const bodyObj = {
-          message: 'Sync check-in data',
+          message: 'Sync study & fitness check-in data',
           content: utf8ToBase64(JSON.stringify(currentStore, null, 2))
         };
         if (cloudSha) bodyObj.sha = cloudSha;
@@ -771,14 +1058,41 @@
     function loadDailyCheckin() {
       const dateStr = document.getElementById('checkinDate').value;
       const store = getStore();
-      const dayData = store.daily[dateStr] || { tasks: {}, cups: [] };
+      const dayData = store.daily[dateStr] || { tasks: {}, cups: [], studyNote: '' };
 
       const d = new Date(dateStr + 'T00:00:00');
       const wk = d.getDay();
-      const wkNames = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+      const wkNames = ['周日(复盘日)', '周一(单数日)', '周二(双数日)', '周三(单数日)', '周四(双数日)', '周五(单数日)', '周六(双数日)'];
       document.getElementById('weekdayHint').textContent = wkNames[wk];
-      document.getElementById('todayPlanBadge').textContent = WEEK_PLANS[wk];
+      document.getElementById('todayPlanBadge').textContent = WEEK_FIT_PLANS[wk];
+      document.getElementById('todayStudyBadge').textContent = WEEK_STUDY_PLANS[wk];
+      document.getElementById('dailyStudyNote').value = dayData.studyNote || '';
 
+      // 1. 渲染今日学习任务 (7项)
+      const studyTasks = getStudyTasksForWeekday(wk);
+      const studyContainer = document.getElementById('studyChecklistContainer');
+      studyContainer.innerHTML = '';
+      let studyCheckedCount = 0;
+
+      studyTasks.forEach(st => {
+        const isChecked = !!(dayData.tasks && dayData.tasks[st.id]);
+        if (isChecked) studyCheckedCount++;
+        const row = document.createElement('label');
+        row.className = 'check-item study-item' + (isChecked ? ' checked' : '');
+        row.innerHTML = `
+          <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleTask('${dateStr}', '${st.id}', this.checked)" />
+          <div class="item-content">
+            <div><span class="item-time">${st.time}</span><span class="item-title">${st.title}</span></div>
+            <div class="item-desc">${st.desc}</div>
+          </div>
+        `;
+        studyContainer.appendChild(row);
+      });
+
+      document.getElementById('studyScoreText').textContent = `${studyCheckedCount} / ${studyTasks.length} 项`;
+      document.getElementById('headerStudyScore').textContent = `${studyCheckedCount}/${studyTasks.length}`;
+
+      // 2. 渲染饮水打卡 (8杯)
       const waterEl = document.getElementById('waterCups');
       waterEl.innerHTML = '';
       CUP_LABELS.forEach((label, idx) => {
@@ -790,12 +1104,13 @@
         waterEl.appendChild(btn);
       });
 
+      // 3. 渲染减脂打卡 (12项)
       const container = document.getElementById('checklistContainer');
       container.innerHTML = '';
       let currentGroup = '';
-      let checkedCount = 0;
+      let fitCheckedCount = 0;
 
-      TASKS.forEach(t => {
+      FIT_TASKS.forEach(t => {
         if (t.group !== currentGroup) {
           currentGroup = t.group;
           const gTitle = document.createElement('div');
@@ -803,11 +1118,11 @@
           gTitle.textContent = currentGroup;
           container.appendChild(gTitle);
         }
-        const isChecked = !!dayData.tasks[t.id];
-        if (isChecked) checkedCount++;
+        const isChecked = !!(dayData.tasks && dayData.tasks[t.id]);
+        if (isChecked) fitCheckedCount++;
 
         const row = document.createElement('label');
-        row.className = 'check-item' + (isChecked ? ' checked' : '');
+        row.className = 'check-item fit-item' + (isChecked ? ' checked' : '');
         row.innerHTML = `
           <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleTask('${dateStr}', '${t.id}', this.checked)" />
           <div class="item-content">
@@ -818,21 +1133,31 @@
         container.appendChild(row);
       });
 
-      document.getElementById('dailyScoreText').textContent = `${checkedCount} / ${TASKS.length} 项`;
+      document.getElementById('dailyScoreText').textContent = `${fitCheckedCount} / ${FIT_TASKS.length} 项`;
+      document.getElementById('headerFitScore').textContent = `${fitCheckedCount}/${FIT_TASKS.length}`;
     }
 
     function toggleTask(dateStr, taskId, checked) {
       const store = getStore();
-      if (!store.daily[dateStr]) store.daily[dateStr] = { tasks: {}, cups: [], ts: 0 };
+      if (!store.daily[dateStr]) store.daily[dateStr] = { tasks: {}, cups: [], studyNote: '', ts: 0 };
       store.daily[dateStr].tasks[taskId] = checked;
       store.daily[dateStr].ts = Date.now();
       saveStore(store, true);
       loadDailyCheckin();
     }
 
+    function saveStudyNote(val) {
+      const dateStr = document.getElementById('checkinDate').value;
+      const store = getStore();
+      if (!store.daily[dateStr]) store.daily[dateStr] = { tasks: {}, cups: [], studyNote: '', ts: 0 };
+      store.daily[dateStr].studyNote = val;
+      store.daily[dateStr].ts = Date.now();
+      saveStore(store, true);
+    }
+
     function toggleCup(dateStr, cupIdx) {
       const store = getStore();
-      if (!store.daily[dateStr]) store.daily[dateStr] = { tasks: {}, cups: [], ts: 0 };
+      if (!store.daily[dateStr]) store.daily[dateStr] = { tasks: {}, cups: [], studyNote: '', ts: 0 };
       const cups = store.daily[dateStr].cups || [];
       const pos = cups.indexOf(cupIdx);
       if (pos >= 0) cups.splice(pos, 1);
@@ -841,6 +1166,42 @@
       store.daily[dateStr].ts = Date.now();
       saveStore(store, true);
       loadDailyCheckin();
+    }
+
+    function renderSubjectsProgress() {
+      const store = getStore();
+      const container = document.getElementById('subjectsProgressContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      SUBJECTS_META.forEach(sub => {
+        const sData = (store.subjects && store.subjects[sub.id]) || { pct: 0, note: sub.defaultNote };
+        const box = document.createElement('div');
+        box.className = 'subject-card';
+        box.innerHTML = `
+          <div class="subject-head">
+            <span class="subject-title">${sub.name}</span>
+            <span class="tag tag-purple">${sub.schedule} ｜ 已完成 <strong id="pct-label-${sub.id}">${sData.pct || 0}%</strong></span>
+          </div>
+          <div class="subject-controls">
+            <input type="range" min="0" max="100" step="5" value="${sData.pct || 0}" oninput="document.getElementById('pct-label-${sub.id}').textContent=this.value+'%'" onchange="saveSubject('${sub.id}', 'pct', parseInt(this.value, 10))" />
+            <input type="text" placeholder="当前章节/模块进度..." value="${sData.note || ''}" onchange="saveSubject('${sub.id}', 'note', this.value)" />
+          </div>
+        `;
+        container.appendChild(box);
+      });
+    }
+
+    function saveSubject(subId, field, val) {
+      const store = getStore();
+      if (!store.subjects) store.subjects = {};
+      if (!store.subjects[subId]) {
+        const meta = SUBJECTS_META.find(m => m.id === subId);
+        store.subjects[subId] = { pct: 0, note: meta ? meta.defaultNote : '', ts: 0 };
+      }
+      store.subjects[subId][field] = val;
+      store.subjects[subId].ts = Date.now();
+      saveStore(store, true);
     }
 
     function renderWeeklyTable() {
@@ -898,19 +1259,17 @@
         }
       }
       const lost = Math.max(0, INIT_WEIGHT - latestWeight);
-      const remain = Math.max(0, latestWeight - TARGET_WEIGHT);
       const pct = Math.min(100, Math.max(0, (lost / TOTAL_LOSS_GOAL) * 100));
 
       document.getElementById('currentWeightDisplay').textContent = latestWeight.toFixed(1);
       document.getElementById('lostWeightDisplay').textContent = lost.toFixed(1);
-      document.getElementById('remainWeightDisplay').textContent = remain.toFixed(1);
-      document.getElementById('progressPercent').textContent = `${pct.toFixed(1)}%`;
+      document.getElementById('progressPercent').textContent = `${pct.toFixed(1)}% (距65kg还差 ${Math.max(0, latestWeight - TARGET_WEIGHT).toFixed(1)}kg)`;
       document.getElementById('progressBar').style.width = `${pct}%`;
     }
 
     function switchTab(tabName) {
       document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
-        const names = ['daily', 'weekly', 'guide'];
+        const names = ['daily', 'study', 'weekly', 'guide'];
         btn.classList.toggle('active', names[idx] === tabName);
       });
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -921,7 +1280,7 @@
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(getStore(), null, 2));
       const dl = document.createElement('a');
       dl.setAttribute("href", dataStr);
-      dl.setAttribute("download", `减脂打卡记录_${formatDate(new Date())}.json`);
+      dl.setAttribute("download", `减脂与CPA打卡记录_${formatDate(new Date())}.json`);
       document.body.appendChild(dl);
       dl.click();
       dl.remove();
@@ -938,6 +1297,7 @@
             saveStore(data, true);
             loadDailyCheckin();
             renderWeeklyTable();
+            renderSubjectsProgress();
             alert('打卡数据恢复成功，正在同步到云端！');
           }
         } catch (err) {
@@ -947,13 +1307,13 @@
       reader.readAsText(file);
     }
 
-    // 页面重新回到前台时自动从云端拉取最新状态
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') pullFromCloud();
     });
 
     setToday();
     renderWeeklyTable();
+    renderSubjectsProgress();
     pullFromCloud();
   </script>
 </body>
