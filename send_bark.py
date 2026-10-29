@@ -48,19 +48,30 @@ def main():
     with open(config_path, "r", encoding="utf-8") as f:
         config = json.load(f)
 
-    # 读取云端实时打卡数据 checkin_data.json
+    # 读取云端实时打卡数据 checkin_data.json (优先从 data 分支拉取最新打卡状态)
     progress_line = ""
-    data_path = os.path.join(base_dir, "checkin_data.json")
-    if os.path.exists(data_path):
+    c_data = None
+    try:
+        raw_url = f"https://raw.githubusercontent.com/xuqinqiu0412/weight-loss-tracker/data/checkin_data.json?t={int(time.time())}"
+        with urllib.request.urlopen(raw_url, timeout=10) as df_resp:
+            c_data = json.loads(df_resp.read().decode("utf-8"))
+    except Exception:
+        data_path = os.path.join(base_dir, "checkin_data.json")
+        if os.path.exists(data_path):
+            try:
+                with open(data_path, "r", encoding="utf-8") as df:
+                    c_data = json.load(df)
+            except Exception:
+                pass
+
+    if c_data:
         try:
-            with open(data_path, "r", encoding="utf-8") as df:
-                c_data = json.load(df)
             today_rec = (c_data.get("daily") or {}).get(date_str) or {}
             cups_count = len(today_rec.get("cups") or [])
             tasks_map = today_rec.get("tasks") or {}
             done_study = sum(1 for k, v in tasks_map.items() if k.startswith("s") and v)
             done_fit = sum(1 for k, v in tasks_map.items() if k.startswith("t") and v)
-            progress_line = f"📊 今日已打卡：📚学习 {done_study}/7 ｜ 🔥减脂 {done_fit}/12 ｜ 💧饮水 {cups_count}/8杯\n"
+            progress_line = f"📊 今日已打卡：📚学业 {done_study}/7 ｜ 🔥塑形 {done_fit}/12 ｜ 💧饮水 {cups_count}/8杯\n"
         except Exception:
             pass
 
