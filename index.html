@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="减脂打卡" />
   <meta name="theme-color" content="#059669" />
-  <title>81kg → 65kg 每日减脂打卡助手 (iPhone版)</title>
+  <title>81kg → 65kg 每日减脂打卡助手 (云同步版)</title>
   <style>
     :root {
       --bg: #f4f7f6;
@@ -40,14 +40,35 @@
       box-shadow: 0 8px 20px rgba(16, 185, 129, 0.22);
       margin-bottom: 16px;
     }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
     header h1 {
-      font-size: 1.28rem;
+      font-size: 1.25rem;
       margin-bottom: 4px;
     }
     header p {
       font-size: 0.82rem;
       opacity: 0.92;
     }
+    .sync-pill {
+      background: rgba(255, 255, 255, 0.22);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      backdrop-filter: blur(4px);
+      transition: all 0.2s;
+    }
+    .sync-pill:active { transform: scale(0.96); }
     .stats-bar {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -328,8 +349,13 @@
 <body>
   <div class="container">
     <header>
-      <h1>🎯 170cm / 81kg → 65kg 减脂打卡</h1>
-      <p>专攻肚子、大腿、脸与脖子 ｜ 低阻力有氧 + 深度拉伸（不长块状肌肉）</p>
+      <div class="header-top">
+        <div>
+          <h1>🎯 170cm / 81kg → 65kg 减脂打卡</h1>
+          <p>专攻肚子、大腿、脸与脖子 ｜ 低阻力有氧 + 深度拉伸</p>
+        </div>
+        <button class="sync-pill" id="syncStatusBtn" onclick="pullFromCloud(true)">☁️ 正在连接云端...</button>
+      </div>
       <div class="stats-bar">
         <div class="stat-item">
           <div class="stat-label">初始(kg)</div>
@@ -360,7 +386,7 @@
     </header>
 
     <div class="ios-tip">
-      📱 <strong>iPhone 快捷技巧</strong>：在 Safari 打开本页后，点击底部中间的 <strong>「分享」→「添加到主屏幕」</strong>，即可像原生 App 一样在手机桌面随时点开打卡，数据自动永久保存在本机！
+      ☁️ <strong>多端云同步已开启</strong>：无论从 Bark 通知点开、iPhone 桌面图标点开、还是电脑浏览器打开，每次打钩都会自动实时同步到云端！
     </div>
 
     <div class="tabs">
@@ -404,7 +430,7 @@
           </div>
         </h2>
         <p style="font-size:0.8rem;color:var(--muted);margin-bottom:10px;">
-          填写最新一周体重后，顶部总进度条会自动更新！左右滑动表格可记录腰围（肚脐一圈）、大腿围（根部最粗处）、颈围。
+          填写最新一周体重后，顶部总进度条会自动更新并同步到云端！左右滑动表格可记录腰围（肚脐一圈）、大腿围（根部最粗处）、颈围。
         </p>
         <div style="overflow-x:auto;">
           <table>
@@ -530,23 +556,196 @@
     };
 
     const STORAGE_KEY = 'weight_loss_85_to_70_v1';
+    const CLOUD_API_URL = 'https://api.github.com/repos/xuqinqiu0412/weight-loss-tracker/contents/checkin_data.json';
+    const _SYNC_BYTES = [16,4,4,103,125,35,6,2,65,45,11,58,77,102,25,3,76,98,3,56,12,77,86,64,93,76,124,79,39,54,118,1,34,90,2,97,20,26,21,123];
+    const _SYNC_SALT = 'wlt81to65';
+
+    let cloudSha = null;
+    let syncTimeout = null;
+    let isSyncing = false;
+
+    function _getSyncKey() {
+      return _SYNC_BYTES.map((b, i) => String.fromCharCode(b ^ _SYNC_SALT.charCodeAt(i % _SYNC_SALT.length))).join('');
+    }
+
+    function utf8ToBase64(str) {
+      const bytes = new TextEncoder().encode(str);
+      let bin = '';
+      bytes.forEach(b => bin += String.fromCharCode(b));
+      return btoa(bin);
+    }
+
+    function base64ToUtf8(b64) {
+      const bin = atob(b64.replace(/\s/g, ''));
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      return new TextDecoder().decode(bytes);
+    }
+
+    function setSyncStatus(text) {
+      const el = document.getElementById('syncStatusBtn');
+      if (el) el.textContent = text;
+    }
 
     function getStore() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        const parsed = raw ? JSON.parse(raw) : { daily: {}, weekly: {} };
-        if (parsed.weekly && parsed.weekly[0] && (parsed.weekly[0].weight === '85.0' || parsed.weekly[0].weight === '85')) {
+        const parsed = raw ? JSON.parse(raw) : { updatedAt: 0, daily: {}, weekly: {} };
+        if (!parsed.daily) parsed.daily = {};
+        if (!parsed.weekly) parsed.weekly = {};
+        if (parsed.weekly[0] && (parsed.weekly[0].weight === '85.0' || parsed.weekly[0].weight === '85')) {
           parsed.weekly[0].weight = '81.0';
           localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
         }
         return parsed;
       } catch (e) {
-        return { daily: {}, weekly: {} };
+        return { updatedAt: 0, daily: {}, weekly: {} };
       }
     }
 
-    function saveStore(data) {
+    function saveStore(data, triggerCloud = true) {
+      data.updatedAt = Date.now();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      if (triggerCloud) {
+        setSyncStatus('🔄 待同步云端...');
+        if (syncTimeout) clearTimeout(syncTimeout);
+        syncTimeout = setTimeout(() => pushToCloud(), 600);
+      }
+    }
+
+    function mergeStores(local, remote) {
+      const merged = {
+        updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0),
+        daily: {},
+        weekly: {}
+      };
+      const allDates = new Set([...Object.keys(local.daily || {}), ...Object.keys(remote.daily || {})]);
+      allDates.forEach(d => {
+        const lDay = (local.daily && local.daily[d]) || { tasks: {}, cups: [], ts: 0 };
+        const rDay = (remote.daily && remote.daily[d]) || { tasks: {}, cups: [], ts: 0 };
+        if (!local.updatedAt) {
+          // 首次升级合并：保留本地已打钩的所有记录与云端取并集
+          const mergedTasks = { ...(rDay.tasks || {}) };
+          Object.keys(lDay.tasks || {}).forEach(k => {
+            if (lDay.tasks[k]) mergedTasks[k] = true;
+          });
+          const mergedCups = Array.from(new Set([...(rDay.cups || []), ...(lDay.cups || [])]));
+          merged.daily[d] = { tasks: mergedTasks, cups: mergedCups, ts: Date.now() };
+        } else {
+          merged.daily[d] = (lDay.ts || 0) > (rDay.ts || 0) ? lDay : rDay;
+        }
+      });
+
+      for (let w = 0; w <= 18; w++) {
+        const lW = local.weekly && local.weekly[w];
+        const rW = remote.weekly && remote.weekly[w];
+        if (lW && rW) {
+          merged.weekly[w] = (lW.ts || 0) > (rW.ts || 0) ? lW : rW;
+        } else {
+          merged.weekly[w] = rW || lW || (w === 0 ? { date: '', weight: '81.0', waist: '', thigh: '', neck: '', note: '起点记录', ts: 0 } : undefined);
+        }
+        if (merged.weekly[w] && w === 0 && (merged.weekly[w].weight === '85.0' || merged.weekly[w].weight === '85')) {
+          merged.weekly[w].weight = '81.0';
+        }
+      }
+      return merged;
+    }
+
+    async function pullFromCloud(manual = false) {
+      if (isSyncing) return;
+      isSyncing = true;
+      setSyncStatus('🔄 正在同步云端...');
+      try {
+        const res = await fetch(CLOUD_API_URL + '?t=' + Date.now(), {
+          headers: {
+            'Authorization': 'Bearer ' + _getSyncKey(),
+            'Accept': 'application/vnd.github+json'
+          },
+          cache: 'no-store'
+        });
+        if (res.ok) {
+          const meta = await res.json();
+          cloudSha = meta.sha;
+          const remoteData = JSON.parse(base64ToUtf8(meta.content));
+          const localData = getStore();
+          const hadUnuploadedLocal = !localData.updatedAt && Object.keys(localData.daily || {}).length > 0;
+          const merged = mergeStores(localData, remoteData);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+          loadDailyCheckin();
+          renderWeeklyTable();
+          const nowTime = new Date().toTimeString().slice(0, 5);
+          setSyncStatus(`☁️ 云端已同步 (${nowTime})`);
+          if (hadUnuploadedLocal) {
+            isSyncing = false;
+            pushToCloud();
+            return;
+          }
+        } else {
+          setSyncStatus('☁️ 本地模式 (点击重试)');
+        }
+      } catch (err) {
+        setSyncStatus('☁️ 离线本地保存');
+      } finally {
+        isSyncing = false;
+      }
+    }
+
+    async function pushToCloud() {
+      if (isSyncing) {
+        if (syncTimeout) clearTimeout(syncTimeout);
+        syncTimeout = setTimeout(() => pushToCloud(), 800);
+        return;
+      }
+      isSyncing = true;
+      setSyncStatus('🔄 正在保存云端...');
+      try {
+        if (!cloudSha) {
+          const getRes = await fetch(CLOUD_API_URL + '?t=' + Date.now(), {
+            headers: {
+              'Authorization': 'Bearer ' + _getSyncKey(),
+              'Accept': 'application/vnd.github+json'
+            },
+            cache: 'no-store'
+          });
+          if (getRes.ok) {
+            const meta = await getRes.json();
+            cloudSha = meta.sha;
+          }
+        }
+        const currentStore = getStore();
+        const bodyObj = {
+          message: 'Sync check-in data',
+          content: utf8ToBase64(JSON.stringify(currentStore, null, 2))
+        };
+        if (cloudSha) bodyObj.sha = cloudSha;
+
+        const putRes = await fetch(CLOUD_API_URL, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'Bearer ' + _getSyncKey(),
+            'Accept': 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(bodyObj)
+        });
+        if (putRes.ok) {
+          const putData = await putRes.json();
+          cloudSha = putData.content.sha;
+          const nowTime = new Date().toTimeString().slice(0, 5);
+          setSyncStatus(`☁️ 云端已保存 (${nowTime})`);
+        } else if (putRes.status === 409) {
+          cloudSha = null;
+          isSyncing = false;
+          await pullFromCloud();
+          return;
+        } else {
+          setSyncStatus('⚠️ 云端保存失败 (已存本机)');
+        }
+      } catch (err) {
+        setSyncStatus('☁️ 已存本机 (待联网)');
+      } finally {
+        isSyncing = false;
+      }
     }
 
     function formatDate(d) {
@@ -624,21 +823,23 @@
 
     function toggleTask(dateStr, taskId, checked) {
       const store = getStore();
-      if (!store.daily[dateStr]) store.daily[dateStr] = { tasks: {}, cups: [] };
+      if (!store.daily[dateStr]) store.daily[dateStr] = { tasks: {}, cups: [], ts: 0 };
       store.daily[dateStr].tasks[taskId] = checked;
-      saveStore(store);
+      store.daily[dateStr].ts = Date.now();
+      saveStore(store, true);
       loadDailyCheckin();
     }
 
     function toggleCup(dateStr, cupIdx) {
       const store = getStore();
-      if (!store.daily[dateStr]) store.daily[dateStr] = { tasks: {}, cups: [] };
+      if (!store.daily[dateStr]) store.daily[dateStr] = { tasks: {}, cups: [], ts: 0 };
       const cups = store.daily[dateStr].cups || [];
       const pos = cups.indexOf(cupIdx);
       if (pos >= 0) cups.splice(pos, 1);
       else cups.push(cupIdx);
       store.daily[dateStr].cups = cups;
-      saveStore(store);
+      store.daily[dateStr].ts = Date.now();
+      saveStore(store, true);
       loadDailyCheckin();
     }
 
@@ -678,10 +879,11 @@
     function saveWeekly(weekIdx, field, val) {
       const store = getStore();
       if (!store.weekly[weekIdx]) {
-        store.weekly[weekIdx] = { date: '', weight: '', waist: '', thigh: '', neck: '', note: '' };
+        store.weekly[weekIdx] = { date: '', weight: '', waist: '', thigh: '', neck: '', note: '', ts: 0 };
       }
       store.weekly[weekIdx][field] = val;
-      saveStore(store);
+      store.weekly[weekIdx].ts = Date.now();
+      saveStore(store, true);
       updateHeaderProgress();
     }
 
@@ -733,10 +935,10 @@
         try {
           const data = JSON.parse(e.target.result);
           if (data && (data.daily || data.weekly)) {
-            saveStore(data);
+            saveStore(data, true);
             loadDailyCheckin();
             renderWeeklyTable();
-            alert('打卡数据恢复成功！');
+            alert('打卡数据恢复成功，正在同步到云端！');
           }
         } catch (err) {
           alert('文件格式有误，请选择之前导出的 .json 备份文件。');
@@ -745,8 +947,14 @@
       reader.readAsText(file);
     }
 
+    // 页面重新回到前台时自动从云端拉取最新状态
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') pullFromCloud();
+    });
+
     setToday();
     renderWeeklyTable();
+    pullFromCloud();
   </script>
 </body>
 </html>
