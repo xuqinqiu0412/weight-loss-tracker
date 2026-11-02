@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1793615213726,
+  "updatedAt": 1793615215913,
   "daily": {
     "2026-10-26": {
       "tasks": {},
@@ -119,11 +119,11 @@
       "tasks": {
         "t1": true,
         "t4": true,
-        "t5": false
+        "t5": true
       },
       "cups": [],
       "studyNote": "",
-      "ts": 1793615213726
+      "ts": 1793615215913
     }
   },
   "weekly": {
